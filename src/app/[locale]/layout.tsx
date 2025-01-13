@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { Metadata } from 'next';
 import './globals.css';
 
@@ -6,6 +5,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
+import { Locale } from '@/i18n/config';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -14,19 +14,22 @@ export const metadata: Metadata = {
 
 export default async function LocaleLayout({
   children,
-  params,
+  params: rawParams,
 }: {
   children: React.ReactNode;
-  params: { locale: string };
+  params: { locale: Locale };
 }) {
-  if (!routing.locales.includes(params.locale as any)) {
+  const params = await rawParams;
+  const { locale } = params;
+
+  if (!routing.locales.includes(locale)) {
     notFound();
   }
 
   const messages = await getMessages();
 
   return (
-    <html lang={params.locale}>
+    <html lang={locale}>
       <body>
         <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
       </body>
