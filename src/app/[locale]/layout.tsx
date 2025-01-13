@@ -14,19 +14,19 @@ export const metadata: Metadata = {
 
 export default async function LocaleLayout({
   children,
-  params: { locale },
+  params,
 }: {
   children: React.ReactNode;
   params: { locale: string };
 }) {
-  if (!routing.locales.includes(locale as any)) {
+  if (!routing.locales.includes(params.locale as any)) {
     notFound();
   }
 
   const messages = await getMessages();
 
   return (
-    <html lang={locale}>
+    <html lang={params.locale}>
       <body>
         <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
       </body>
