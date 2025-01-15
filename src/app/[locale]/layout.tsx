@@ -12,6 +12,7 @@ import { notFound } from 'next/navigation';
 
 import { routing } from '@/i18n/routing';
 import { Locale } from '@/i18n/config';
+import StoreProvider from '@/contexts/StoreProvider';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -42,7 +43,9 @@ export default async function LocaleLayout({
     <html lang={locale}>
       <body>
         <MantineProvider theme={theme}>
-          <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
+          <NextIntlClientProvider messages={messages}>
+            <StoreProvider>{children}</StoreProvider>
+          </NextIntlClientProvider>
         </MantineProvider>
       </body>
     </html>
