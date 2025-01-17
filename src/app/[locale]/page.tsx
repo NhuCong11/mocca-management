@@ -1,6 +1,6 @@
 import { Link } from '@/i18n/routing';
 import { useTranslations } from 'next-intl';
-import { ActionIcon } from '@mantine/core';
+import { ActionIcon, Button } from '@mantine/core';
 import { IconAdjustments } from '@tabler/icons-react';
 
 export default function Home() {
@@ -11,9 +11,10 @@ export default function Home() {
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
         <h1>{t('title')}</h1>
         <Link href="/checkout">Checkout</Link>
-        <ActionIcon variant="filled" aria-label="Settings">
+        <ActionIcon size="xl" variant="filled" aria-label="Settings">
           <IconAdjustments style={{ width: '70%', height: '70%' }} stroke={1.5} />
         </ActionIcon>
+        <Button size="lg">Action</Button>
       </main>
     </div>
   );
