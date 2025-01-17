@@ -1,9 +1,8 @@
 import type { Metadata } from 'next';
-import './globals.css';
-
 import '@mantine/core/styles.css';
 import '@mantine/dates/styles.css';
 import '@mantine/charts/styles.css';
+import './globals.css';
 
 import { notFound } from 'next/navigation';
 import { getMessages } from 'next-intl/server';
