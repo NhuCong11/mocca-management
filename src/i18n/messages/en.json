@@ -3,5 +3,10 @@
   "description": "Easily search, compare, and purchase coffee from reputable stores. Let's explore and experience the amazing flavors of coffee with us!",
   "button": {
     "btn01": "Go to home page"
+  },
+  "errors": {
+    "404": "404 | Not Found.",
+    "403": "403 | Forbidden.",
+    "500": "500 | Internal Server."
   }
 }

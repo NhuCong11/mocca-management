@@ -3,5 +3,10 @@
   "description": "Dễ dàng tìm kiếm, so sánh và đặt mua Cafe các cửa hàng uy tín. Hãy cùng khám phá và trải nghiệm những hương vị tuyệt vời của Cafe cùng chúng tôi!",
   "button": {
     "btn01": "Quay lại trang chủ"
+  },
+  "errors": {
+    "404": "404 | Trang không tồn tại.",
+    "403": "403 | Bạn không có quyền truy cập.",
+    "500": "500 | Lỗi máy chủ."
   }
 }

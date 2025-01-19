@@ -1,8 +1,4 @@
 import type { Metadata } from 'next';
-import '@mantine/core/styles.css';
-import '@mantine/dates/styles.css';
-import '@mantine/charts/styles.css';
-import './globals.css';
 
 import { notFound } from 'next/navigation';
 import { getMessages } from 'next-intl/server';
@@ -12,8 +8,9 @@ import { MantineProvider } from '@mantine/core';
 import { Locale } from '@/i18n/config';
 import { routing } from '@/i18n/routing';
 import { theme } from '@/styles/mantine';
-import StoreProvider from '@/contexts/StoreProvider';
 import { fonts } from '@/styles/fonts';
+
+import StoreProvider from '@/contexts/StoreProvider';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
