@@ -11,6 +11,7 @@ import { theme } from '@/styles/mantine';
 import { fonts } from '@/styles/fonts';
 
 import StoreProvider from '@/contexts/StoreProvider';
+import LayoutProvider from '@/contexts/LayoutProvider';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -38,7 +39,9 @@ export default async function LocaleLayout({
       <body className={`${fonts.inter} antialiased`}>
         <MantineProvider theme={theme}>
           <NextIntlClientProvider messages={messages}>
-            <StoreProvider>{children}</StoreProvider>
+            <StoreProvider>
+              <LayoutProvider>{children}</LayoutProvider>
+            </StoreProvider>
           </NextIntlClientProvider>
         </MantineProvider>
       </body>
