@@ -1,5 +1,6 @@
 'use client';
 import { useEffect } from 'react';
+import { ThemeProvider } from 'next-themes';
 
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -24,7 +25,11 @@ function LayoutProvider({ children }: { children: Readonly<React.ReactNode> }) {
     detectDevTools();
   }, []);
 
-  return children;
+  return (
+    <ThemeProvider attribute="class" defaultTheme="system" enableSystem={true} disableTransitionOnChange>
+      {children}
+    </ThemeProvider>
+  );
 }
 
 export default LayoutProvider;
