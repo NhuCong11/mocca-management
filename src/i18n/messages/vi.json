@@ -1,6 +1,19 @@
 {
   "title": "Mocca Cafe | Ứng dụng đặt mua Cafe đa dạng",
   "description": "Dễ dàng tìm kiếm, so sánh và đặt mua Cafe các cửa hàng uy tín. Hãy cùng khám phá và trải nghiệm những hương vị tuyệt vời của Cafe cùng chúng tôi!",
+  "header": {
+    "na01": "Trang chủ",
+    "na02": "Đăng nhập"
+  },
+  "languages": {
+    "vi": "Tiếng Việt",
+    "en": "English",
+    "zh": "中国人",
+    "ko": "한국어"
+  },
+  "user-options": {
+    "op01": "Đăng xuất"
+  },
   "button": {
     "btn01": "Quay lại trang chủ"
   },

@@ -1,6 +1,19 @@
 {
   "title": "Mocca Cafe | Diverse Cafe ordering applications",
   "description": "Easily search, compare, and purchase coffee from reputable stores. Let's explore and experience the amazing flavors of coffee with us!",
+  "header": {
+    "na01": "Home",
+    "na02": "Sign In"
+  },
+  "languages": {
+    "vi": "Tiếng Việt",
+    "en": "English",
+    "zh": "中国人",
+    "ko": "한국어"
+  },
+  "user-options": {
+    "op01": "Log Out"
+  },
   "button": {
     "btn01": "Go to home page"
   },

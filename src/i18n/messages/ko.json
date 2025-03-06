@@ -1,6 +1,19 @@
 {
   "title": "Mocca Cafe | 다양한 커피 주문 앱",
   "description": "신뢰할 수 있는 상점에서 커피를 쉽게 검색하고, 비교하고, 구매하세요. 우리와 함께 놀라운 커피의 맛을 탐험하고 경험해보세요!",
+  "header": {
+    "na01": "홈",
+    "na02": "로그인"
+  },
+  "languages": {
+    "vi": "Tiếng Việt",
+    "en": "English",
+    "zh": "中国人",
+    "ko": "한국어"
+  },
+  "user-options": {
+    "op01": "로그아웃"
+  },
   "button": {
     "btn01": "홈으로 돌아가기"
   },

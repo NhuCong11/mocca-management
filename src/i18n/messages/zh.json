@@ -1,6 +1,19 @@
 {
   "title": "Mocca Cafe | 多样化的咖啡馆点餐应用",
   "description": "轻松搜索、比较并从信誉良好的商店购买咖啡。与我们一起探索和体验咖啡的美妙风味吧！",
+  "header": {
+    "na01": "首页",
+    "na02": "登录"
+  },
+  "languages": {
+    "vi": "Tiếng Việt",
+    "en": "English",
+    "zh": "中国人",
+    "ko": "한국어"
+  },
+  "user-options": {
+    "op01": "登出"
+  },
   "button": {
     "btn01": "返回主页"
   },

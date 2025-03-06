@@ -4,8 +4,14 @@ import { ThemeProvider } from 'next-themes';
 
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { useDisclosure } from '@mantine/hooks';
+import { AppShell, Burger, Flex, Group } from '@mantine/core';
+
+import AppHeader from '@/components/AppHeader';
 
 function LayoutProvider({ children }: { children: Readonly<React.ReactNode> }) {
+  const [opened, { toggle }] = useDisclosure();
+
   useEffect(() => {
     AOS.init({
       once: true,
@@ -27,7 +33,27 @@ function LayoutProvider({ children }: { children: Readonly<React.ReactNode> }) {
 
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem={true} disableTransitionOnChange>
-      {children}
+      <AppShell
+        header={{ height: 100 }}
+        navbar={{
+          width: 400,
+          breakpoint: 'sm',
+          collapsed: { mobile: !opened },
+        }}
+      >
+        <AppShell.Header>
+          <Flex align="center" gap="lg" h="100%" bg="#181818" p="lg">
+            <Group p="sm">
+              <Burger color="white" opened={opened} onClick={toggle} hiddenFrom="sm" size="lg" />
+            </Group>
+            <AppHeader />
+          </Flex>
+        </AppShell.Header>
+
+        <AppShell.Navbar p="md">Navbar</AppShell.Navbar>
+
+        <AppShell.Main>{children}</AppShell.Main>
+      </AppShell>
     </ThemeProvider>
   );
 }

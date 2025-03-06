@@ -1,0 +1,132 @@
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/mixins';
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 1;
+
+  &__actions {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    &-avatar {
+      display: block;
+      width: 42px;
+      height: 42px;
+      object-fit: cover;
+      font-size: 1.2rem;
+      font-weight: 500;
+      text-align: center;
+      color: var(--white);
+      border-radius: 20px;
+      border: 1px solid #f0efef;
+      background-color: #676767;
+      cursor: pointer;
+      transition: border linear 0.2s;
+
+      &--open {
+        border: 1.5px solid var(--primary-bg);
+      }
+    }
+  }
+
+  &__language-arrow {
+    rotate: 0deg;
+    transition: rotate linear 0.2s;
+
+    &--open {
+      rotate: 180deg;
+    }
+  }
+
+  &__languages,
+  &__user-options {
+    position: absolute;
+    top: 48px;
+    right: 0;
+    visibility: hidden;
+    opacity: 0;
+    padding: 8px 0;
+    min-width: 180px;
+    text-align: left;
+    border-radius: 6px;
+    transform: scale(0);
+    transform-origin: top right;
+    background-color: var(--btn-bg);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: visibility, opacity, transform;
+    transition-duration: 0.3s;
+    transition-timing-function: linear;
+    z-index: 2;
+
+    &--show {
+      opacity: 1;
+      transform: scale(1);
+      visibility: visible;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      right: 10%;
+      border: 8px solid;
+      border-color: var(--btn-bg) var(--btn-bg) transparent transparent;
+      rotate: -45deg;
+      z-index: 1;
+    }
+  }
+
+  &__languages {
+    &::before {
+      right: 10%;
+    }
+  }
+
+  &__user-options {
+    &::before {
+      top: 4px;
+      right: 50%;
+      transform: translateX(50%);
+    }
+  }
+
+  &__language {
+    &-img {
+      width: auto;
+      height: auto;
+      object-fit: cover;
+      border-radius: 2px;
+    }
+  }
+
+  &__language,
+  &__user-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--text-color);
+    white-space: nowrap;
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--option-hover);
+    }
+
+    &--md {
+      display: none;
+
+      @include media-breakpoint-down(md) {
+        display: flex;
+      }
+    }
+  }
+}

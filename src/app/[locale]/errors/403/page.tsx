@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import Image from 'next/image';
 
 import clsx from 'clsx';
@@ -14,9 +13,6 @@ function Forbidden() {
       <div className={clsx(styles.stars)}>
         <div className={clsx(styles.centralBody)}>
           <h1 className={clsx(styles.errorName)}>{t('errors.403')}</h1>
-          <Link href={'/'} className={clsx(styles.btnGoHome)}>
-            {t('button.btn01')}
-          </Link>
         </div>
         <div className={clsx(styles.objects)}>
           <Image
