@@ -16,7 +16,7 @@ function NotFound() {
   return (
     <div className={clsx(styles.bgPurple)}>
       <div className={clsx(styles.stars)}>
-        <div className={clsx(styles.centralBody)}>
+        <div className={clsx(styles.centralBody404)}>
           <h1 className={clsx(styles.errorName)}>{t('errors.404')}</h1>
           <Link href={'/'} className={clsx(styles.btnGoHome)}>
             {t('button.btn01')}
