@@ -4,6 +4,7 @@ import { ThemeProvider } from 'next-themes';
 
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { Toaster } from 'react-hot-toast';
 import { useDisclosure } from '@mantine/hooks';
 import { AppShell, Burger, Flex, Group } from '@mantine/core';
 
@@ -54,6 +55,21 @@ function LayoutProvider({ children }: { children: Readonly<React.ReactNode> }) {
 
         <AppShell.Main>{children}</AppShell.Main>
       </AppShell>
+      <Toaster
+        gutter={8}
+        position="top-center"
+        reverseOrder={false}
+        toastOptions={{
+          duration: 3000,
+          removeDelay: 1000,
+          style: {
+            borderRadius: '12px',
+            background: 'var(--white)',
+            color: 'var(--coffee-color-v2)',
+            border: '1px solid var(--primary-bg)',
+          },
+        }}
+      />
     </ThemeProvider>
   );
 }
