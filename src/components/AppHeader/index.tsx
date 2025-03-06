@@ -1,15 +1,18 @@
 import Image from 'next/image';
 import clsx from 'clsx';
+import { removeCookie } from 'typescript-cookie';
 import { Link, useRouter } from '@/i18n/routing';
 import { useLocale, useTranslations } from 'next-intl';
+import { IconCaretDownFilled } from '@tabler/icons-react';
 
 import styles from './AppHeader.module.scss';
+import { getUserOptions } from './constant';
 import Button from '@/share/Button';
 import { fonts } from '@/styles/fonts';
-import { IconCaretDownFilled } from '@tabler/icons-react';
 import { Locale, locales } from '@/i18n/config';
 import useClickOutside from '@/hooks/useClickOutSide';
-import { getUserOptions } from './constant';
+import { showToast, ToastType } from '@/utils/toastUtils';
+import { MOCCA } from '@/constants';
 // import { useAppDispatch } from '@/lib/hooks';
 
 function AppHeader() {
@@ -36,9 +39,9 @@ function AppHeader() {
     localStorage.removeItem('user');
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
-    // removeCookie('accessToken', { path: '/' });
-    // setShowUserOptions(false);
-    // showToast(t('login.notify02'), ToastType.SUCCESS);
+    removeCookie('accessToken', { path: '/' });
+    setShowUserOptions(false);
+    showToast(t('login.notify02'), ToastType.SUCCESS);
     // dispatch(logout());
     router.replace('/');
   };
@@ -60,7 +63,7 @@ function AppHeader() {
   return (
     <div className={clsx(styles['header'])}>
       <Link href={'/'}>
-        <Image width={150} height={47} src={'/images/logo-vip1.png'} priority alt={'Mocca Cafe'} />
+        <Image width={150} height={47} src={'/images/logo-vip1.png'} priority alt={MOCCA} />
       </Link>
       <div className={clsx(styles['header__actions'])}>
         {true && (
