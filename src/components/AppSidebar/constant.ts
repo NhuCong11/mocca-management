@@ -72,6 +72,19 @@ export const sidebars = [
 ];
 
 export const getRandomColor = () => {
-  const colors = ['#e64980', '#be4bdb', '#15aabf', '#228be6', '#12b886', '#40c057', '#82c91e', '#fd7e14'];
+  const colors = [
+    '#e64980',
+    '#be4bdb',
+    '#15aabf',
+    '#228be6',
+    '#12b886',
+    '#40c057',
+    '#82c91e',
+    '#fd7e14',
+    '#fab005',
+    '7950f2',
+    '#fa5252',
+    '#4c6ef5',
+  ];
   return colors[Math.floor(Math.random() * colors.length)];
 };
