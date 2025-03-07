@@ -29,7 +29,7 @@ function AppHeader() {
   const token = JSON.parse(String(getLocalStorageItem('accessToken')));
 
   const [isLogin, setIsLogin] = useState(false);
-  const [avatar, setAvatar] = useState<string | StaticImageData>(userInfo?.avatar ? userInfo.avatar : '');
+  const [avatar, setAvatar] = useState<string | StaticImageData>(userInfo?.avatar || '');
 
   const {
     elementRef: languagesRef,
@@ -79,8 +79,7 @@ function AppHeader() {
         setIsLogin(false);
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isAuth]);
+  }, [isAuth, token, userInfo]);
 
   return (
     <div className={clsx(styles['header'])}>
