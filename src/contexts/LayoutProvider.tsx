@@ -13,6 +13,7 @@ import { usePathname } from '@/i18n/routing';
 import { noDefaultLayoutRoutes } from '@/config/routes';
 import { useAppSelector } from '@/lib/hooks';
 import { getLocalStorageItem } from '@/utils/localStorage';
+import AppSidebar from '@/components/AppSidebar';
 
 function LayoutProvider({ children }: { children: Readonly<React.ReactNode> }) {
   const pathname = usePathname();
@@ -59,7 +60,9 @@ function LayoutProvider({ children }: { children: Readonly<React.ReactNode> }) {
             </Flex>
           </AppShell.Header>
 
-          <AppShell.Navbar p="md">Navbar</AppShell.Navbar>
+          <AppShell.Navbar pt="sm">
+            <AppSidebar />
+          </AppShell.Navbar>
 
           <AppShell.Main>{children}</AppShell.Main>
         </AppShell>
