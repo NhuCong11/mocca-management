@@ -10,12 +10,18 @@ export default async function middleware(request: NextRequest) {
     defaultLocale: defaultLocale,
   });
   const response = handleI18nRouting(request);
+  const token = request.cookies.get('accessToken')?.value;
   const currentLocale = locales.find((locale) => pathname.startsWith(`/${locale}`)) || defaultLocale;
 
   response.headers.set('x-default-locale', defaultLocale);
 
   if (privateRoutes.includes(pathname)) {
     const url = new URL(`/${currentLocale}/errors/403`, request.url);
+    response.headers.set('x-middleware-rewrite', url.toString());
+  }
+
+  if (!token) {
+    const url = new URL(`/${currentLocale}/auth/signin`, request.url);
     response.headers.set('x-middleware-rewrite', url.toString());
   }
 

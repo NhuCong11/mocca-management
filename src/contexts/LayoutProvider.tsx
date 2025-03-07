@@ -11,9 +11,13 @@ import { AppShell, Burger, Flex, Group } from '@mantine/core';
 import AppHeader from '@/components/AppHeader';
 import { usePathname } from '@/i18n/routing';
 import { noDefaultLayoutRoutes } from '@/config/routes';
+import { useAppSelector } from '@/lib/hooks';
+import { getLocalStorageItem } from '@/utils/localStorage';
 
 function LayoutProvider({ children }: { children: Readonly<React.ReactNode> }) {
   const pathname = usePathname();
+  const isAuth = useAppSelector((state) => state?.auth?.isLogin);
+  const token = JSON.parse(String(getLocalStorageItem('accessToken')));
   const [opened, { toggle }] = useDisclosure();
 
   useEffect(() => {
@@ -37,7 +41,7 @@ function LayoutProvider({ children }: { children: Readonly<React.ReactNode> }) {
 
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem={true} disableTransitionOnChange>
-      {!noDefaultLayoutRoutes.includes(pathname) ? (
+      {!noDefaultLayoutRoutes.includes(pathname) && (isAuth || token) ? (
         <AppShell
           header={{ height: 100 }}
           navbar={{
