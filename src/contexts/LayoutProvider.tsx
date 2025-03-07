@@ -15,6 +15,7 @@ import { useAppSelector } from '@/lib/hooks';
 import { getLocalStorageItem } from '@/utils/localStorage';
 import AppSidebar from '@/components/AppSidebar';
 import { theme } from '@/styles/mantine';
+import AppThemeToggle from '@/components/AppThemeToggle';
 
 function LayoutProvider({ children }: { children: Readonly<React.ReactNode> }) {
   const pathname = usePathname();
@@ -71,6 +72,7 @@ function LayoutProvider({ children }: { children: Readonly<React.ReactNode> }) {
         ) : (
           children
         )}
+        <AppThemeToggle />
         <Toaster
           gutter={8}
           position="top-center"

@@ -82,7 +82,7 @@ export const getRandomColor = () => {
     '#82c91e',
     '#fd7e14',
     '#fab005',
-    '7950f2',
+    '#7950f2',
     '#fa5252',
     '#4c6ef5',
   ];
