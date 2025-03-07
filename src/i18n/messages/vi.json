@@ -1,5 +1,5 @@
 {
-  "title": "Mocca Cafe | Ứng dụng đặt mua Cafe đa dạng",
+  "title": "Mocca Cafe | Admin",
   "description": "Dễ dàng tìm kiếm, so sánh và đặt mua Cafe các cửa hàng uy tín. Hãy cùng khám phá và trải nghiệm những hương vị tuyệt vời của Cafe cùng chúng tôi!",
   "header": {
     "na01": "Trang chủ",
@@ -17,17 +17,29 @@
   "button": {
     "btn01": "Quay lại trang chủ"
   },
+  "form": {
+    "tp01": "Email",
+    "tp02": "Mật khẩu"
+  },
   "errors": {
     "404": "404 | Trang không tồn tại.",
     "403": "403 | Bạn không có quyền truy cập.",
-    "500": "500 | Lỗi máy chủ."
+    "500": "500 | Lỗi máy chủ.",
+    "err01": "Vui lòng nhập email.",
+    "err02": "Email không đúng, vui lòng nhập lại.",
+    "err03": "Vui lòng nhập mật khẩu.",
+    "err04": "Mật khẩu phải chứa ít nhất 8 ký tự và 1 ký tự đặc biệt @-_"
+  },
+  "system": {
+    "error": "Đã xảy ra lỗi vui lòng thử lại sau!"
   },
   "login": {
     "heading": "Đăng nhập",
-    "desc01": "Chào mừng bạn quay trở lại. Đăng nhập để tiếp tục mua hàng.",
+    "desc01": "Chào mừng bạn quay trở lại. Đăng nhập để quản lý hệ thống và cửa hàng của bạn.",
     "desc02": "Bạn chưa có tài khoản",
     "notify01": "Đăng nhập thành công",
     "notify02": "Đăng xuất thành công",
-    "notify03": "Bạn đã đăng nhập rồi"
+    "notify03": "Bạn đã đăng nhập rồi",
+    "notify04": "Bạn không có quyền truy cập!"
   }
 }

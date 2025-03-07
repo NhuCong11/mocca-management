@@ -1,5 +1,5 @@
 {
-  "title": "Mocca Cafe | Diverse Cafe ordering applications",
+  "title": "Mocca Cafe | Admin",
   "description": "Easily search, compare, and purchase coffee from reputable stores. Let's explore and experience the amazing flavors of coffee with us!",
   "header": {
     "na01": "Home",
@@ -17,14 +17,25 @@
   "button": {
     "btn01": "Go to home page"
   },
+  "form": {
+    "tp01": "Email",
+    "tp02": "Password"
+  },
   "errors": {
     "404": "404 | Not Found.",
     "403": "403 | Forbidden.",
-    "500": "500 | Internal Server."
+    "500": "500 | Internal Server.",
+    "err01": "Please enter email.",
+    "err02": "Email is incorrect, please re-enter.",
+    "err03": "Please enter password.",
+    "err04": "Password must contain at least 8 characters and 1 special character @-_"
+  },
+  "system": {
+    "error": "An error occurred. Please try again later"
   },
   "login": {
     "heading": "Sign in",
-    "desc01": "Welcome back. Sign in to continue shopping.",
+    "desc01": "Welcome back. Log in to manage the system and your store.",
     "desc02": "You don't have an account",
     "notify01": "Login successful",
     "notify02": "Successfully logged out",

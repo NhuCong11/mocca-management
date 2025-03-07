@@ -21,8 +21,7 @@ import LayoutProvider from '@/contexts/LayoutProvider';
 export async function generateMetadata(): Promise<Metadata> {
   const messages = await getMessages();
 
-  const title =
-    typeof messages['title'] === 'string' ? messages['title'] : 'Mocca Cafe | Ứng dụng đặt mua Cafe đa dạng';
+  const title = typeof messages['title'] === 'string' ? messages['title'] : 'Mocca Cafe | Admin';
   const description =
     typeof messages['description'] === 'string'
       ? messages['description']
