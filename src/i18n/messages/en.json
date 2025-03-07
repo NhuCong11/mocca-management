@@ -33,6 +33,7 @@
   "system": {
     "error": "An error occurred. Please try again later"
   },
+  "nothingFoundMessage": "--No data--",
   "login": {
     "heading": "Sign in",
     "desc01": "Welcome back. Log in to manage the system and your store.",

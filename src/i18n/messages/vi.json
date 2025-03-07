@@ -33,6 +33,7 @@
   "system": {
     "error": "Đã xảy ra lỗi vui lòng thử lại sau!"
   },
+  "nothingFoundMessage": "--Không có dữ liệu--",
   "login": {
     "heading": "Đăng nhập",
     "desc01": "Chào mừng bạn quay trở lại. Đăng nhập để quản lý hệ thống và cửa hàng của bạn.",

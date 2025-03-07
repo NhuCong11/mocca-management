@@ -33,6 +33,7 @@
   "system": {
     "error": "发生了一个错误。请稍后重试"
   },
+  "nothingFoundMessage": "--没有数据--",
   "login": {
     "heading": "登录",
     "desc01": "欢迎回来。登录以管理系统和您的商店。",
