@@ -21,5 +21,13 @@
     "404": "404 | Trang không tồn tại.",
     "403": "403 | Bạn không có quyền truy cập.",
     "500": "500 | Lỗi máy chủ."
+  },
+  "login": {
+    "heading": "Đăng nhập",
+    "desc01": "Chào mừng bạn quay trở lại. Đăng nhập để tiếp tục mua hàng.",
+    "desc02": "Bạn chưa có tài khoản",
+    "notify01": "Đăng nhập thành công",
+    "notify02": "Đăng xuất thành công",
+    "notify03": "Bạn đã đăng nhập rồi"
   }
 }

@@ -21,5 +21,13 @@
     "404": "404 | Not Found.",
     "403": "403 | Forbidden.",
     "500": "500 | Internal Server."
+  },
+  "login": {
+    "heading": "Sign in",
+    "desc01": "Welcome back. Sign in to continue shopping.",
+    "desc02": "You don't have an account",
+    "notify01": "Login successful",
+    "notify02": "Successfully logged out",
+    "notify03": "You are already logged in"
   }
 }

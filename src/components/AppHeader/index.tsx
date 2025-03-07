@@ -1,4 +1,5 @@
-import Image from 'next/image';
+import { useEffect, useState } from 'react';
+import Image, { StaticImageData } from 'next/image';
 import clsx from 'clsx';
 import { removeCookie } from 'typescript-cookie';
 import { Link, useRouter } from '@/i18n/routing';
@@ -8,18 +9,27 @@ import { IconCaretDownFilled } from '@tabler/icons-react';
 import styles from './AppHeader.module.scss';
 import { getUserOptions } from './constant';
 import Button from '@/share/Button';
+import { MOCCA } from '@/constants';
+import { UserInfo } from '@/types';
 import { fonts } from '@/styles/fonts';
 import { Locale, locales } from '@/i18n/config';
+import { logout } from '@/lib/features/authSlice';
 import useClickOutside from '@/hooks/useClickOutSide';
 import { showToast, ToastType } from '@/utils/toastUtils';
-import { MOCCA } from '@/constants';
-// import { useAppDispatch } from '@/lib/hooks';
+import { useAppDispatch, useAppSelector } from '@/lib/hooks';
+import { getLocalStorageItem } from '@/utils/localStorage';
 
 function AppHeader() {
   const t = useTranslations();
   const router = useRouter();
   const locale = useLocale();
-  //   const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
+  const isAuth = useAppSelector((state) => state?.auth?.isLogin);
+  const userInfo: UserInfo | null = getLocalStorageItem('user');
+  const token = JSON.parse(String(getLocalStorageItem('accessToken')));
+
+  const [isLogin, setIsLogin] = useState(false);
+  const [avatar, setAvatar] = useState<string | StaticImageData>(userInfo?.avatar ? userInfo.avatar : '');
 
   const {
     elementRef: languagesRef,
@@ -42,7 +52,7 @@ function AppHeader() {
     removeCookie('accessToken', { path: '/' });
     setShowUserOptions(false);
     showToast(t('login.notify02'), ToastType.SUCCESS);
-    // dispatch(logout());
+    dispatch(logout());
     router.replace('/');
   };
 
@@ -60,13 +70,25 @@ function AppHeader() {
       .find((item) => item.name === lang);
   };
 
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      if (isAuth || token) {
+        setIsLogin(true);
+        setAvatar(userInfo?.avatar ? userInfo.avatar : '/images/logo.png');
+      } else {
+        setIsLogin(false);
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isAuth]);
+
   return (
     <div className={clsx(styles['header'])}>
       <Link href={'/'}>
         <Image width={150} height={47} src={'/images/logo-vip1.png'} priority alt={MOCCA} />
       </Link>
       <div className={clsx(styles['header__actions'])}>
-        {true && (
+        {!isLogin && (
           <div className={clsx(styles['header__actions-group'])}>
             <Link href={'/auth/signin'}>
               <Button tabletLaptop action outline>
@@ -75,14 +97,14 @@ function AppHeader() {
             </Link>
           </div>
         )}
-        {true && (
+        {isLogin && (
           <div className={clsx(styles['header__actions-group'])}>
             <Image
               priority
               width={42}
               height={42}
               alt="Avatar"
-              src={'/images/logo.png'}
+              src={avatar}
               ref={avatarRef}
               onClick={() => setShowUserOptions(!showUserOptions)}
               className={clsx(
