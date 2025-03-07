@@ -19,6 +19,7 @@ import { loginUser } from '@/services/authServices';
 import useSessionStorage from '@/hooks/useSessionStorage';
 import { showToast, ToastType } from '@/utils/toastUtils';
 import { ADMIN_RULES } from '@/constants';
+import { getLocalStorageItem } from '@/utils/localStorage';
 
 export interface LoginInfo {
   email: string;
@@ -30,6 +31,7 @@ function SignIn() {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { setItem } = useSessionStorage();
+  const token = JSON.parse(String(getLocalStorageItem('accessToken')));
   const isLogin = useAppSelector((state) => state.auth.isLogin);
   const isLoading = useAppSelector((state) => state?.auth.loading);
   const [showPassword, setShowPassword] = useState(false);
@@ -37,7 +39,6 @@ function SignIn() {
   const handleShowPassword = useCallback(() => setShowPassword((prev) => !prev), []);
 
   const handleSubmit = async (values: LoginInfo) => {
-    const token = localStorage.getItem('accessToken');
     if (token || isLogin) {
       showToast(t('login.notify03'), ToastType.ERROR);
       router.push('/');
@@ -69,7 +70,7 @@ function SignIn() {
     showToast('', ToastType.PROMISE, loginPromise);
   };
 
-  if (isLogin) return;
+  if (isLogin || token) return;
 
   return (
     <div className={clsx(styles['auth'], fonts.inter)}>
