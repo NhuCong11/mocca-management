@@ -8,11 +8,9 @@ import './globals.css';
 import { notFound } from 'next/navigation';
 import { getMessages } from 'next-intl/server';
 import { NextIntlClientProvider } from 'next-intl';
-import { MantineProvider } from '@mantine/core';
 
 import { Locale } from '@/i18n/config';
 import { routing } from '@/i18n/routing';
-import { theme } from '@/styles/mantine';
 import { fonts } from '@/styles/fonts';
 
 import StoreProvider from '@/contexts/StoreProvider';
@@ -52,13 +50,11 @@ export default async function LocaleLayout({
   return (
     <html lang={locale}>
       <body className={`${fonts.inter} antialiased`}>
-        <MantineProvider theme={theme}>
-          <NextIntlClientProvider messages={messages}>
-            <StoreProvider>
-              <LayoutProvider>{children}</LayoutProvider>
-            </StoreProvider>
-          </NextIntlClientProvider>
-        </MantineProvider>
+        <NextIntlClientProvider messages={messages}>
+          <StoreProvider>
+            <LayoutProvider>{children}</LayoutProvider>
+          </StoreProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

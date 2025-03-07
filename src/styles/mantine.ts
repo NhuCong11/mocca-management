@@ -1,7 +1,6 @@
-import { MantineThemeOverride } from '@mantine/core';
+import { createTheme, MantineTheme } from '@mantine/core';
 
-export const theme: MantineThemeOverride = {
-  primaryColor: 'green',
+export const theme = createTheme({
   fontFamily: 'Inter, sans-serif',
   fontSizes: {
     xs: '0.8rem',
@@ -17,4 +16,17 @@ export const theme: MantineThemeOverride = {
     lg: '1.5',
     xl: '1.5',
   },
-};
+  components: {
+    Select: {
+      styles: (theme: MantineTheme) => ({
+        label: {
+          marginBottom: '8px',
+        },
+        input: {
+          fontWeight: 400,
+          borderColor: theme.colors.gray[5],
+        },
+      }),
+    },
+  },
+});
