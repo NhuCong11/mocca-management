@@ -69,6 +69,8 @@ function SignIn() {
     showToast('', ToastType.PROMISE, loginPromise);
   };
 
+  if (isLogin) return;
+
   return (
     <div className={clsx(styles['auth'], fonts.inter)}>
       <h1 className={clsx(styles['auth__heading'])}>{t('login.heading')}</h1>
