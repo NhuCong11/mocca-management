@@ -13,7 +13,7 @@ function AuthLayout({ children }: Readonly<{ children: React.ReactNode }>) {
 
   return (
     <div className={clsx(styles['wrapper'])}>
-      {((typeof window !== 'undefined' && token) || isLogin) && (
+      {typeof window !== 'undefined' && !token && !isLogin && (
         <>
           <div className={clsx(styles['logo'])}>
             <Link href={'/'}>
