@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Image, { StaticImageData } from 'next/image';
 import clsx from 'clsx';
 import { removeCookie } from 'typescript-cookie';
-import { Link, useRouter } from '@/i18n/routing';
+import { Link, usePathname } from '@/i18n/routing';
 import { useLocale, useTranslations } from 'next-intl';
 import { IconCaretDownFilled } from '@tabler/icons-react';
 
@@ -18,10 +18,12 @@ import useClickOutside from '@/hooks/useClickOutSide';
 import { showToast, ToastType } from '@/utils/toastUtils';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 import { getLocalStorageItem } from '@/utils/localStorage';
+import { useRouter } from 'next/navigation';
 
 function AppHeader() {
   const t = useTranslations();
   const router = useRouter();
+  const pathname = usePathname();
   const locale = useLocale();
   const dispatch = useAppDispatch();
   const isAuth = useAppSelector((state) => state?.auth?.isLogin);
@@ -59,7 +61,13 @@ function AppHeader() {
   const userOptions = getUserOptions(handleLogOut);
 
   const handleLanguageChange = (lang: Locale) => {
-    const newPath = [`${lang}`].join('/');
+    const segments = pathname.split('/').filter(Boolean);
+    if (locales.includes(segments[0] as Locale)) {
+      segments[0] = lang;
+    } else {
+      segments.unshift(lang);
+    }
+    const newPath = `/${segments.join('/')}`;
     router.replace(newPath);
     setShowLanguages(false);
   };
