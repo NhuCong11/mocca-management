@@ -15,7 +15,9 @@
     "op01": "Log Out"
   },
   "button": {
-    "btn01": "Go to home page"
+    "btn01": "Back to Home",
+    "btn02": "Add",
+    "btn03": "Delete Selected"
   },
   "form": {
     "tp01": "Email",

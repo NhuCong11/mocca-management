@@ -6,8 +6,8 @@ export const theme = createTheme({
     xs: '0.8rem',
     sm: '1rem',
     md: '1.2rem',
-    lg: '1.5rem',
-    xl: '1.6rem',
+    lg: '1.4rem',
+    xl: '1.5rem',
   },
   lineHeights: {
     xs: '1.2',

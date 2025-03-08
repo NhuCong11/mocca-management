@@ -15,7 +15,9 @@
     "op01": "Đăng xuất"
   },
   "button": {
-    "btn01": "Quay lại trang chủ"
+    "btn01": "Quay lại trang chủ",
+    "btn02": "Thêm",
+    "btn03": "Xóa đã chọn"
   },
   "form": {
     "tp01": "Email",
