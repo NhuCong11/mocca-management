@@ -71,7 +71,7 @@ function SignIn() {
   };
 
   return (
-    <div className={clsx(styles['auth'], !token && !isLogin && styles['auth--form'], fonts.inter)}>
+    <div className={clsx(!token && !isLogin && styles['auth'], fonts.inter)}>
       {!token && !isLogin && (
         <>
           <h1 className={clsx(styles['auth__heading'])}>{t('login.heading')}</h1>
