@@ -10,7 +10,7 @@ import { getLocalStorageItem } from '@/utils/localStorage';
 function AuthLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const token = JSON.parse(String(getLocalStorageItem('accessToken')));
   const isLogin = useAppSelector((state) => state.auth.isLogin);
-  if (token || isLogin) return;
+  if ((typeof window !== 'undefined' && token) || isLogin) return;
 
   return (
     <div className={clsx(styles['wrapper'])}>

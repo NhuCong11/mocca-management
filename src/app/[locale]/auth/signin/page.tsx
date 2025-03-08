@@ -70,7 +70,7 @@ function SignIn() {
     showToast('', ToastType.PROMISE, loginPromise);
   };
 
-  if (isLogin || token) return;
+  if (isLogin || (typeof window !== 'undefined' && token)) return;
 
   return (
     <div className={clsx(styles['auth'], fonts.inter)}>
