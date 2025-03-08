@@ -50,14 +50,14 @@ function LayoutProvider({ children }: { children: Readonly<React.ReactNode> }) {
             header={{ height: 100 }}
             navbar={{
               width: 400,
-              breakpoint: 'sm',
+              breakpoint: 'lg',
               collapsed: { mobile: !opened },
             }}
           >
             <AppShell.Header>
               <Flex align="center" gap="lg" h="100%" bg="#181818" p="lg">
-                <Group p="sm">
-                  <Burger color="white" opened={opened} onClick={toggle} hiddenFrom="sm" size="lg" />
+                <Group p="lg">
+                  <Burger color="white" opened={opened} onClick={toggle} hiddenFrom="lg" size="lg" />
                 </Group>
                 <AppHeader />
               </Flex>
