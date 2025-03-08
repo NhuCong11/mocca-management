@@ -4,14 +4,8 @@ import clsx from 'clsx';
 import styles from './layout.module.scss';
 import { MOCCA } from '@/constants';
 import { Link } from '@/i18n/routing';
-import { useAppSelector } from '@/lib/hooks';
-import { getLocalStorageItem } from '@/utils/localStorage';
 
 function AuthLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  const token = JSON.parse(String(getLocalStorageItem('accessToken')));
-  const isLogin = useAppSelector((state) => state.auth.isLogin);
-  if ((typeof window !== 'undefined' && token) || isLogin) return;
-
   return (
     <div className={clsx(styles['wrapper'])}>
       <div className={clsx(styles['logo'])}>
