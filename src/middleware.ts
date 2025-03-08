@@ -1,6 +1,6 @@
 import createMiddleware from 'next-intl/middleware';
 import { NextRequest } from 'next/server';
-import { privateRoutes } from './config/routes';
+import { convertPathName, privateRoutes } from './config/routes';
 import { defaultLocale, locales } from './i18n/config';
 
 export default async function middleware(request: NextRequest) {
@@ -20,7 +20,7 @@ export default async function middleware(request: NextRequest) {
     response.headers.set('x-middleware-rewrite', url.toString());
   }
 
-  if (!token) {
+  if (!token && convertPathName(['']).includes(pathname)) {
     const url = new URL(`/${currentLocale}/auth/signin`, request.url);
     response.headers.set('x-middleware-rewrite', url.toString());
   }
