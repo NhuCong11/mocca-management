@@ -70,8 +70,6 @@ function SignIn() {
     showToast('', ToastType.PROMISE, loginPromise);
   };
 
-  if (isLogin || (typeof window !== 'undefined' && token)) return;
-
   return (
     <div className={clsx(styles['auth'], fonts.inter)}>
       <h1 className={clsx(styles['auth__heading'])}>{t('login.heading')}</h1>

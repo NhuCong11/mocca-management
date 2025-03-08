@@ -9,4 +9,4 @@ export const convertPathName = (pathNames: string[]): string[] => {
 
 export const privateRoutes: string[] = convertPathName(privatePath);
 
-export const noDefaultLayoutRoutes: string[] = noDefaultLayoutPath;
+export const noDefaultLayoutRoutes: string[] = convertPathName(noDefaultLayoutPath);
