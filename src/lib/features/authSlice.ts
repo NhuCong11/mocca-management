@@ -2,7 +2,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { UserInfo } from '@/types';
 import { ADMIN_RULES, UNKNOWN_ERROR } from '@/constants';
-import { getLocalStorageItem } from '@/utils/localStorage';
 import { loginUser } from '@/services/authServices';
 import { ActionRejectedType } from '../store';
 
@@ -10,14 +9,14 @@ export interface AuthState {
   loading: boolean;
   user: UserInfo | null;
   error: string | null;
-  isLogin: boolean | null;
+  isLogin: boolean;
 }
 
 const initialState: AuthState = {
   loading: false,
-  user: getLocalStorageItem('user') || null,
+  user: null,
   error: null,
-  isLogin: getLocalStorageItem('user') ? true : null,
+  isLogin: false,
 };
 
 const authSlice = createSlice({
@@ -51,7 +50,7 @@ const authSlice = createSlice({
         state.loading = false;
         state.user = null;
         state.error = action.payload?.message || UNKNOWN_ERROR;
-        state.isLogin = null;
+        state.isLogin = false;
       });
   },
 });
