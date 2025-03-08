@@ -45,7 +45,7 @@ function LayoutProvider({ children }: { children: Readonly<React.ReactNode> }) {
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem={true} disableTransitionOnChange>
       <MantineProvider theme={theme} defaultColorScheme="auto">
-        {!noDefaultLayoutRoutes.includes(pathname) && (isAuth || token) ? (
+        {!noDefaultLayoutRoutes.includes(pathname) && (isAuth || (typeof window !== 'undefined' && token)) ? (
           <AppShell
             header={{ height: 100 }}
             navbar={{
