@@ -71,64 +71,60 @@ function SignIn() {
   };
 
   return (
-    <div className={clsx(!token && !isLogin && styles['auth'], fonts.inter)}>
-      {!token && !isLogin && (
-        <>
-          <h1 className={clsx(styles['auth__heading'])}>{t('login.heading')}</h1>
-          <p className={clsx(styles['auth__desc'], fonts.lora)}>{t('login.desc01')}</p>
+    <div className={clsx(styles['auth'], fonts.inter)}>
+      <h1 className={clsx(styles['auth__heading'])}>{t('login.heading')}</h1>
+      <p className={clsx(styles['auth__desc'], fonts.lora)}>{t('login.desc01')}</p>
 
-          <Formik
-            initialValues={{ email: '', password: '' }}
-            validationSchema={validationSchema(t)}
-            onSubmit={(values) => {
-              handleSubmit(values);
-            }}
-            validateOnChange={true}
-            validateOnMount={true}
-          >
-            {({ isValid, dirty }) => {
-              return (
-                <Form>
-                  <InputText
-                    required
-                    label={t('form.tp01')}
-                    name="email"
-                    type="email"
-                    placeholder={t('form.tp01')}
-                    LeftIcon={<IconMail />}
-                    readOnly={isLoading}
-                  />
-                  <InputText
-                    required
-                    label={t('form.tp02')}
-                    name="password"
-                    type={showPassword ? 'text' : 'password'}
-                    placeholder={t('form.tp02')}
-                    LeftIcon={<IconLock />}
-                    RightIcon={<IconKeyPassword showPassword={showPassword} onToggle={handleShowPassword} />}
-                    readOnly={isLoading}
-                  />
+      <Formik
+        initialValues={{ email: '', password: '' }}
+        validationSchema={validationSchema(t)}
+        onSubmit={(values) => {
+          handleSubmit(values);
+        }}
+        validateOnChange={true}
+        validateOnMount={true}
+      >
+        {({ isValid, dirty }) => {
+          return (
+            <Form>
+              <InputText
+                required
+                label={t('form.tp01')}
+                name="email"
+                type="email"
+                placeholder={t('form.tp01')}
+                LeftIcon={<IconMail />}
+                readOnly={isLoading}
+              />
+              <InputText
+                required
+                label={t('form.tp02')}
+                name="password"
+                type={showPassword ? 'text' : 'password'}
+                placeholder={t('form.tp02')}
+                LeftIcon={<IconLock />}
+                RightIcon={<IconKeyPassword showPassword={showPassword} onToggle={handleShowPassword} />}
+                readOnly={isLoading}
+              />
 
-                  <div
-                    style={!isValid || !dirty ? { cursor: 'no-drop' } : {}}
-                    className={clsx(styles['form__group'], styles['auth__btn-group'])}
-                  >
-                    <Button
-                      primary
-                      auth
-                      type="submit"
-                      disabled={!isValid || !dirty || isLoading}
-                      leftIcon={isLoading && <Loader size={30} color="var(--white)" />}
-                    >
-                      {t('header.na02')}
-                    </Button>
-                  </div>
-                </Form>
-              );
-            }}
-          </Formik>
-        </>
-      )}
+              <div
+                style={!isValid || !dirty ? { cursor: 'no-drop' } : {}}
+                className={clsx(styles['form__group'], styles['auth__btn-group'])}
+              >
+                <Button
+                  primary
+                  auth
+                  type="submit"
+                  disabled={!isValid || !dirty || isLoading}
+                  leftIcon={isLoading && <Loader size={30} color="var(--white)" />}
+                >
+                  {t('header.na02')}
+                </Button>
+              </div>
+            </Form>
+          );
+        }}
+      </Formik>
     </div>
   );
 }
