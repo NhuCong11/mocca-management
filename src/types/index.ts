@@ -1,3 +1,5 @@
+import { TimePeriod } from '@/constants';
+
 export interface RejectValueError {
   rejectValue: { message: string };
 }
@@ -6,6 +8,19 @@ export interface DefaultParams {
   limit: number;
   page: number;
   keyword?: string;
+}
+
+export interface StatisticalProps {
+  statisticalBy: TimePeriod;
+}
+
+export interface OrderStatusInfo {
+  pending: number;
+  canceled: number;
+  confirmed: number;
+  reject: number;
+  shipping: number;
+  success: number;
 }
 
 export interface LoginInfo {
@@ -80,25 +95,6 @@ export interface RestaurantInfo {
   categories?: CategoryInfo[];
 }
 
-export interface CartItemInfo {
-  _id: string;
-  product: ProductInfo;
-  quantity: number;
-  totalPrice: number;
-}
-
-export interface CartInfo {
-  shop: RestaurantInfo;
-  cartDetails: CartItemInfo[];
-  totalMoney: number;
-}
-
-export interface CartsInfo {
-  carts: CartInfo[];
-  totalProducts: number;
-  totalMoneyAllCarts: number;
-}
-
 export interface RestaurantsInfo {
   shops: RestaurantInfo[];
   limit: number;
@@ -106,33 +102,4 @@ export interface RestaurantsInfo {
   totalPage: number;
   currentPage: number;
   currentResult: number;
-}
-
-export interface CreateOrderInfo {
-  cartDetails: string[];
-  paymentMethod: string;
-  address: string;
-  note: string;
-}
-
-export interface GetOrderInfo {
-  limit: number;
-  page: number;
-  status?: string;
-}
-
-export interface OrderItemInfo {
-  _id: string;
-  createdAt: string;
-  updatedAt: string;
-  totalMoney: number;
-  status: string;
-  shop: RestaurantInfo;
-  paymentMethod: string;
-  paymentCode: string;
-  paymentStatus?: string;
-  cartDetails: CartItemInfo[];
-  address: string;
-  note: string;
-  expriedTimeBank?: string;
 }

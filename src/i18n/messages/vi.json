@@ -1,5 +1,5 @@
 {
-  "title": "Mocca Cafe | Admin",
+  "title": "Mocca Cafe | Quản trị",
   "description": "Dễ dàng tìm kiếm, so sánh và đặt mua Cafe các cửa hàng uy tín. Hãy cùng khám phá và trải nghiệm những hương vị tuyệt vời của Cafe cùng chúng tôi!",
   "header": {
     "na01": "Trang chủ",
@@ -44,5 +44,30 @@
     "notify02": "Đăng xuất thành công",
     "notify03": "Bạn đã đăng nhập rồi",
     "notify04": "Bạn không có quyền truy cập!"
+  },
+  "dashboard": {
+    "title01": "Chào mừng trở lại 👋 🎉",
+    "title02": "Doanh thu",
+    "title03": "Người dùng mới",
+    "title04": "Đơn đặt hàng",
+    "title05": "Tin nhắn",
+    "title06": "Trạng thái đơn hàng",
+    "title07": "Tổng quan hiệu suất",
+    "title08": "Biểu đồ doanh thu",
+    "timePeriods": {
+      "week": "Tuần",
+      "month": "Tháng",
+      "quarter": "Quý",
+      "year": "Năm"
+    },
+    "statisticsTime": "Thống kê theo:"
+  },
+  "orderStatus": {
+    "pending": "Chờ xác nhận",
+    "canceled": "Đã hủy",
+    "confirmed": "Đã xác nhận",
+    "reject": "Từ chối",
+    "shipping": "Đang giao hàng",
+    "success": "Giao thành công"
   }
 }

@@ -43,5 +43,30 @@
     "notify01": "Login successful",
     "notify02": "Successfully logged out",
     "notify03": "You are already logged in"
+  },
+  "dashboard": {
+    "title01": "Welcome back 👋 🎉",
+    "title02": "Revenue",
+    "title03": "New Users",
+    "title04": "Orders",
+    "title05": "Messages",
+    "title06": "Order Status",
+    "title07": "Performance Overview",
+    "title08": "Revenue Chart",
+    "timePeriods": {
+      "week": "Week",
+      "month": "Month",
+      "quarter": "Quarter",
+      "year": "Year"
+    },
+    "statisticsTime": "Statistics by:"
+  },
+  "orderStatus": {
+    "pending": "Pending Confirmation",
+    "canceled": "Canceled",
+    "confirmed": "Confirmed",
+    "reject": "Rejected",
+    "shipping": "Shipping",
+    "success": "Delivered Successfully"
   }
 }

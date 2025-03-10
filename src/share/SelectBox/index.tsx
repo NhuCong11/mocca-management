@@ -13,6 +13,7 @@ interface SelectBoxProps {
   data?: ItemInfo[];
   leftIcon?: React.ReactNode;
   value?: ComboboxItem | null;
+  notNull?: boolean;
   onChange?: (value: ComboboxItem) => void;
 }
 
@@ -23,6 +24,7 @@ function SelectBox({
   required = false,
   leftIcon,
   value,
+  notNull = false,
   onChange = () => {},
 }: SelectBoxProps) {
   const t = useTranslations();
@@ -36,7 +38,7 @@ function SelectBox({
     <Select
       size="xl"
       miw={200}
-      clearable
+      clearable={!notNull}
       searchable
       label={label}
       withScrollArea
