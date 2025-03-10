@@ -1,6 +1,7 @@
 import { configureStore, PayloadAction } from '@reduxjs/toolkit';
 import authSlice from './features/authSlice';
 import dashboardSlice from './features/dashboardSlice';
+import usersSlice from './features/usersSlice';
 
 interface MessagePayload {
   message: string;
@@ -12,6 +13,7 @@ export const makeStore = () => {
     reducer: {
       auth: authSlice,
       dashboard: dashboardSlice,
+      users: usersSlice,
     },
   });
 };

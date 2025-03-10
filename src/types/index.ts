@@ -103,3 +103,8 @@ export interface RestaurantsInfo {
   currentPage: number;
   currentResult: number;
 }
+
+export interface UpdateUserInfo {
+  userId?: string;
+  userCredentials: UserInfo;
+}
