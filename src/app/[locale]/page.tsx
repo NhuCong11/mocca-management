@@ -108,7 +108,7 @@ export default function Home() {
   }, [timePeriod]);
 
   return (
-    <Box p="xl">
+    <Box p="xl" bg="var(--content-bg)">
       <Group pb={10}>
         <Title order={1} c="var(--primary-bg)">
           {t('dashboard.title01')}

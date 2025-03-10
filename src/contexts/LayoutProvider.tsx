@@ -63,7 +63,7 @@ function LayoutProvider({ children }: { children: Readonly<React.ReactNode> }) {
               </Flex>
             </AppShell.Header>
 
-            <AppShell.Navbar pt="sm">
+            <AppShell.Navbar pt="sm" bg="var(--btn-bg)">
               <AppSidebar />
             </AppShell.Navbar>
 
