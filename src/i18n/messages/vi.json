@@ -45,15 +45,24 @@
     "notify03": "Bạn đã đăng nhập rồi",
     "notify04": "Bạn không có quyền truy cập!"
   },
+  "sidebar": {
+    "system": "Quản lý hệ thống",
+    "order": "Quản lý đặt hàng",
+    "chat": "Quản lý tin nhắn",
+    "users": "Danh sách người dùng",
+    "categories": "Danh mục",
+    "contacts": "Danh sách liên hệ",
+    "products": "Danh sách sản phẩm",
+    "orders": "Đơn đặt hàng",
+    "chats": "Tin nhắn"
+  },
   "dashboard": {
     "title01": "Chào mừng trở lại 👋 🎉",
     "title02": "Doanh thu",
     "title03": "Người dùng mới",
-    "title04": "Đơn đặt hàng",
-    "title05": "Tin nhắn",
-    "title06": "Trạng thái đơn hàng",
-    "title07": "Tổng quan hiệu suất",
-    "title08": "Biểu đồ doanh thu",
+    "title04": "Trạng thái đơn hàng",
+    "title05": "Tổng quan hiệu suất",
+    "title06": "Biểu đồ doanh thu",
     "timePeriods": {
       "week": "Tuần",
       "month": "Tháng",

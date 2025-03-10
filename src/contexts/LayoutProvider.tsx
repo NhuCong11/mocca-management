@@ -67,7 +67,7 @@ function LayoutProvider({ children }: { children: Readonly<React.ReactNode> }) {
               <AppSidebar />
             </AppShell.Navbar>
 
-            <AppShell.Main>{children}</AppShell.Main>
+            <AppShell.Main bg="var(--content-bg)">{children}</AppShell.Main>
           </AppShell>
         ) : (
           children

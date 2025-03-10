@@ -80,8 +80,8 @@ export default function Home() {
         labelKey: 'dashboard.title03',
         hidden: checkRoleShop(userInfo?.role),
       },
-      { color: 'lime', icon: <IconTruckDelivery />, value: statisticalData.order || 0, labelKey: 'dashboard.title04' },
-      { color: 'orange', icon: <IconMessage />, value: statisticalData.message || 0, labelKey: 'dashboard.title05' },
+      { color: 'lime', icon: <IconTruckDelivery />, value: statisticalData.order || 0, labelKey: 'sidebar.orders' },
+      { color: 'orange', icon: <IconMessage />, value: statisticalData.message || 0, labelKey: 'sidebar.chats' },
     ].filter((stat) => !stat.hidden);
   }, [statisticalData, userInfo]);
 
@@ -108,10 +108,10 @@ export default function Home() {
   }, [timePeriod]);
 
   return (
-    <Box p="xl" bg="var(--content-bg)">
+    <Box p="xl">
       <Group pb={10}>
         <Title order={1} c="var(--primary-bg)">
-          {t('dashboard.title01')}
+          {`${t('dashboard.title01')} ${userInfo?.fullname ?? ''}`}
         </Title>
       </Group>
       <DateTimeDisplay lang={locale} />
@@ -146,7 +146,7 @@ export default function Home() {
           {checkRoleAdmin(userInfo?.role) && (
             <Group>
               <Text size="xl" fw={600} c="violet">
-                {t('dashboard.title07')}
+                {t('dashboard.title05')}
               </Text>
               <LineChart
                 h={300}
@@ -163,7 +163,7 @@ export default function Home() {
 
           <Group mt={80}>
             <Text size="xl" fw={600} c="teal">
-              {t('dashboard.title08')}
+              {t('dashboard.title06')}
             </Text>
             <BarChart
               h={300}
@@ -180,7 +180,7 @@ export default function Home() {
             <Box mt="xl">
               <Group justify="center">
                 <Text size="xl" fw={600} c="lime">
-                  {t('dashboard.title06')}
+                  {t('dashboard.title04')}
                 </Text>
                 {allOrderStatusEmpty && (
                   <Text size="xl" fs="italic">

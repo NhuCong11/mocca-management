@@ -1,4 +1,4 @@
-function SignInLayout({
+function UsersLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -8,8 +8,8 @@ function SignInLayout({
 
 export const generateMetadata = () => {
   return {
-    title: 'Mocca Admin | Sign In',
+    title: 'Mocca Admin | Users',
   };
 };
 
-export default SignInLayout;
+export default UsersLayout;

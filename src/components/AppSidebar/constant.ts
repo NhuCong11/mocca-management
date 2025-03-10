@@ -14,30 +14,30 @@ import {
 export const sidebars = [
   {
     id: 'system',
-    label: 'Quản lý hệ thống',
+    label: 'sidebar.system',
     Icon: IconSettings,
     content: [
       {
-        title: 'Danh sách người dùng',
-        link: '',
+        title: 'sidebar.users',
+        link: '/users',
         Icon: IconUser,
         rule: [RULES.ADMIN],
       },
       {
-        title: 'Danh mục',
-        link: '',
+        title: 'sidebar.categories',
+        link: '/categories',
         Icon: IconCategory2,
         rule: [RULES.ADMIN],
       },
       {
-        title: 'Danh sách liên hệ',
-        link: '',
+        title: 'sidebar.contacts',
+        link: '/contacts',
         Icon: IconAddressBook,
         rule: [RULES.ADMIN],
       },
       {
-        title: 'Danh sách sản phẩm',
-        link: '',
+        title: 'sidebar.products',
+        link: '/products',
         Icon: IconBadgeTm,
         rule: [RULES.SHOP],
       },
@@ -45,12 +45,12 @@ export const sidebars = [
   },
   {
     id: 'order',
-    label: 'Quản lý đặt hàng',
+    label: 'sidebar.order',
     Icon: IconTruckDelivery,
     content: [
       {
-        title: 'Đơn đặt hàng',
-        link: '',
+        title: 'sidebar.orders',
+        link: '/orders',
         Icon: IconShoppingCart,
         rule: [RULES.SHOP],
       },
@@ -58,12 +58,12 @@ export const sidebars = [
   },
   {
     id: 'chat',
-    label: 'Quản lý tin nhắn',
+    label: 'sidebar.chat',
     Icon: IconMailbox,
     content: [
       {
-        title: 'Tin nhắn',
-        link: '',
+        title: 'sidebar.chats',
+        link: '/chats',
         Icon: IconMessage,
         rule: [RULES.SHOP],
       },

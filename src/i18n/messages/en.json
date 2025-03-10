@@ -44,15 +44,24 @@
     "notify02": "Successfully logged out",
     "notify03": "You are already logged in"
   },
+  "sidebar": {
+    "system": "System Management",
+    "order": "Order Management",
+    "chat": "Chat Management",
+    "users": "User List",
+    "categories": "Categories",
+    "contacts": "Contact List",
+    "products": "Product List",
+    "orders": "Orders",
+    "chats": "Messages"
+  },
   "dashboard": {
     "title01": "Welcome back 👋 🎉",
     "title02": "Revenue",
     "title03": "New Users",
-    "title04": "Orders",
-    "title05": "Messages",
-    "title06": "Order Status",
-    "title07": "Performance Overview",
-    "title08": "Revenue Chart",
+    "title04": "Order Status",
+    "title05": "Performance Overview",
+    "title06": "Revenue Chart",
     "timePeriods": {
       "week": "Week",
       "month": "Month",
