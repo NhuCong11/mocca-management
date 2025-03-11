@@ -14,6 +14,8 @@ interface SelectBoxProps {
   leftIcon?: React.ReactNode;
   value?: ComboboxItem | null;
   notNull?: boolean;
+  size?: string;
+  maw?: number;
   onChange?: (value: ComboboxItem) => void;
 }
 
@@ -25,6 +27,8 @@ function SelectBox({
   leftIcon,
   value,
   notNull = false,
+  size = 'xl',
+  maw,
   onChange = () => {},
 }: SelectBoxProps) {
   const t = useTranslations();
@@ -36,8 +40,9 @@ function SelectBox({
 
   return (
     <Select
-      size="xl"
+      size={size}
       miw={200}
+      maw={maw}
       clearable={!notNull}
       searchable
       label={label}

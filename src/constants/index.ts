@@ -1,3 +1,5 @@
+import { ItemInfo } from '@/share/SelectBox';
+
 export const ERROR_MESSAGES = {
   JWT_EXPIRED_VI: 'jwt hết hạn',
   JWT_EXPIRED_EN: 'jwt expired',
@@ -23,3 +25,9 @@ export const UNKNOWN_ERROR = 'Unknown error';
 export const MOCCA = 'Mocca Cafe';
 export const EMPTY_CHAR = '---';
 export const TIME_PERIODS = [TimePeriod.Week, TimePeriod.Month, TimePeriod.Quarter, TimePeriod.Year];
+export const LINES_ON_PAGE = [5, 10, 20, 50, 100];
+
+export const linesOnThePage: ItemInfo[] = LINES_ON_PAGE.map((rule) => ({
+  value: `${rule}`,
+  label: `${rule}`,
+}));

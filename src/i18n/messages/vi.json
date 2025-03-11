@@ -98,5 +98,6 @@
   "gender": {
     "male": "Nam",
     "female": "Nữ"
-  }
+  },
+  "lines": "Số dòng"
 }

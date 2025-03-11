@@ -21,6 +21,7 @@ import { useTranslations } from 'next-intl';
 import { handleExportFile } from '@/utils/constants';
 import SelectBox from '../SelectBox';
 import { NOT_SORT, renderCellValue, renderSortIcon, rolesSelect } from './constant';
+import { linesOnThePage } from '@/constants';
 
 interface ShowTableProps<T> {
   data: T[];
@@ -28,6 +29,8 @@ interface ShowTableProps<T> {
   isLoading?: boolean;
   translate: string;
   totalPages: number;
+  numberLines: ComboboxItem | null;
+  changeLines: (value: ComboboxItem) => void;
 }
 
 function ShowTable<T extends Record<string, any>>({
@@ -36,6 +39,8 @@ function ShowTable<T extends Record<string, any>>({
   isLoading = false,
   translate,
   totalPages,
+  numberLines,
+  changeLines,
 }: ShowTableProps<T>) {
   const t = useTranslations();
 
@@ -186,7 +191,7 @@ function ShowTable<T extends Record<string, any>>({
   );
 
   const TableFooter = () => (
-    <Group justify="space-between" mt="xl">
+    <Group justify="space-between" mt="xl" gap={50}>
       <Group>
         <Button
           size="lg"
@@ -217,7 +222,13 @@ function ShowTable<T extends Record<string, any>>({
           </Button>
         </Anchor>
       </Group>
-      <AppPagination total={totalPages} />
+      <Group gap="lg">
+        <Group>
+          <Text size="lg">{t('lines')}</Text>
+          <SelectBox notNull size="md" maw={100} data={linesOnThePage} value={numberLines} onChange={changeLines} />
+        </Group>
+        <AppPagination total={totalPages} />
+      </Group>
     </Group>
   );
 

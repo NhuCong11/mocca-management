@@ -97,5 +97,6 @@
   "gender": {
     "male": "男",
     "female": "女"
-  }
+  },
+  "lines": "行数"
 }
