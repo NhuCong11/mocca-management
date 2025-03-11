@@ -6,6 +6,7 @@ export const ERROR_MESSAGES = {
 };
 
 export enum RULES {
+  USER = 'user',
   ADMIN = 'admin',
   SHOP = 'shop',
 }

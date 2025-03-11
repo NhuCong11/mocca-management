@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import { Group, Pagination } from '@mantine/core';
 import {
@@ -16,21 +17,25 @@ interface AppPaginationProps {
 function AppPagination({ total }: AppPaginationProps) {
   const { getParam, updateParams } = useQueryParams();
   const pageParam = getParam('page');
-  const [activePage, setActivePage] = useState(Number(pageParam));
+  const initialPage = pageParam && !isNaN(Number(pageParam)) ? Number(pageParam) : 1;
+  const [activePage, setActivePage] = useState(initialPage);
 
   useEffect(() => {
-    if (activePage >= 1 && pageParam) {
-      updateParams({ page: String(activePage) });
-    }
-  }, [activePage, updateParams, pageParam]);
-
-  useEffect(() => {
-    if (pageParam) {
-      setActivePage(Number(pageParam));
+    if (!pageParam) {
+      updateParams({ page: '1' });
     } else {
-      setActivePage(0);
+      const pageNumber = Number(pageParam);
+      if (!isNaN(pageNumber) && pageNumber !== activePage) {
+        setActivePage(pageNumber);
+      }
     }
   }, [pageParam]);
+
+  useEffect(() => {
+    if (String(activePage) !== pageParam) {
+      updateParams({ page: String(activePage) });
+    }
+  }, [activePage]);
 
   if (total < 1) return null;
 

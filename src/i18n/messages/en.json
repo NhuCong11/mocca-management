@@ -17,11 +17,13 @@
   "button": {
     "btn01": "Back to Home",
     "btn02": "Add",
-    "btn03": "Delete Selected"
+    "btn03": "Delete Selected",
+    "btn04": "Download File"
   },
   "form": {
     "tp01": "Email",
-    "tp02": "Password"
+    "tp02": "Password",
+    "tp03": "Search"
   },
   "errors": {
     "404": "404 | Not Found.",
@@ -77,5 +79,23 @@
     "reject": "Rejected",
     "shipping": "Shipping",
     "success": "Delivered Successfully"
+  },
+  "users": {
+    "fullname": "Full Name",
+    "username": "Username",
+    "email": "Email",
+    "dateOfBirth": "Date of Birth",
+    "gender": "Gender",
+    "isVerify": "Verified",
+    "role": "Role",
+    "avatar": "Avatar",
+    "is2FA": "2FA Enabled",
+    "phone": "Phone Number",
+    "createdAt": "Created At",
+    "updatedAt": "Updated At"
+  },
+  "gender": {
+    "male": "Male",
+    "female": "Female"
   }
 }

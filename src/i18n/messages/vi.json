@@ -17,11 +17,13 @@
   "button": {
     "btn01": "Quay lại trang chủ",
     "btn02": "Thêm",
-    "btn03": "Xóa đã chọn"
+    "btn03": "Xóa đã chọn",
+    "btn04": "Tải xuống file"
   },
   "form": {
     "tp01": "Email",
-    "tp02": "Mật khẩu"
+    "tp02": "Mật khẩu",
+    "tp03": "Tìm kiếm"
   },
   "errors": {
     "404": "404 | Trang không tồn tại.",
@@ -78,5 +80,23 @@
     "reject": "Từ chối",
     "shipping": "Đang giao hàng",
     "success": "Giao thành công"
+  },
+  "users": {
+    "fullname": "Họ tên",
+    "username": "Tên người dùng",
+    "email": "Email",
+    "dateOfBirth": "Ngày sinh",
+    "gender": "Giới tính",
+    "isVerify": "Đã xác thực",
+    "role": "Quyền",
+    "avatar": "Ảnh đại diện",
+    "is2FA": "Đã bảo mật 2FA",
+    "phone": "Số điện thoại",
+    "createdAt": "Tạo lúc",
+    "updatedAt": "Sửa lúc"
+  },
+  "gender": {
+    "male": "Nam",
+    "female": "Nữ"
   }
 }

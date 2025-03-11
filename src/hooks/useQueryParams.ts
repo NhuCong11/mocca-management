@@ -33,17 +33,26 @@ export const useQueryParams = () => {
   const updateParams = useCallback(
     (newParams: UpdateQueryParams) => {
       const currentParams = new URLSearchParams(searchParams as any);
+      let isChanged = false;
 
       Object.entries(newParams).forEach(([key, value]) => {
         if (value === null) {
-          currentParams.delete(key); // Xoá param nếu value là null
+          if (currentParams.has(key)) {
+            currentParams.delete(key);
+            isChanged = true;
+          }
         } else {
-          currentParams.set(key, value); // Cập nhật hoặc thêm mới param
+          if (currentParams.get(key) !== value) {
+            currentParams.set(key, value);
+            isChanged = true;
+          }
         }
       });
 
-      // Thay đổi URL với các params mới
-      router.replace(`?${currentParams.toString()}`, { scroll: false });
+      // Chỉ cập nhật URL nếu có thay đổi thực sự
+      if (isChanged) {
+        router.replace(`?${currentParams.toString()}`, { scroll: false });
+      }
     },
     [router, searchParams],
   );

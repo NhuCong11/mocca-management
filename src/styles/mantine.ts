@@ -28,5 +28,16 @@ export const theme = createTheme({
         },
       }),
     },
+    TextInput: {
+      styles: (theme: MantineTheme) => ({
+        label: {
+          marginBottom: '8px',
+        },
+        input: {
+          fontWeight: 400,
+          borderColor: theme.colors.gray[7],
+        },
+      }),
+    },
   },
 });

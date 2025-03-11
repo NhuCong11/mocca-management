@@ -1,3 +1,5 @@
+import { getLocalStorageItem } from './localStorage';
+
 export const hostname = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://api.hauifood.com/';
 
 export const hostnameGHN = process.env.NEXT_PUBLIC_API_GET_GHN || 'https://online-gateway.ghn.vn/shiip/public-api/';
@@ -36,4 +38,12 @@ export const formatDateTime = (dateTimeString: string, enough?: boolean, isoStri
   } else {
     return `${day}/${month}/${year}`;
   }
+};
+
+export const handleExportFile = (searchKeyword: string, page: string) => {
+  const token = JSON.parse(String(getLocalStorageItem('accessToken')));
+  if (searchKeyword) {
+    return `${hostname}v1/${page}/exports?keyword=${searchKeyword}&token=${token}`;
+  }
+  return `${hostname}v1/${page}/exports?token=${token}`;
 };

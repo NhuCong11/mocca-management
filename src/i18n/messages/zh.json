@@ -17,11 +17,13 @@
   "button": {
     "btn01": "返回首页",
     "btn02": "添加",
-    "btn03": "删除已选"
+    "btn03": "删除已选",
+    "btn04": "下载文件"
   },
   "form": {
     "tp01": "电子邮件",
-    "tp02": "密码"
+    "tp02": "密码",
+    "tp03": "搜索"
   },
   "errors": {
     "404": "404 | 未找到.",
@@ -77,5 +79,23 @@
     "reject": "已拒绝",
     "shipping": "配送中",
     "success": "已送达"
+  },
+  "users": {
+    "fullname": "全名",
+    "username": "用户名",
+    "email": "电子邮件",
+    "dateOfBirth": "出生日期",
+    "gender": "性别",
+    "isVerify": "已验证",
+    "role": "角色",
+    "avatar": "头像",
+    "is2FA": "已启用二步验证",
+    "phone": "电话号码",
+    "createdAt": "创建时间",
+    "updatedAt": "更新时间"
+  },
+  "gender": {
+    "male": "男",
+    "female": "女"
   }
 }

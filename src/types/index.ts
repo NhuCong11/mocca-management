@@ -42,6 +42,8 @@ export interface UserInfo {
   avatar?: string;
   background?: string;
   is2FA?: boolean;
+  isLocked?: boolean;
+  slug?: string;
   phone?: string;
   lastActive?: string;
   createdAt?: string;
