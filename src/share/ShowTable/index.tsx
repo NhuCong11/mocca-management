@@ -13,27 +13,14 @@ import {
   Anchor,
   TextInput,
   ComboboxItem,
-  Avatar,
-  Badge,
 } from '@mantine/core';
-import {
-  IconArrowUp,
-  IconArrowDown,
-  IconArrowsSort,
-  IconEdit,
-  IconEye,
-  IconTrash,
-  IconPlus,
-  IconDownload,
-  IconCheck,
-  IconX,
-} from '@tabler/icons-react';
+import { IconEdit, IconEye, IconTrash, IconPlus, IconDownload } from '@tabler/icons-react';
 import CustomCheckbox from '../CustomCheckbox';
 import AppPagination from '@/components/AppPagination';
 import { useTranslations } from 'next-intl';
 import { handleExportFile } from '@/utils/constants';
-import SelectBox, { ItemInfo } from '../SelectBox';
-import { EMPTY_CHAR, RULES } from '@/constants';
+import SelectBox from '../SelectBox';
+import { NOT_SORT, renderCellValue, renderSortIcon, rolesSelect } from './constant';
 
 interface ShowTableProps<T> {
   data: T[];
@@ -42,11 +29,6 @@ interface ShowTableProps<T> {
   translate: string;
   totalPages: number;
 }
-
-const rolesSelect: ItemInfo[] = Object.values(RULES).map((rule, index) => ({
-  value: rule,
-  label: `${index + 1}. ${rule.toUpperCase()}`,
-}));
 
 function ShowTable<T extends Record<string, any>>({
   data,
@@ -68,15 +50,6 @@ function ShowTable<T extends Record<string, any>>({
   const searchInputRef = useRef<HTMLInputElement | null>(null);
 
   const columns = useMemo(() => (data.length ? Object.keys(data[0]) : []), [data]);
-
-  const renderSortIcon = (key: keyof T) => {
-    if (sortConfig.key !== key) return <IconArrowsSort size={18} color="teal" />;
-    return sortConfig.direction === 'asc' ? (
-      <IconArrowUp size={18} color="teal" />
-    ) : (
-      <IconArrowDown size={18} color="teal" />
-    );
-  };
 
   const handleCheckboxChange = (index: number) => {
     setSelectedRows((prev) => {
@@ -166,9 +139,11 @@ function ShowTable<T extends Record<string, any>>({
             <Text size="xl" fw={600} ta="center">
               {t(`${translate}.${key}`)}
             </Text>
-            <ActionIcon size={35} variant="transparent" onClick={() => handleSort(key)}>
-              {renderSortIcon(key)}
-            </ActionIcon>
+            {!NOT_SORT.includes(key) && (
+              <ActionIcon size={35} variant="transparent" onClick={() => handleSort(key)}>
+                {renderSortIcon(key, sortConfig)}
+              </ActionIcon>
+            )}
           </Group>
         </Table.Th>
       ))}
@@ -246,46 +221,6 @@ function ShowTable<T extends Record<string, any>>({
     </Group>
   );
 
-  const renderCellValue = (row: Record<string, any>, key: string) => {
-    const value = row[key];
-    if (typeof value === 'boolean') {
-      return (
-        <Group justify="center">
-          {value ? <IconCheck size={20} color="green" /> : <IconX size={20} color="red" />}
-        </Group>
-      );
-    }
-    if (key === 'avatar') {
-      return (
-        <Group justify="center">
-          <Avatar src={value} alt="Avatar" size={50} />
-        </Group>
-      );
-    }
-    if (key === 'gender') {
-      const color = value === 'male' ? 'blue' : 'pink';
-      return (
-        <Group justify="center">
-          <Badge size="xl" color={color} variant="light" miw={100}>
-            {t(`gender.${value}`)}
-          </Badge>
-        </Group>
-      );
-    }
-    if (key === 'role') {
-      const color = value === RULES.SHOP ? 'orange' : value === RULES.ADMIN ? 'green' : 'teal';
-      return (
-        <Group justify="center">
-          <Badge size="xl" color={color} variant="light" miw={100}>
-            {value}
-          </Badge>
-        </Group>
-      );
-    }
-
-    return <Text size="lg">{value || EMPTY_CHAR}</Text>;
-  };
-
   useEffect(() => {
     if (searchInputRef.current) {
       searchInputRef.current.focus();
@@ -320,7 +255,7 @@ function ShowTable<T extends Record<string, any>>({
                   </Table.Td>
                   {columns.map((key) => (
                     <Table.Td key={key} ta="center">
-                      {renderCellValue(row, key)}
+                      {renderCellValue(row, key, t)}
                     </Table.Td>
                   ))}
                 </Table.Tr>
