@@ -20,8 +20,10 @@ import AppPagination from '@/components/AppPagination';
 import { useTranslations } from 'next-intl';
 import { handleExportFile } from '@/utils/constants';
 import SelectBox from '../SelectBox';
-import { NOT_SORT, renderCellValue, renderSortIcon, rolesSelect } from './constant';
+import { excludedFields, NOT_SORT, renderCellValue, renderSortIcon, rolesSelect } from './constant';
 import { linesOnThePage } from '@/constants';
+import { useDisclosure } from '@mantine/hooks';
+import ResourceView from '../ResourceView';
 
 interface ShowTableProps<T> {
   data: T[];
@@ -53,8 +55,13 @@ function ShowTable<T extends Record<string, any>>({
   const [selectedRows, setSelectedRows] = useState<Set<number>>(new Set());
   const [selectedRole, setSelectedRole] = useState<ComboboxItem | null>(null);
   const searchInputRef = useRef<HTMLInputElement | null>(null);
+  const [selectedId, setSelectedId] = useState('');
+  const [openedView, { open: openView, close: closeView }] = useDisclosure(false);
 
-  const columns = useMemo(() => (data.length ? Object.keys(data[0]) : []), [data]);
+  const columns = useMemo(() => {
+    if (!data.length) return [];
+    return Object.keys(data[0]).filter((key) => !excludedFields.includes(key));
+  }, [data]);
 
   const handleCheckboxChange = (index: number) => {
     setSelectedRows((prev) => {
@@ -176,19 +183,26 @@ function ShowTable<T extends Record<string, any>>({
       </Table.Tr>
     ));
 
-  const ActionButtons = () => (
-    <Group p="0 10px" justify="center">
-      <ActionIcon size={45} variant="light" color="violet">
-        <IconEye size={18} />
-      </ActionIcon>
-      <ActionIcon size={45} variant="light" color="teal">
-        <IconEdit size={18} />
-      </ActionIcon>
-      <ActionIcon size={45} variant="light" color="red">
-        <IconTrash size={18} />
-      </ActionIcon>
-    </Group>
-  );
+  const ActionButtons = (row: Record<string, any>) => {
+    const handleView = () => {
+      setSelectedId(row?.rowData?._id ?? '');
+      openView();
+    };
+
+    return (
+      <Group p="0 10px" justify="center">
+        <ActionIcon size={45} variant="light" color="violet" onClick={handleView}>
+          <IconEye size={18} />
+        </ActionIcon>
+        <ActionIcon size={45} variant="light" color="teal">
+          <IconEdit size={18} />
+        </ActionIcon>
+        <ActionIcon size={45} variant="light" color="red">
+          <IconTrash size={18} />
+        </ActionIcon>
+      </Group>
+    );
+  };
 
   const TableFooter = () => (
     <Group justify="space-between" mt="xl" gap={50}>
@@ -262,7 +276,7 @@ function ShowTable<T extends Record<string, any>>({
                     </Group>
                   </Table.Td>
                   <Table.Td miw={250}>
-                    <ActionButtons />
+                    <ActionButtons rowData={row} />
                   </Table.Td>
                   {columns.map((key) => (
                     <Table.Td key={key} ta="center">
@@ -276,6 +290,10 @@ function ShowTable<T extends Record<string, any>>({
         </Table>
       </Table.ScrollContainer>
       <TableFooter />
+
+      {openedView && (
+        <ResourceView close={closeView} opened={openedView} selectedId={selectedId} resourceName={translate} />
+      )}
     </Box>
   );
 }

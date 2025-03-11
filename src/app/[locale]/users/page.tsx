@@ -31,24 +31,7 @@ function Users() {
     (page: number, numberLines: number) => {
       dispatch(getAllUser({ limit: numberLines, page })).then((result) => {
         if (result?.payload?.code === 200) {
-          const excludedFields: (keyof UserInfo)[] = [
-            '_id',
-            'accountBalance',
-            'normalizedEmail',
-            'forgotStatus',
-            'background',
-            'secret',
-            'lastActive',
-            'isLocked',
-            'slug',
-            'verifyExpireAt',
-          ];
-          const filteredUsers = result.payload.data.users.map((user: UserInfo) => {
-            return Object.fromEntries(
-              Object.entries(user).filter(([key]) => !excludedFields.includes(key as keyof UserInfo)),
-            ) as Partial<UserInfo>;
-          });
-          setListUsers(filteredUsers);
+          setListUsers(result.payload.data.users);
           setTotalPages(result.payload.data.totalPage);
         }
       });

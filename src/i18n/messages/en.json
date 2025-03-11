@@ -81,9 +81,11 @@
     "success": "Delivered Successfully"
   },
   "users": {
+    "_id": "ID",
     "fullname": "Full Name",
     "username": "Username",
     "email": "Email",
+    "normalizedEmail": "Normalized Email",
     "dateOfBirth": "Date of Birth",
     "gender": "Gender",
     "isVerify": "Verified",
@@ -92,11 +94,26 @@
     "is2FA": "2FA Enabled",
     "phone": "Phone Number",
     "createdAt": "Created At",
-    "updatedAt": "Updated At"
+    "updatedAt": "Updated At",
+    "verifyExpireAt": "Verification Expiry",
+    "lastActive": "Last Active",
+    "isLocked": "Locked",
+    "secret": "Secret Key",
+    "background": "Background Image",
+    "forgotStatus": "Forgot Password Status",
+    "description": "Description",
+    "slug": "Slug",
+    "accountBalance": "Account Balance"
   },
   "gender": {
     "male": "Male",
     "female": "Female"
   },
-  "lines": "Lines"
+  "lines": "Lines",
+  "modal": {
+    "create": "Create",
+    "view": "View details",
+    "update": "Update information",
+    "delete": "Confirm deletion"
+  }
 }

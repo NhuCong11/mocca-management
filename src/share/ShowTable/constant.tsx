@@ -1,11 +1,25 @@
-import { Avatar, Badge, Group, Text } from '@mantine/core';
+import { Anchor, Avatar, Badge, Group, Text } from '@mantine/core';
 import { IconArrowDown, IconArrowsSort, IconArrowUp, IconCheck, IconX } from '@tabler/icons-react';
 import { ItemInfo } from '../SelectBox';
 import { EMPTY_CHAR, RULES } from '@/constants';
-import { formatDateTime } from '@/utils/constants';
+import { formatDateTime, getVNCurrency } from '@/utils/constants';
 
 export const NOT_SORT = ['isVerify', 'is2FA', 'avatar'];
-export const FIELD_DATE_FORMAT = ['dateOfBirth', 'createdAt', 'updatedAt'];
+export const FIELD_DATE_FORMAT = ['dateOfBirth', 'createdAt', 'updatedAt', 'lastActive', 'verifyExpireAt'];
+export const excludedFieldsUsers = [
+  '_id',
+  'accountBalance',
+  'normalizedEmail',
+  'forgotStatus',
+  'background',
+  'secret',
+  'lastActive',
+  'isLocked',
+  'slug',
+  'verifyExpireAt',
+];
+
+export const excludedFields: string[] = [...excludedFieldsUsers];
 
 export const rolesSelect: ItemInfo[] = Object.values(RULES).map((rule, index) => ({
   value: rule,
@@ -42,15 +56,25 @@ const getBadgeColor = (role: string) => {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const renderCellValue = (row: Record<string, any>, key: string, t: (path: string) => string) => {
   const value = row[key];
-
   switch (key) {
     case 'avatar':
       return (
         <Group justify="center">
-          <Avatar src={value as string} alt="Avatar" size={50} />
+          <Avatar src={value as string} alt="Avatar" size={60} />
         </Group>
       );
-
+    case 'background':
+      return (
+        <Anchor
+          size="xl"
+          href={value}
+          target="_blank"
+          underline="never"
+          style={{ wordBreak: 'break-all', maxWidth: '100%' }}
+        >
+          {value}
+        </Anchor>
+      );
     case 'gender':
       return (
         <Group justify="center">
@@ -59,7 +83,19 @@ export const renderCellValue = (row: Record<string, any>, key: string, t: (path:
           </Badge>
         </Group>
       );
-
+    case 'email':
+    case 'normalizedEmail':
+      return (
+        <Anchor size="xl" href={`mailto:${value}`} underline="always">
+          {value}
+        </Anchor>
+      );
+    case 'phone':
+      return (
+        <Anchor size="xl" href={`tel:${value}`} underline="always">
+          {value}
+        </Anchor>
+      );
     case 'role':
       return (
         <Group justify="center">
@@ -68,7 +104,8 @@ export const renderCellValue = (row: Record<string, any>, key: string, t: (path:
           </Badge>
         </Group>
       );
-
+    case 'accountBalance':
+      return <Text size="xl">{getVNCurrency(value as number)}</Text>;
     default:
       if (typeof value === 'boolean') {
         return (
@@ -77,11 +114,9 @@ export const renderCellValue = (row: Record<string, any>, key: string, t: (path:
           </Group>
         );
       }
-
       if (FIELD_DATE_FORMAT.includes(key)) {
-        return <Text size="lg">{formatDateTime(value as string)}</Text>;
+        return <Text size="xl">{formatDateTime(value as string)}</Text>;
       }
-
-      return <Text size="lg">{value || EMPTY_CHAR}</Text>;
+      return <Text size="xl">{value || EMPTY_CHAR}</Text>;
   }
 };

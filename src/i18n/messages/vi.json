@@ -82,9 +82,11 @@
     "success": "Giao thành công"
   },
   "users": {
+    "_id": "ID",
     "fullname": "Họ tên",
     "username": "Tên người dùng",
     "email": "Email",
+    "normalizedEmail": "Email đã chuẩn hóa",
     "dateOfBirth": "Ngày sinh",
     "gender": "Giới tính",
     "isVerify": "Đã xác thực",
@@ -93,11 +95,26 @@
     "is2FA": "Đã bảo mật 2FA",
     "phone": "Số điện thoại",
     "createdAt": "Tạo lúc",
-    "updatedAt": "Sửa lúc"
+    "updatedAt": "Sửa lúc",
+    "verifyExpireAt": "Xác thực lúc",
+    "lastActive": "Lần cuối hoạt động",
+    "isLocked": "Đã khóa",
+    "secret": "Khóa bí mật",
+    "background": "Ảnh nền",
+    "forgotStatus": "Trạng thái",
+    "description": "Mô tả",
+    "slug": "Slug",
+    "accountBalance": "Số dư tài khoản"
   },
   "gender": {
     "male": "Nam",
     "female": "Nữ"
   },
-  "lines": "Số dòng"
+  "lines": "Số dòng",
+  "modal": {
+    "create": "Tạo mới",
+    "view": "Thông tin chi tiết",
+    "update": "Cập nhật thông tin",
+    "delete": "Xác nhận xóa"
+  }
 }

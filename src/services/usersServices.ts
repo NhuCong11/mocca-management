@@ -30,7 +30,7 @@ export const createUser = createAsyncThunk<any, UpdateUserInfo, RejectValueError
 
 export const getUserById = createAsyncThunk<any, UpdateUserInfo, RejectValueError>(
   'user/getById',
-  async (userId, { rejectWithValue }) => {
+  async ({ userId }, { rejectWithValue }) => {
     try {
       const res: AxiosResponse = await callApi(HttpMethod.GET, `/v1/users/${userId}`, {}, {});
       return res;

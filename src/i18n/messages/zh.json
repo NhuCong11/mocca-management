@@ -81,22 +81,39 @@
     "success": "已送达"
   },
   "users": {
+    "_id": "ID",
     "fullname": "全名",
     "username": "用户名",
     "email": "电子邮件",
+    "normalizedEmail": "标准化电子邮件",
     "dateOfBirth": "出生日期",
     "gender": "性别",
     "isVerify": "已验证",
     "role": "角色",
     "avatar": "头像",
-    "is2FA": "已启用二步验证",
+    "is2FA": "已启用 2FA",
     "phone": "电话号码",
     "createdAt": "创建时间",
-    "updatedAt": "更新时间"
+    "updatedAt": "更新时间",
+    "verifyExpireAt": "验证到期时间",
+    "lastActive": "最后活动",
+    "isLocked": "已锁定",
+    "secret": "密钥",
+    "background": "背景图片",
+    "forgotStatus": "忘记密码状态",
+    "description": "描述",
+    "slug": "Slug",
+    "accountBalance": "账户余额"
   },
   "gender": {
     "male": "男",
     "female": "女"
   },
-  "lines": "行数"
+  "lines": "行数",
+  "modal": {
+    "create": "创建",
+    "view": "查看详情",
+    "update": "更新信息",
+    "delete": "确认删除"
+  }
 }
