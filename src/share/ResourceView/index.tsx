@@ -9,6 +9,7 @@ import { useAppDispatch } from '@/lib/hooks';
 import { CategoryUpdateInfo, UpdateUserInfo, UserInfo } from '@/types';
 import { getUserById } from '@/services/usersServices';
 import { getCategoryById } from '@/services/categoriesServices';
+import { getContactById } from '@/services/contactsServices';
 
 interface ResourceViewProps {
   opened: boolean;
@@ -39,6 +40,15 @@ function ResourceView({ opened, close, selectedId, resourceName }: ResourceViewP
         break;
       case 'categories':
         dispatch(getCategoryById({ categoryId: selectedId } as CategoryUpdateInfo)).then((result) => {
+          if (result?.payload?.code === 200) {
+            const filteredData = { ...result?.payload?.data };
+            delete filteredData.__v;
+            setViewData(filteredData);
+          }
+        });
+        break;
+      case 'contacts':
+        dispatch(getContactById(selectedId)).then((result) => {
           if (result?.payload?.code === 200) {
             const filteredData = { ...result?.payload?.data };
             delete filteredData.__v;

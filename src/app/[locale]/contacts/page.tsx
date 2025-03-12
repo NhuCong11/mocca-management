@@ -4,22 +4,22 @@ import { useTranslations } from 'next-intl';
 import { Box, ComboboxItem, Group, Title } from '@mantine/core';
 import { IconCategory } from '@tabler/icons-react';
 
-import { CategoryInfo } from '@/types';
+import { ContactInfo } from '@/types';
 import ShowTable from '@/share/ShowTable';
 import LoadingStart from '@/share/Loading';
 import { linesOnThePage } from '@/constants';
 import { useQueryParams } from '@/hooks/useQueryParams';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks';
-import { getAllCategory } from '@/services/categoriesServices';
+import { getAllContacts } from '@/services/contactsServices';
 
-function Categories() {
+function Contacts() {
   const t = useTranslations();
   const dispatch = useAppDispatch();
   const { getParam } = useQueryParams();
   const pageParam = Number(getParam('page')) || 1;
-  const isLoading = useAppSelector((state) => state.categories.loading);
+  const isLoading = useAppSelector((state) => state.contacts.loading);
 
-  const [listCategories, setCategories] = useState<CategoryInfo[]>([]);
+  const [listContacts, setContacts] = useState<ContactInfo[]>([]);
   const [totalPages, setTotalPages] = useState(0);
   const [numberLines, setNumberLines] = useState<ComboboxItem | null>(linesOnThePage[2] as ComboboxItem);
 
@@ -27,11 +27,11 @@ function Categories() {
     setNumberLines(value);
   };
 
-  const fetchAllCategories = useCallback(
+  const fetchAllContacts = useCallback(
     (page: number, numberLines: number) => {
-      dispatch(getAllCategory({ limit: numberLines, page })).then((result) => {
+      dispatch(getAllContacts({ limit: numberLines, page })).then((result) => {
         if (result?.payload?.code === 200) {
-          setCategories(result.payload.data.categories);
+          setContacts(result.payload.data.contacts);
           setTotalPages(result.payload.data.totalPage);
         }
       });
@@ -40,27 +40,27 @@ function Categories() {
   );
 
   useEffect(() => {
-    fetchAllCategories(pageParam, Number(numberLines?.value));
-  }, [pageParam, fetchAllCategories, numberLines]);
+    fetchAllContacts(pageParam, Number(numberLines?.value));
+  }, [pageParam, fetchAllContacts, numberLines]);
 
   return (
     <Box p="xl">
       <Group pb={10}>
         <IconCategory size={25} color="var(--primary-bg)" />
         <Title order={1} c="var(--primary-bg)">
-          {t('sidebar.categories')}
+          {t('sidebar.contacts')}
         </Title>
       </Group>
       <Box mt="xl" p="lg">
         <ShowTable
-          data={listCategories}
-          translate="categories"
+          data={listContacts}
+          translate="contacts"
           isLoading={isLoading}
           totalPages={totalPages}
-          tableName={t('sidebar.categories')}
+          tableName={t('sidebar.contacts')}
           numberLines={numberLines}
           changeLines={handleChangeNumberLines}
-          filterFields={['name']}
+          filterFields={['fullname', 'email', 'phone']}
         />
       </Box>
       {isLoading && <LoadingStart />}
@@ -68,4 +68,4 @@ function Categories() {
   );
 }
 
-export default Categories;
+export default Contacts;

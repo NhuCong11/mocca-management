@@ -124,5 +124,14 @@
     "slug": "Slug",
     "createdAt": "Tạo lúc",
     "updatedAt": "Sửa lúc"
+  },
+  "contacts": {
+    "_id": "ID",
+    "fullname": "Họ tên",
+    "email": "Email",
+    "phone": "Số điện thoại",
+    "message": "Tin nhắn",
+    "createdAt": "Tạo lúc",
+    "updatedAt": "Sửa lúc"
   }
 }

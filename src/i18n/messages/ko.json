@@ -123,5 +123,14 @@
     "slug": "슬러그",
     "createdAt": "생성 날짜",
     "updatedAt": "수정 날짜"
+  },
+  "contacts": {
+    "_id": "ID",
+    "fullname": "이름",
+    "email": "이메일",
+    "phone": "전화번호",
+    "message": "메시지",
+    "createdAt": "생성 시간",
+    "updatedAt": "수정 시간"
   }
 }

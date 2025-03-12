@@ -116,3 +116,12 @@ export interface UpdateUserInfo {
   userId?: string;
   userCredentials: UserInfo;
 }
+
+export interface ContactInfo {
+  fullname?: string;
+  email?: string;
+  phone?: string;
+  message?: string;
+  createdAt?: string;
+  updatedAt?: string;
+}

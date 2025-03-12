@@ -123,5 +123,14 @@
     "slug": "Slug",
     "createdAt": "Created At",
     "updatedAt": "Updated At"
+  },
+  "contacts": {
+    "_id": "ID",
+    "fullname": "Full Name",
+    "email": "Email",
+    "phone": "Phone Number",
+    "message": "Message",
+    "createdAt": "Created At",
+    "updatedAt": "Updated At"
   }
 }

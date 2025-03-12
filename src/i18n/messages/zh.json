@@ -123,5 +123,14 @@
     "slug": "短链",
     "createdAt": "创建时间",
     "updatedAt": "更新时间"
+  },
+  "contacts": {
+    "_id": "ID",
+    "fullname": "全名",
+    "email": "电子邮件",
+    "phone": "电话号码",
+    "message": "消息",
+    "createdAt": "创建时间",
+    "updatedAt": "更新时间"
   }
 }

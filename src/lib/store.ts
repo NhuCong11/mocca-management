@@ -3,6 +3,7 @@ import authSlice from './features/authSlice';
 import dashboardSlice from './features/dashboardSlice';
 import usersSlice from './features/usersSlice';
 import categoriesSlice from './features/categoriesSlice';
+import contactsSlice from './features/contactsSlice';
 
 interface MessagePayload {
   message: string;
@@ -16,6 +17,7 @@ export const makeStore = () => {
       dashboard: dashboardSlice,
       users: usersSlice,
       categories: categoriesSlice,
+      contacts: contactsSlice,
     },
   });
 };
