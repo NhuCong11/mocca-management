@@ -2,24 +2,24 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Box, ComboboxItem, Group, Title } from '@mantine/core';
-import { IconUser } from '@tabler/icons-react';
+import { IconCategory } from '@tabler/icons-react';
 
-import { UserInfo } from '@/types';
-import { useAppDispatch, useAppSelector } from '@/lib/hooks';
-import { getAllUser } from '@/services/usersServices';
+import { CategoryInfo } from '@/types';
 import ShowTable from '@/share/ShowTable';
-import { useQueryParams } from '@/hooks/useQueryParams';
 import LoadingStart from '@/share/Loading';
 import { linesOnThePage } from '@/constants';
+import { useQueryParams } from '@/hooks/useQueryParams';
+import { useAppDispatch, useAppSelector } from '@/lib/hooks';
+import { getAllCategory } from '@/services/categoriesServices';
 
-function Users() {
+function Categories() {
   const t = useTranslations();
   const dispatch = useAppDispatch();
   const { getParam } = useQueryParams();
   const pageParam = Number(getParam('page')) || 1;
   const isLoading = useAppSelector((state) => state.users.loading);
 
-  const [listUsers, setListUsers] = useState<UserInfo[]>([]);
+  const [listCategories, setCategories] = useState<CategoryInfo[]>([]);
   const [totalPages, setTotalPages] = useState(0);
   const [numberLines, setNumberLines] = useState<ComboboxItem | null>(linesOnThePage[2] as ComboboxItem);
 
@@ -27,11 +27,11 @@ function Users() {
     setNumberLines(value);
   };
 
-  const fetchAllUsers = useCallback(
+  const fetchAllCategories = useCallback(
     (page: number, numberLines: number) => {
-      dispatch(getAllUser({ limit: numberLines, page })).then((result) => {
+      dispatch(getAllCategory({ limit: numberLines, page })).then((result) => {
         if (result?.payload?.code === 200) {
-          setListUsers(result.payload.data.users);
+          setCategories(result.payload.data.categories);
           setTotalPages(result.payload.data.totalPage);
         }
       });
@@ -40,27 +40,28 @@ function Users() {
   );
 
   useEffect(() => {
-    fetchAllUsers(pageParam, Number(numberLines?.value));
-  }, [pageParam, fetchAllUsers, numberLines]);
+    fetchAllCategories(pageParam, Number(numberLines?.value));
+  }, [pageParam, fetchAllCategories, numberLines]);
+  console.log(listCategories);
 
   return (
     <Box p="xl">
       <Group pb={10}>
-        <IconUser size={25} color="var(--primary-bg)" />
+        <IconCategory size={25} color="var(--primary-bg)" />
         <Title order={1} c="var(--primary-bg)">
-          {t('sidebar.users')}
+          {t('sidebar.categories')}
         </Title>
       </Group>
       <Box mt="xl" p="lg">
         <ShowTable
-          data={listUsers}
-          translate="users"
+          data={listCategories}
+          translate="categories"
           isLoading={isLoading}
           totalPages={totalPages}
-          tableName={t('sidebar.users')}
+          tableName={t('sidebar.categories')}
           numberLines={numberLines}
           changeLines={handleChangeNumberLines}
-          filterFields={['fullname', 'email', 'role']}
+          filterFields={['name']}
         />
       </Box>
       {isLoading && <LoadingStart />}
@@ -68,4 +69,4 @@ function Users() {
   );
 }
 
-export default Users;
+export default Categories;

@@ -116,5 +116,13 @@
     "view": "Thông tin chi tiết",
     "update": "Cập nhật thông tin",
     "delete": "Xác nhận xóa"
+  },
+  "categories": {
+    "_id": "ID",
+    "name": "Tên danh mục",
+    "image": "Ảnh",
+    "slug": "Slug",
+    "createdAt": "Tạo lúc",
+    "updatedAt": "Sửa lúc"
   }
 }

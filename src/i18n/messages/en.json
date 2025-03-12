@@ -115,5 +115,13 @@
     "view": "View details",
     "update": "Update information",
     "delete": "Confirm deletion"
+  },
+  "categories": {
+    "_id": "ID",
+    "name": "Category Name",
+    "image": "Image",
+    "slug": "Slug",
+    "createdAt": "Created At",
+    "updatedAt": "Updated At"
   }
 }

@@ -115,5 +115,13 @@
     "view": "상세 정보",
     "update": "정보 업데이트",
     "delete": "삭제 확인"
+  },
+  "categories": {
+    "_id": "ID",
+    "name": "카테고리 이름",
+    "image": "이미지",
+    "slug": "슬러그",
+    "createdAt": "생성 날짜",
+    "updatedAt": "수정 날짜"
   }
 }

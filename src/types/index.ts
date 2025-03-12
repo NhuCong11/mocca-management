@@ -72,6 +72,12 @@ export interface CategoryInfo {
   products?: ProductInfo[];
 }
 
+export interface CategoryUpdateInfo {
+  categoryId?: string;
+  name?: string;
+  image?: File;
+}
+
 export interface RestaurantInfo {
   _id?: string;
   fullname?: string;

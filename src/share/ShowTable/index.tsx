@@ -33,6 +33,7 @@ interface ShowTableProps<T> {
   totalPages: number;
   numberLines: ComboboxItem | null;
   changeLines: (value: ComboboxItem) => void;
+  filterFields?: string[];
 }
 
 function ShowTable<T extends Record<string, any>>({
@@ -43,6 +44,7 @@ function ShowTable<T extends Record<string, any>>({
   totalPages,
   numberLines,
   changeLines,
+  filterFields,
 }: ShowTableProps<T>) {
   const t = useTranslations();
 
@@ -81,14 +83,17 @@ function ShowTable<T extends Record<string, any>>({
   };
 
   const filteredData = useMemo(() => {
-    return tableData.filter(
-      (item) =>
-        (selectedRole ? item.role.toLowerCase() === selectedRole.value.toLowerCase() : true) &&
-        (item.fullname.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          item.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          item.role.toLowerCase().includes(searchQuery.toLowerCase())),
-    );
-  }, [tableData, searchQuery, selectedRole]);
+    return tableData.filter((item) => {
+      const matchesSearch = filterFields?.some((field) =>
+        item[field]?.toLowerCase().includes(searchQuery.toLowerCase()),
+      );
+
+      if (translate === 'users') {
+        return (selectedRole ? item.role.toLowerCase() === selectedRole.value.toLowerCase() : true) && matchesSearch;
+      }
+      return matchesSearch;
+    });
+  }, [tableData, searchQuery, selectedRole, translate, filterFields]);
 
   const handleRoleChange = (value: ComboboxItem) => {
     setSelectedRole(value);
@@ -122,12 +127,14 @@ function ShowTable<T extends Record<string, any>>({
     <Group mb="lg" justify="space-between">
       <Title order={2}>{tableName}</Title>
       <Group>
-        <SelectBox
-          label={t('users.role')}
-          data={rolesSelect}
-          value={selectedRole}
-          onChange={(value) => handleRoleChange(value)}
-        />
+        {translate === 'users' && (
+          <SelectBox
+            label={t('users.role')}
+            data={rolesSelect}
+            value={selectedRole}
+            onChange={(value) => handleRoleChange(value)}
+          />
+        )}
         <TextInput
           ref={searchInputRef}
           miw={500}
@@ -259,7 +266,7 @@ function ShowTable<T extends Record<string, any>>({
   return (
     <Box>
       <Header />
-      <Table.ScrollContainer minWidth={300} h="50vh">
+      <Table.ScrollContainer minWidth={300} h="55vh">
         <Table verticalSpacing="sm" striped highlightOnHover withColumnBorders withRowBorders={false} withTableBorder>
           <Table.Thead>
             <TableHead />

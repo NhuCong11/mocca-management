@@ -115,5 +115,13 @@
     "view": "查看详情",
     "update": "更新信息",
     "delete": "确认删除"
+  },
+  "categories": {
+    "_id": "ID",
+    "name": "类别名称",
+    "image": "图片",
+    "slug": "短链",
+    "createdAt": "创建时间",
+    "updatedAt": "更新时间"
   }
 }

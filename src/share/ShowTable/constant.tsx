@@ -1,10 +1,10 @@
-import { Anchor, Avatar, Badge, Group, Text } from '@mantine/core';
+import { Anchor, Avatar, Badge, Group, Image, Text } from '@mantine/core';
 import { IconArrowDown, IconArrowsSort, IconArrowUp, IconCheck, IconX } from '@tabler/icons-react';
 import { ItemInfo } from '../SelectBox';
 import { EMPTY_CHAR, RULES } from '@/constants';
 import { formatDateTime, getVNCurrency } from '@/utils/constants';
 
-export const NOT_SORT = ['isVerify', 'is2FA', 'avatar'];
+export const NOT_SORT = ['isVerify', 'is2FA', 'avatar', 'image'];
 export const FIELD_DATE_FORMAT = ['dateOfBirth', 'createdAt', 'updatedAt', 'lastActive', 'verifyExpireAt'];
 export const excludedFieldsUsers = [
   '_id',
@@ -106,6 +106,12 @@ export const renderCellValue = (row: Record<string, any>, key: string, t: (path:
       );
     case 'accountBalance':
       return <Text size="xl">{getVNCurrency(value as number)}</Text>;
+    case 'image':
+      return (
+        <Group justify="center">
+          <Image radius="md" h={200} w="auto" fit="contain" src={value} alt={value} />
+        </Group>
+      );
     default:
       if (typeof value === 'boolean') {
         return (
