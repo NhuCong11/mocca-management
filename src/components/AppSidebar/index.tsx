@@ -1,13 +1,16 @@
 import { useMemo } from 'react';
+import clsx from 'clsx';
 import { useTranslations } from 'next-intl';
 import { IconChevronDown } from '@tabler/icons-react';
 import { Accordion, Group, ScrollArea, Text } from '@mantine/core';
 
+import styles from './AppSideBar.module.scss';
 import { getRandomColor, sidebars } from './constant';
-import { Link } from '@/i18n/routing';
+import { Link, usePathname } from '@/i18n/routing';
 
 function AppSidebar() {
   const t = useTranslations();
+  const pathname = usePathname();
   const defaultOpens = useMemo(() => sidebars.map((item) => item.id), []);
 
   const items = useMemo(
@@ -22,7 +25,11 @@ function AppSidebar() {
               const Icon = nav.Icon;
               return (
                 <Link href={nav.link} key={nav.title}>
-                  <Group gap={15} p="lg">
+                  <Group
+                    gap={15}
+                    p="md"
+                    className={clsx(styles['sidebar__item'], pathname === nav.link && styles['sidebar__item--active'])}
+                  >
                     <Icon size={25} color={getRandomColor()} />
                     <Text size="lg">{t(nav.title)}</Text>
                   </Group>
@@ -33,7 +40,7 @@ function AppSidebar() {
         </Accordion.Item>
       )),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [],
+    [pathname],
   );
 
   return (
