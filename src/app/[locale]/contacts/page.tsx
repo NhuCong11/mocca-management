@@ -2,7 +2,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Box, ComboboxItem, Group, Title } from '@mantine/core';
-import { IconCategory } from '@tabler/icons-react';
+import { IconAddressBook } from '@tabler/icons-react';
 
 import { ContactInfo } from '@/types';
 import ShowTable from '@/share/ShowTable';
@@ -46,7 +46,7 @@ function Contacts() {
   return (
     <Box p="xl">
       <Group pb={10}>
-        <IconCategory size={25} color="var(--primary-bg)" />
+        <IconAddressBook size={25} color="var(--primary-bg)" />
         <Title order={1} c="var(--primary-bg)">
           {t('sidebar.contacts')}
         </Title>

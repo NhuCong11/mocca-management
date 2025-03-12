@@ -69,7 +69,9 @@ export const renderCellValue = (row: Record<string, any>, key: string, t: (path:
           size="xl"
           href={value}
           target="_blank"
-          underline="never"
+          underline="always"
+          variant="gradient"
+          gradient={{ from: 'indigo', to: 'teal', deg: 150 }}
           style={{ wordBreak: 'break-all', maxWidth: '100%' }}
         >
           {value}
@@ -78,7 +80,7 @@ export const renderCellValue = (row: Record<string, any>, key: string, t: (path:
     case 'gender':
       return (
         <Group justify="center">
-          <Badge size="xl" color={value === 'male' ? 'blue' : 'pink'} variant="light" miw={100}>
+          <Badge size="xl" color={value === 'male' ? 'cyan' : 'pink'} variant="light" miw={100}>
             {t(`gender.${value}`)}
           </Badge>
         </Group>
@@ -86,13 +88,25 @@ export const renderCellValue = (row: Record<string, any>, key: string, t: (path:
     case 'email':
     case 'normalizedEmail':
       return (
-        <Anchor size="xl" href={`mailto:${value}`} underline="always">
+        <Anchor
+          size="xl"
+          underline="always"
+          variant="gradient"
+          href={`mailto:${value}`}
+          gradient={{ from: 'indigo', to: 'teal', deg: 150 }}
+        >
           {value}
         </Anchor>
       );
     case 'phone':
       return (
-        <Anchor size="xl" href={`tel:${value}`} underline="always">
+        <Anchor
+          size="xl"
+          underline="always"
+          variant="gradient"
+          href={`tel:${value}`}
+          gradient={{ from: 'indigo', to: 'teal', deg: 150 }}
+        >
           {value}
         </Anchor>
       );

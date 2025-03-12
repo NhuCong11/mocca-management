@@ -80,7 +80,7 @@ function ResourceView({ opened, close, selectedId, resourceName }: ResourceViewP
     >
       <Box>
         {viewData ? (
-          <SimpleGrid cols={{ base: 1, sm: 2, lg: 2 }} spacing="lg">
+          <SimpleGrid cols={{ base: 1, sm: 2, lg: 2 }} spacing="xl">
             {Object.entries(viewData).map(([key]) => (
               <Group key={key}>
                 <Text size="xl" fw={600}>
