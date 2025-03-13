@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useEffect, useState, useMemo } from 'react';
 import { useMediaQuery } from '@mantine/hooks';
 import { Box, Modal, Title, Text, SimpleGrid, Group, Loader } from '@mantine/core';
 import { useTranslations } from 'next-intl';
@@ -6,11 +7,12 @@ import { IconX } from '@tabler/icons-react';
 
 import { renderCellValue } from '../ShowTable/constant';
 import { useAppDispatch } from '@/lib/hooks';
-import { CategoryUpdateInfo, UpdateUserInfo, UserInfo } from '@/types';
+import { UpdateUserInfo, CategoryUpdateInfo, UserInfo, ContactInfo, ProductInfo } from '@/types';
 import { getUserById } from '@/services/usersServices';
 import { getCategoryById } from '@/services/categoriesServices';
 import { getContactById } from '@/services/contactsServices';
 import { getProductById } from '@/services/productsServices';
+import { showToast, ToastType } from '@/utils/toastUtils';
 
 interface ResourceViewProps {
   opened: boolean;
@@ -19,57 +21,37 @@ interface ResourceViewProps {
   resourceName: string;
 }
 
+type ResourceDataType = UserInfo | CategoryUpdateInfo | ContactInfo | ProductInfo;
+
+const resourceServices: Record<string, (id: string) => any> = {
+  users: (id) => getUserById({ userId: id } as UpdateUserInfo),
+  categories: (id) => getCategoryById({ categoryId: id } as CategoryUpdateInfo),
+  contacts: (id) => getContactById(id),
+  products: (id) => getProductById({ productId: id }),
+};
+
 function ResourceView({ opened, close, selectedId, resourceName }: ResourceViewProps) {
   const t = useTranslations();
   const dispatch = useAppDispatch();
   const isMobile = useMediaQuery('(max-width: 50em)');
+  const [viewData, setViewData] = useState<ResourceDataType | null>(null);
 
-  const [viewData, setViewData] = useState<UserInfo | null>(null);
+  const fetchData = useMemo(() => resourceServices[resourceName], [resourceName]);
 
   useEffect(() => {
-    if (!selectedId || !resourceName) return;
+    if (!selectedId || !fetchData) return;
 
-    switch (resourceName) {
-      case 'users':
-        dispatch(getUserById({ userId: selectedId } as UpdateUserInfo)).then((result) => {
-          if (result?.payload?.code === 200) {
-            const filteredData = { ...result?.payload?.data };
-            delete filteredData.__v;
-            setViewData(filteredData);
-          }
-        });
-        break;
-      case 'categories':
-        dispatch(getCategoryById({ categoryId: selectedId } as CategoryUpdateInfo)).then((result) => {
-          if (result?.payload?.code === 200) {
-            const filteredData = { ...result?.payload?.data };
-            delete filteredData.__v;
-            setViewData(filteredData);
-          }
-        });
-        break;
-      case 'contacts':
-        dispatch(getContactById(selectedId)).then((result) => {
-          if (result?.payload?.code === 200) {
-            const filteredData = { ...result?.payload?.data };
-            delete filteredData.__v;
-            setViewData(filteredData);
-          }
-        });
-        break;
-      case 'products':
-        dispatch(getProductById({ productId: selectedId })).then((result) => {
-          if (result?.payload?.code === 200) {
-            const filteredData = { ...result?.payload?.data };
-            delete filteredData.__v;
-            setViewData(filteredData);
-          }
-        });
-        break;
-      default:
-        setViewData(null);
-    }
-  }, [dispatch, selectedId, resourceName]);
+    dispatch(fetchData(selectedId)).then((result: any) => {
+      if (result?.payload?.code === 200) {
+        const filteredData = { ...result?.payload?.data };
+        delete filteredData.__v;
+        setViewData(filteredData);
+      } else {
+        showToast(result?.payload?.message, ToastType.ERROR);
+        close();
+      }
+    });
+  }, [dispatch, selectedId, fetchData, close]);
 
   return (
     <Modal
