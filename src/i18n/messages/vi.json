@@ -133,5 +133,15 @@
     "message": "Tin nhắn",
     "createdAt": "Tạo lúc",
     "updatedAt": "Sửa lúc"
+  },
+  "products": {
+    "_id": "ID",
+    "name": "Tên danh mục",
+    "description": "Mô tả",
+    "price": "Giá",
+    "image": "Ảnh",
+    "shop": "Cửa hàng",
+    "category": "Danh mục",
+    "slug": "Slug"
   }
 }

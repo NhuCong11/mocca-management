@@ -132,5 +132,15 @@
     "message": "Message",
     "createdAt": "Created At",
     "updatedAt": "Updated At"
+  },
+  "products": {
+    "_id": "ID",
+    "name": "Category Name",
+    "description": "Description",
+    "price": "Price",
+    "image": "Image",
+    "shop": "Shop",
+    "category": "Category",
+    "slug": "Slug"
   }
 }

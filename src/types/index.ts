@@ -125,3 +125,16 @@ export interface ContactInfo {
   createdAt?: string;
   updatedAt?: string;
 }
+
+export interface ProductData {
+  name: string;
+  description: string;
+  price: number;
+  category: string;
+}
+
+export interface UpdateProductInfo {
+  productId?: string;
+  image?: string;
+  productData?: ProductData;
+}

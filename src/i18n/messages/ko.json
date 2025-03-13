@@ -132,5 +132,15 @@
     "message": "메시지",
     "createdAt": "생성 시간",
     "updatedAt": "수정 시간"
+  },
+  "products": {
+    "_id": "ID",
+    "name": "카테고리 이름",
+    "description": "설명",
+    "price": "가격",
+    "image": "이미지",
+    "shop": "상점",
+    "category": "카테고리",
+    "slug": "슬러그"
   }
 }

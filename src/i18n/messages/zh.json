@@ -132,5 +132,15 @@
     "message": "消息",
     "createdAt": "创建时间",
     "updatedAt": "更新时间"
+  },
+  "products": {
+    "_id": "ID",
+    "name": "类别名称",
+    "description": "描述",
+    "price": "价格",
+    "image": "图片",
+    "shop": "商店",
+    "category": "类别",
+    "slug": "别名"
   }
 }

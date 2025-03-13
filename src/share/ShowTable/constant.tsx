@@ -119,12 +119,31 @@ export const renderCellValue = (row: Record<string, any>, key: string, t: (path:
         </Group>
       );
     case 'accountBalance':
+    case 'price':
       return <Text size="xl">{getVNCurrency(value as number)}</Text>;
     case 'image':
       return (
         <Group justify="center">
           <Image radius="md" h={200} w="auto" fit="contain" src={value} alt={value} />
         </Group>
+      );
+    case 'shop':
+      return (
+        <Text size="xl" variant="gradient" gradient={{ from: 'grape', to: 'cyan', deg: 200 }}>
+          {value?.fullname}
+        </Text>
+      );
+    case 'category':
+      return (
+        <Text size="xl" variant="gradient" gradient={{ from: 'yellow', to: 'orange', deg: 90 }}>
+          {value?.name}
+        </Text>
+      );
+    case 'description':
+      return (
+        <Text size="xl" lineClamp={6}>
+          {value}
+        </Text>
       );
     default:
       if (typeof value === 'boolean') {
