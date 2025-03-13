@@ -18,7 +18,9 @@
     "btn01": "Back to Home",
     "btn02": "Add",
     "btn03": "Delete Selected",
-    "btn04": "Download File"
+    "btn04": "Download File",
+    "btn05": "Delete",
+    "btn06": "Cancel"
   },
   "form": {
     "tp01": "Email",
@@ -114,7 +116,10 @@
     "create": "Create",
     "view": "View details",
     "update": "Update information",
-    "delete": "Confirm deletion"
+    "delete": "Confirm deletion",
+    "confirm": "Are you sure you want to perform this action?",
+    "deleteSuccess": "Deleted successfully",
+    "deleteError": "Deletion failed, an error occurred."
   },
   "categories": {
     "_id": "ID",

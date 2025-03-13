@@ -74,7 +74,7 @@ export const updateCategoryById = createAsyncThunk<any, CategoryUpdateInfo, Reje
 
 export const deleteCategoryById = createAsyncThunk<any, CategoryUpdateInfo, RejectValueError>(
   'category/deleteById',
-  async (categoryId, { rejectWithValue }) => {
+  async ({ categoryId }, { rejectWithValue }) => {
     try {
       const res = await callApi(HttpMethod.DELETE, `/v1/categories/${categoryId}`, {}, {});
       return res;

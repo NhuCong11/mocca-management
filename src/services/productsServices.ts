@@ -84,7 +84,7 @@ export const updateProductById = createAsyncThunk<any, UpdateProductInfo, Reject
 
 export const deleteProductById = createAsyncThunk<any, UpdateProductInfo, RejectValueError>(
   'product/deleteById',
-  async (productId, { rejectWithValue }) => {
+  async ({ productId }, { rejectWithValue }) => {
     try {
       const res: AxiosResponse = await callApi(HttpMethod.DELETE, `/v1/products/${productId}`, {}, {});
       return res;

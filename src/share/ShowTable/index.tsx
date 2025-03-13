@@ -24,6 +24,7 @@ import { excludedFields, NOT_SORT, renderCellValue, renderSortIcon, rolesSelect 
 import { linesOnThePage } from '@/constants';
 import { useDisclosure } from '@mantine/hooks';
 import ResourceView from '../ResourceView';
+import ResourceDelete from '../ResourceDelete';
 
 interface ShowTableProps<T> {
   data: T[];
@@ -55,17 +56,19 @@ function ShowTable<T extends Record<string, any>>({
   });
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedRows, setSelectedRows] = useState<Set<number>>(new Set());
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
   const [selectedRole, setSelectedRole] = useState<ComboboxItem | null>(null);
   const searchInputRef = useRef<HTMLInputElement | null>(null);
   const [selectedId, setSelectedId] = useState('');
   const [openedView, { open: openView, close: closeView }] = useDisclosure(false);
+  const [openedDelete, { open: openDelete, close: closeDelete }] = useDisclosure(false);
 
   const columns = useMemo(() => {
     if (!data.length) return [];
     return Object.keys(data[0]).filter((key) => !excludedFields.includes(key));
   }, [data]);
 
-  const handleCheckboxChange = (index: number) => {
+  const handleCheckboxChange = (index: number, id: string) => {
     setSelectedRows((prev) => {
       const newSet = new Set(prev);
       if (newSet.has(index)) {
@@ -75,11 +78,25 @@ function ShowTable<T extends Record<string, any>>({
       }
       return newSet;
     });
+
+    setSelectedIds((prev) => {
+      const newSet = new Set(prev);
+      if (newSet.has(id)) {
+        newSet.delete(id);
+      } else {
+        newSet.add(id);
+      }
+      return newSet;
+    });
   };
 
   const handleDeleteSelected = () => {
     setTableData((prevData) => prevData.filter((_, index) => !selectedRows.has(index)));
     setSelectedRows(new Set());
+  };
+
+  const handleDeleteSuccess = (id: string) => {
+    setTableData((prevData) => prevData.filter((item) => item._id !== id));
   };
 
   const filteredData = useMemo(() => {
@@ -191,20 +208,29 @@ function ShowTable<T extends Record<string, any>>({
     ));
 
   const ActionButtons = (row: Record<string, any>) => {
-    const handleView = () => {
+    const handleView = (action: 'view' | 'delete' | 'update') => {
       setSelectedId(row?.rowData?._id ?? '');
-      openView();
+      switch (action) {
+        case 'view':
+          openView();
+          break;
+        case 'delete':
+          openDelete();
+          break;
+        default:
+          break;
+      }
     };
 
     return (
       <Group p="0 10px" justify="center">
-        <ActionIcon size={45} variant="light" color="violet" onClick={handleView}>
+        <ActionIcon size={45} variant="light" color="violet" onClick={() => handleView('view')}>
           <IconEye size={18} />
         </ActionIcon>
         <ActionIcon size={45} variant="light" color="teal">
           <IconEdit size={18} />
         </ActionIcon>
-        <ActionIcon size={45} variant="light" color="red">
+        <ActionIcon size={45} variant="light" color="red" onClick={() => handleView('delete')}>
           <IconTrash size={18} />
         </ActionIcon>
       </Group>
@@ -223,12 +249,7 @@ function ShowTable<T extends Record<string, any>>({
           {t('button.btn02')}
         </Button>
         {selectedRows.size > 0 && (
-          <Button
-            size="lg"
-            variant="gradient"
-            onClick={handleDeleteSelected}
-            gradient={{ from: 'red', to: 'grape', deg: 150 }}
-          >
+          <Button size="lg" variant="gradient" onClick={openDelete} gradient={{ from: 'red', to: 'grape', deg: 150 }}>
             {t('button.btn03')}
           </Button>
         )}
@@ -279,7 +300,10 @@ function ShowTable<T extends Record<string, any>>({
                 <Table.Tr key={index}>
                   <Table.Td miw={100}>
                     <Group justify="center">
-                      <CustomCheckbox checked={selectedRows.has(index)} onChange={() => handleCheckboxChange(index)} />
+                      <CustomCheckbox
+                        checked={selectedRows.has(index)}
+                        onChange={() => handleCheckboxChange(index, row?._id)}
+                      />
                     </Group>
                   </Table.Td>
                   <Table.Td miw={250}>
@@ -300,6 +324,17 @@ function ShowTable<T extends Record<string, any>>({
 
       {openedView && (
         <ResourceView close={closeView} opened={openedView} selectedId={selectedId} resourceName={translate} />
+      )}
+      {openedDelete && (
+        <ResourceDelete
+          close={closeDelete}
+          opened={openedDelete}
+          selectedId={selectedId}
+          resourceName={translate}
+          onDeleteSuccess={handleDeleteSuccess}
+          selectedIds={Array.from(selectedIds)}
+          handleDeleteSelected={handleDeleteSelected}
+        />
       )}
     </Box>
   );

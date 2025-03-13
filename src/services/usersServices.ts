@@ -54,7 +54,7 @@ export const updateUserById = createAsyncThunk<any, UpdateUserInfo, RejectValueE
 
 export const deleteUserById = createAsyncThunk<any, UpdateUserInfo, RejectValueError>(
   'user/deleteById',
-  async (userId, { rejectWithValue }) => {
+  async ({ userId }, { rejectWithValue }) => {
     try {
       const res: AxiosResponse = await callApi(HttpMethod.DELETE, `/v1/users/${userId}`, {}, {});
       return res;

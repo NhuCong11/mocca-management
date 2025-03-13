@@ -18,7 +18,9 @@
     "btn01": "Quay lại trang chủ",
     "btn02": "Thêm",
     "btn03": "Xóa đã chọn",
-    "btn04": "Tải xuống file"
+    "btn04": "Tải xuống file",
+    "btn05": "Xóa",
+    "btn06": "Hủy bỏ"
   },
   "form": {
     "tp01": "Email",
@@ -115,7 +117,10 @@
     "create": "Tạo mới",
     "view": "Thông tin chi tiết",
     "update": "Cập nhật thông tin",
-    "delete": "Xác nhận xóa"
+    "delete": "Xác nhận xóa",
+    "confirm": "Bạn chắc chắn muốn thực hiện hành động này?",
+    "deleteSuccess": "Xóa thành công",
+    "deleteError": "Xóa thất bại, đã có lỗi xảy ra."
   },
   "categories": {
     "_id": "ID",

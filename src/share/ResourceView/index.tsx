@@ -5,13 +5,10 @@ import { Box, Modal, Title, Text, SimpleGrid, Group, Loader } from '@mantine/cor
 import { useTranslations } from 'next-intl';
 import { IconX } from '@tabler/icons-react';
 
+import { resourceServices } from './constant';
 import { renderCellValue } from '../ShowTable/constant';
 import { useAppDispatch } from '@/lib/hooks';
-import { UpdateUserInfo, CategoryUpdateInfo, UserInfo, ContactInfo, ProductInfo } from '@/types';
-import { getUserById } from '@/services/usersServices';
-import { getCategoryById } from '@/services/categoriesServices';
-import { getContactById } from '@/services/contactsServices';
-import { getProductById } from '@/services/productsServices';
+import { CategoryUpdateInfo, UserInfo, ContactInfo, ProductInfo } from '@/types';
 import { showToast, ToastType } from '@/utils/toastUtils';
 
 interface ResourceViewProps {
@@ -22,13 +19,6 @@ interface ResourceViewProps {
 }
 
 type ResourceDataType = UserInfo | CategoryUpdateInfo | ContactInfo | ProductInfo;
-
-const resourceServices: Record<string, (id: string) => any> = {
-  users: (id) => getUserById({ userId: id } as UpdateUserInfo),
-  categories: (id) => getCategoryById({ categoryId: id } as CategoryUpdateInfo),
-  contacts: (id) => getContactById(id),
-  products: (id) => getProductById({ productId: id }),
-};
 
 function ResourceView({ opened, close, selectedId, resourceName }: ResourceViewProps) {
   const t = useTranslations();
