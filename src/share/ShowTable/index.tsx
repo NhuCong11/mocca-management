@@ -93,6 +93,7 @@ function ShowTable<T extends Record<string, any>>({
   const handleDeleteSelected = () => {
     setTableData((prevData) => prevData.filter((_, index) => !selectedRows.has(index)));
     setSelectedRows(new Set());
+    setSelectedIds(new Set());
   };
 
   const handleDeleteSuccess = (id: string) => {

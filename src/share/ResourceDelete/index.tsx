@@ -55,7 +55,8 @@ function ResourceDelete({
       });
       showToast('', ToastType.PROMISE, deletePromise);
     } else if (selectedIds.length) {
-      const deletePromises = selectedIds.map((id) => {
+      const uniqueSelectedIds = [...new Set(selectedIds)].filter(Boolean);
+      const deletePromises = uniqueSelectedIds.map((id) => {
         return dispatch(fetchData(id))
           .unwrap()
           .then((result: any) => {
@@ -68,11 +69,9 @@ function ResourceDelete({
       });
 
       const deleteAllPromise = Promise.allSettled(deletePromises).then((results) => {
-        const hasError = results.some((res) => res?.status === 'rejected');
+        const hasError = results.some((res) => res.status === 'rejected');
         close();
-        return hasError
-          ? Promise.reject(new Error(t('system.deleteError')))
-          : Promise.resolve(t('modal.deleteSuccess'));
+        return hasError ? Promise.reject(new Error(t('modal.deleteError'))) : Promise.resolve(t('modal.deleteSuccess'));
       });
 
       showToast('', ToastType.PROMISE, deleteAllPromise);
