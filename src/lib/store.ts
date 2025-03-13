@@ -5,6 +5,7 @@ import usersSlice from './features/usersSlice';
 import categoriesSlice from './features/categoriesSlice';
 import contactsSlice from './features/contactsSlice';
 import productsSlice from './features/productsSlice';
+import ordersSlice from './features/ordersSlice';
 
 interface MessagePayload {
   message: string;
@@ -20,6 +21,7 @@ export const makeStore = () => {
       categories: categoriesSlice,
       contacts: contactsSlice,
       products: productsSlice,
+      orders: ordersSlice,
     },
   });
 };

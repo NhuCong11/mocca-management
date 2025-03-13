@@ -19,6 +19,15 @@ export enum TimePeriod {
   Year = 'year',
 }
 
+export enum OrderStatus {
+  Pending = 'pending',
+  Canceled = 'canceled',
+  Confirmed = 'confirmed',
+  Reject = 'reject',
+  Shipping = 'shipping',
+  Success = 'success',
+}
+
 export const ADMIN_RULES = [RULES.ADMIN, RULES.SHOP];
 export const MINIMUM_AGE = 14;
 export const UNKNOWN_ERROR = 'Unknown error';

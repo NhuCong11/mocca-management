@@ -1,4 +1,4 @@
-import { TimePeriod } from '@/constants';
+import { OrderStatus, TimePeriod } from '@/constants';
 
 export interface RejectValueError {
   rejectValue: { message: string };
@@ -137,4 +137,9 @@ export interface UpdateProductInfo {
   productId?: string;
   image?: string;
   productData?: ProductData;
+}
+
+export interface ChangeOrderStatus {
+  orderId: string;
+  status: OrderStatus;
 }
