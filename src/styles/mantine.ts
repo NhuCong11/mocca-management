@@ -39,5 +39,45 @@ export const theme = createTheme({
         },
       }),
     },
+    PasswordInput: {
+      styles: (theme: MantineTheme) => ({
+        label: {
+          marginBottom: '8px',
+        },
+        input: {
+          fontWeight: 400,
+          borderColor: theme.colors.gray[7],
+        },
+      }),
+    },
+    NumberInput: {
+      styles: (theme: MantineTheme) => ({
+        label: {
+          marginBottom: '8px',
+        },
+        input: {
+          fontWeight: 400,
+          borderColor: theme.colors.gray[7],
+        },
+      }),
+    },
+    DateInput: {
+      styles: (theme: MantineTheme) => ({
+        label: {
+          marginBottom: '8px',
+        },
+        input: {
+          fontWeight: 400,
+          borderColor: theme.colors.gray[7],
+        },
+      }),
+    },
+    Switch: {
+      styles: {
+        root: {
+          marginTop: '8px',
+        },
+      },
+    },
   },
 });

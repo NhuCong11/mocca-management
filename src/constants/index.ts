@@ -35,6 +35,7 @@ export const MOCCA = 'Mocca Cafe';
 export const EMPTY_CHAR = '---';
 export const TIME_PERIODS = [TimePeriod.Week, TimePeriod.Month, TimePeriod.Quarter, TimePeriod.Year];
 export const LINES_ON_PAGE = [5, 10, 20, 50, 100];
+export const GENDER = ['male', 'female'];
 
 export const linesOnThePage: ItemInfo[] = LINES_ON_PAGE.map((rule) => ({
   value: `${rule}`,

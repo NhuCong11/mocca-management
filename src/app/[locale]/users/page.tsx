@@ -15,7 +15,7 @@ import { linesOnThePage } from '@/constants';
 function Users() {
   const t = useTranslations();
   const dispatch = useAppDispatch();
-  const { getParam } = useQueryParams();
+  const { getParam, updateParams } = useQueryParams();
   const pageParam = Number(getParam('page')) || 1;
   const isLoading = useAppSelector((state) => state.users.loading);
 
@@ -39,6 +39,11 @@ function Users() {
     [dispatch],
   );
 
+  const refreshData = () => {
+    fetchAllUsers(1, Number(numberLines?.value));
+    updateParams({ page: '1' });
+  };
+
   useEffect(() => {
     fetchAllUsers(pageParam, Number(numberLines?.value));
   }, [pageParam, fetchAllUsers, numberLines]);
@@ -58,6 +63,7 @@ function Users() {
           isLoading={isLoading}
           totalPages={totalPages}
           tableName={t('sidebar.users')}
+          refresh={refreshData}
           numberLines={numberLines}
           changeLines={handleChangeNumberLines}
           filterFields={['fullname', 'email', 'role']}

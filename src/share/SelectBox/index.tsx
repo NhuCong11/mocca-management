@@ -17,6 +17,7 @@ interface SelectBoxProps {
   size?: string;
   maw?: number;
   onChange?: (value: ComboboxItem) => void;
+  error?: string;
 }
 
 function SelectBox({
@@ -30,6 +31,7 @@ function SelectBox({
   size = 'xl',
   maw,
   onChange = () => {},
+  ...props
 }: SelectBoxProps) {
   const t = useTranslations();
 
@@ -40,6 +42,7 @@ function SelectBox({
 
   return (
     <Select
+      {...props}
       size={size}
       miw={200}
       maw={maw}

@@ -15,7 +15,7 @@ import { getAllProduct } from '@/services/productsServices';
 function Products() {
   const t = useTranslations();
   const dispatch = useAppDispatch();
-  const { getParam } = useQueryParams();
+  const { getParam, updateParams } = useQueryParams();
   const pageParam = Number(getParam('page')) || 1;
   const isLoading = useAppSelector((state) => state.products.loading);
 
@@ -39,6 +39,11 @@ function Products() {
     [dispatch],
   );
 
+  const refreshData = () => {
+    fetchAllProducts(1, Number(numberLines?.value));
+    updateParams({ page: '1' });
+  };
+
   useEffect(() => {
     fetchAllProducts(pageParam, Number(numberLines?.value));
   }, [pageParam, fetchAllProducts, numberLines]);
@@ -59,6 +64,7 @@ function Products() {
           totalPages={totalPages}
           tableName={t('sidebar.products')}
           numberLines={numberLines}
+          refresh={refreshData}
           changeLines={handleChangeNumberLines}
           filterFields={['name']}
         />

@@ -1,3 +1,4 @@
+import { ItemInfo } from '@/share/SelectBox';
 import { getLocalStorageItem } from './localStorage';
 
 export const hostname = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://api.hauifood.com/';
@@ -46,4 +47,11 @@ export const handleExportFile = (searchKeyword: string, page: string) => {
     return `${hostname}v1/${page}/exports?keyword=${searchKeyword}&token=${token}`;
   }
   return `${hostname}v1/${page}/exports?token=${token}`;
+};
+
+export const getEnumData = (data: string[], t: (key: string) => string, translate: string): ItemInfo[] => {
+  return data.map((gen, index) => ({
+    value: `${gen}`,
+    label: `${index + 1}. ${t(`${translate}.${gen}`)}`,
+  }));
 };

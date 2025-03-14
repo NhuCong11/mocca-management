@@ -135,7 +135,7 @@ export interface ProductData {
 
 export interface UpdateProductInfo {
   productId?: string;
-  image?: string;
+  image?: File | undefined;
   productData?: ProductData;
 }
 

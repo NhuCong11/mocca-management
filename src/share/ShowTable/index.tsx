@@ -20,11 +20,12 @@ import AppPagination from '@/components/AppPagination';
 import { useTranslations } from 'next-intl';
 import { handleExportFile } from '@/utils/constants';
 import SelectBox from '../SelectBox';
-import { excludedFields, NOT_SORT, renderCellValue, renderSortIcon, rolesSelect } from './constant';
+import { excludedCUActions, excludedFields, NOT_SORT, renderCellValue, renderSortIcon, rolesSelect } from './constant';
 import { linesOnThePage } from '@/constants';
 import { useDisclosure } from '@mantine/hooks';
 import ResourceView from '../ResourceView';
 import ResourceDelete from '../ResourceDelete';
+import ResourceEdit from '../ResourceEdit';
 
 interface ShowTableProps<T> {
   data: T[];
@@ -32,6 +33,7 @@ interface ShowTableProps<T> {
   isLoading?: boolean;
   translate: string;
   totalPages: number;
+  refresh: () => void;
   numberLines: ComboboxItem | null;
   changeLines: (value: ComboboxItem) => void;
   filterFields?: string[];
@@ -46,6 +48,7 @@ function ShowTable<T extends Record<string, any>>({
   numberLines,
   changeLines,
   filterFields,
+  refresh,
 }: ShowTableProps<T>) {
   const t = useTranslations();
 
@@ -60,7 +63,9 @@ function ShowTable<T extends Record<string, any>>({
   const [selectedRole, setSelectedRole] = useState<ComboboxItem | null>(null);
   const searchInputRef = useRef<HTMLInputElement | null>(null);
   const [selectedId, setSelectedId] = useState('');
+  const [actions, setActions] = useState<'create' | 'update'>('create');
   const [openedView, { open: openView, close: closeView }] = useDisclosure(false);
+  const [openedEdit, { open: openEdit, close: closeEdit }] = useDisclosure(false);
   const [openedDelete, { open: openDelete, close: closeDelete }] = useDisclosure(false);
 
   const columns = useMemo(() => {
@@ -218,6 +223,10 @@ function ShowTable<T extends Record<string, any>>({
         case 'delete':
           openDelete();
           break;
+        case 'update':
+          setActions('update');
+          openEdit();
+          break;
         default:
           break;
       }
@@ -228,9 +237,11 @@ function ShowTable<T extends Record<string, any>>({
         <ActionIcon size={45} variant="light" color="violet" onClick={() => handleView('view')}>
           <IconEye size={18} />
         </ActionIcon>
-        <ActionIcon size={45} variant="light" color="teal">
-          <IconEdit size={18} />
-        </ActionIcon>
+        {!excludedCUActions.includes(translate) && (
+          <ActionIcon size={45} variant="light" color="teal" onClick={() => handleView('update')}>
+            <IconEdit size={18} />
+          </ActionIcon>
+        )}
         <ActionIcon size={45} variant="light" color="red" onClick={() => handleView('delete')}>
           <IconTrash size={18} />
         </ActionIcon>
@@ -241,14 +252,20 @@ function ShowTable<T extends Record<string, any>>({
   const TableFooter = () => (
     <Group justify="space-between" mt="xl" gap={50}>
       <Group>
-        <Button
-          size="lg"
-          variant="gradient"
-          leftSection={<IconPlus size={15} />}
-          gradient={{ from: 'teal', to: 'green', deg: 150 }}
-        >
-          {t('button.btn02')}
-        </Button>
+        {!excludedCUActions.includes(translate) && (
+          <Button
+            size="lg"
+            variant="gradient"
+            leftSection={<IconPlus size={15} />}
+            gradient={{ from: 'teal', to: 'green', deg: 150 }}
+            onClick={() => {
+              setActions('create');
+              openEdit();
+            }}
+          >
+            {t('button.btn02')}
+          </Button>
+        )}
         {selectedRows.size > 0 && (
           <Button size="lg" variant="gradient" onClick={openDelete} gradient={{ from: 'red', to: 'grape', deg: 150 }}>
             {t('button.btn03')}
@@ -325,6 +342,17 @@ function ShowTable<T extends Record<string, any>>({
 
       {openedView && (
         <ResourceView close={closeView} opened={openedView} selectedId={selectedId} resourceName={translate} />
+      )}
+      {openedEdit && (
+        <ResourceEdit
+          close={closeEdit}
+          opened={openedEdit}
+          selectedId={selectedId}
+          resourceName={translate}
+          action={actions}
+          columns={columns}
+          refresh={refresh}
+        />
       )}
       {openedDelete && (
         <ResourceDelete

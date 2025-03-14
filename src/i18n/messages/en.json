@@ -20,7 +20,9 @@
     "btn03": "Delete Selected",
     "btn04": "Download File",
     "btn05": "Delete",
-    "btn06": "Cancel"
+    "btn06": "Cancel",
+    "btn07": "Choose file",
+    "btn08": "Change file"
   },
   "form": {
     "tp01": "Email",
@@ -34,7 +36,16 @@
     "err01": "Please enter email.",
     "err02": "Email is incorrect, please re-enter.",
     "err03": "Please enter password.",
-    "err04": "Password must contain at least 8 characters and 1 special character @-_"
+    "err04": "Password must contain at least 8 characters and 1 special character @-_",
+    "err05": "Please enter your full name",
+    "err06": "Full name must be between 3 and 50 characters.",
+    "gender": "Please select a gender",
+    "role": "Please select a role",
+    "category": "Please enter the category name",
+    "product": "Please enter the product name",
+    "productDesc": "Please enter the product description",
+    "productPrice": "Please enter the product price",
+    "productCate": "Please select a category"
   },
   "system": {
     "error": "An error occurred. Please try again later"
@@ -95,6 +106,7 @@
     "avatar": "Avatar",
     "is2FA": "2FA Enabled",
     "phone": "Phone Number",
+    "password": "Password",
     "createdAt": "Created At",
     "updatedAt": "Updated At",
     "verifyExpireAt": "Verification Expiry",
@@ -140,7 +152,7 @@
   },
   "products": {
     "_id": "ID",
-    "name": "Category Name",
+    "name": "Product Name",
     "description": "Description",
     "price": "Price",
     "image": "Image",
