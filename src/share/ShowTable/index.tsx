@@ -33,7 +33,7 @@ interface ShowTableProps<T> {
   isLoading?: boolean;
   translate: string;
   totalPages: number;
-  refresh: () => void;
+  refresh?: () => void;
   numberLines: ComboboxItem | null;
   changeLines: (value: ComboboxItem) => void;
   filterFields?: string[];

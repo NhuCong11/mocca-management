@@ -22,7 +22,7 @@ interface ResourceEditProps {
   resourceName: string;
   action: 'create' | 'update';
   columns: string[];
-  refresh: () => void;
+  refresh?: () => void;
 }
 
 function ResourceEdit({ opened, close, selectedId, resourceName, action, columns, refresh }: ResourceEditProps) {
@@ -46,7 +46,7 @@ function ResourceEdit({ opened, close, selectedId, resourceName, action, columns
       const createPromise = dispatch(fetchCreateData(data)).then((result: any) => {
         if (result?.payload?.code === 201) {
           close();
-          refresh();
+          refresh?.();
           return result?.payload?.message;
         } else {
           close();
