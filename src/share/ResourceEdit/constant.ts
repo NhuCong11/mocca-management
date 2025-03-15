@@ -1,7 +1,8 @@
-import { CategoryInfo, ProductData, UpdateUserInfo } from '@/types';
-import { createUser } from '@/services/usersServices';
-import { createCategory } from '@/services/categoriesServices';
-import { createProduct } from '@/services/productsServices';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { CategoryInfo, CategoryUpdateInfo, ProductData, UpdateUserInfo } from '@/types';
+import { createUser, getUserById, updateUserById } from '@/services/usersServices';
+import { createCategory, getCategoryById, updateCategoryById } from '@/services/categoriesServices';
+import { createProduct, getProductById, updateProductById } from '@/services/productsServices';
 import {
   IconCalendarTime,
   IconCoin,
@@ -20,11 +21,22 @@ import { rolesSelect } from '../ShowTable/constant';
 
 export const excludedFields = ['createdAt', 'updatedAt', 'username', 'shop', 'avatar'];
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const resourceCreateServices: Record<string, (data: any) => any> = {
   users: (userCredentials: UpdateUserInfo) => createUser(userCredentials),
   categories: (data: { name: string; image?: File }) => createCategory(data),
   products: (data: { productData?: ProductData; image?: File }) => createProduct(data),
+};
+
+export const resourceGetServices: Record<string, (id: string) => any> = {
+  users: (id) => getUserById({ userId: id } as UpdateUserInfo),
+  categories: (id) => getCategoryById({ categoryId: id } as CategoryUpdateInfo),
+  products: (id) => getProductById({ productId: id }),
+};
+
+export const resourceUpdateServices: Record<string, (id: string, data: any) => any> = {
+  users: (id, userCredentials) => updateUserById({ userId: id, userCredentials }),
+  categories: (id, data) => updateCategoryById({ categoryId: id, ...data }),
+  products: (id, data) => updateProductById({ productId: id, ...data }),
 };
 
 export const getIcon = (col: string) => {

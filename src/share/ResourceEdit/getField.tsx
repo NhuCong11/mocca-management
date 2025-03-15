@@ -41,7 +41,7 @@ export const getField = ({
       <Switch
         size="xl"
         color="teal"
-        checked={formData[column] === 'true'}
+        checked={formData[column] === 'true' || Boolean(formData[column])}
         labelPosition="left"
         label={t(`${resourceName}.${column}`)}
         onChange={(event) => setFieldValue(column, event.currentTarget.checked ? 'true' : 'false')}
@@ -124,8 +124,12 @@ export const getField = ({
               </Box>
             )}
           </FileButton>
-          {formData[column] instanceof File && (
-            <Avatar size={150} src={URL.createObjectURL(formData[column] as File)} alt="Preview" />
+          {(formData[column] instanceof File || String(formData[column])) && (
+            <Avatar
+              size={150}
+              src={String(formData[column]) || URL.createObjectURL(formData[column] as File)}
+              alt="Preview"
+            />
           )}
         </Group>
       );
