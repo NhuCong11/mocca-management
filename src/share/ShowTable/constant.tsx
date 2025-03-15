@@ -20,7 +20,7 @@ export const excludedFieldsUsers = [
 ];
 
 export const excludedFields: string[] = [...excludedFieldsUsers];
-export const excludedCUActions: string[] = ['contacts'];
+export const excludedCUActions: string[] = ['contacts', 'products'];
 
 export const rolesSelect: ItemInfo[] = Object.values(RULES).map((rule, index) => ({
   value: rule,

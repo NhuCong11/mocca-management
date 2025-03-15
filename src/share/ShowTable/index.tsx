@@ -28,7 +28,7 @@ import ResourceDelete from '../ResourceDelete';
 import ResourceEdit from '../ResourceEdit';
 import { getLocalStorageItem } from '@/utils/localStorage';
 import { UserInfo } from '@/types';
-import { checkRoleShop } from '@/utils/checkRoleUtils';
+import { checkRoleAdmin, checkRoleShop } from '@/utils/checkRoleUtils';
 
 interface ShowTableProps<T> {
   data: T[];
@@ -70,6 +70,7 @@ function ShowTable<T extends Record<string, any>>({
   const [actions, setActions] = useState<'create' | 'update'>('create');
   const [countdown, setCountdown] = useState(0);
   const [isShop, setIsShop] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [openedView, { open: openView, close: closeView }] = useDisclosure(false);
   const [openedEdit, { open: openEdit, close: closeEdit }] = useDisclosure(false);
   const [openedDelete, { open: openDelete, close: closeDelete }] = useDisclosure(false);
@@ -270,7 +271,7 @@ function ShowTable<T extends Record<string, any>>({
         <ActionIcon size={45} variant="light" color="violet" onClick={() => handleView('view')}>
           <IconEye size={18} />
         </ActionIcon>
-        {!excludedCUActions.includes(translate) && isShop && (
+        {((!excludedCUActions.includes(translate) && isAdmin) || isShop) && (
           <ActionIcon size={45} variant="light" color="teal" onClick={() => handleView('update')}>
             <IconEdit size={18} />
           </ActionIcon>
@@ -285,7 +286,7 @@ function ShowTable<T extends Record<string, any>>({
   const TableFooter = () => (
     <Group justify="space-between" mt="xl" gap={50}>
       <Group>
-        {!excludedCUActions.includes(translate) && isShop && (
+        {((!excludedCUActions.includes(translate) && isAdmin) || isShop) && (
           <Button
             size="lg"
             variant="gradient"
@@ -349,6 +350,7 @@ function ShowTable<T extends Record<string, any>>({
     if (typeof window !== 'undefined') {
       if (userInfo) {
         setIsShop(checkRoleShop(userInfo?.role));
+        setIsAdmin(checkRoleAdmin(userInfo?.role));
       }
     }
   }, [userInfo]);
