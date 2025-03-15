@@ -114,6 +114,7 @@ function ShowTable<T extends Record<string, any>>({
   };
 
   const filteredData = useMemo(() => {
+    if (!tableData || !Array.isArray(tableData)) return [];
     return tableData.filter((item) => {
       const matchesSearch = filterFields?.some((field) =>
         item[field]?.toLowerCase().includes(searchQuery.toLowerCase()),
@@ -123,7 +124,7 @@ function ShowTable<T extends Record<string, any>>({
         return (selectedRole ? item.role.toLowerCase() === selectedRole.value.toLowerCase() : true) && matchesSearch;
       }
       if (isShop && translate === 'products') {
-        return item.shop._id === userInfo?._id;
+        return item?.shop?._id === userInfo?._id;
       }
       return matchesSearch;
     });

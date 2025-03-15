@@ -24,14 +24,16 @@ export const getField = ({
   categories,
   setFieldValue,
   errors,
+  action,
   t,
 }: {
   column: string;
-  formData: Record<string, string | number | File | boolean>;
+  formData: Record<string, string | number | File | boolean | object>;
   resourceName: string;
   categories: CategoryInfo[];
   setFieldValue: (field: string, value: string | number | File | boolean) => void;
   errors: Record<string, string>;
+  action: string;
   t: (key: string) => string;
 }) => {
   const Icon = getIcon(column);
@@ -64,10 +66,25 @@ export const getField = ({
       );
 
     case 'gender':
-    case 'role':
-    case 'category': {
+    case 'role': {
       const options = getEnum(column, t, categories);
       const selectedValue = options.find((item) => item.value === formData[column]) || null;
+      return (
+        <SelectBox
+          required
+          data={options}
+          leftIcon={<Icon size={20} />}
+          label={t(`${resourceName}.${column}`)}
+          value={selectedValue as ComboboxItem}
+          error={errors[column] ? errors[column] : ''}
+          onChange={(option) => setFieldValue(column, option?.value)}
+        />
+      );
+    }
+
+    case 'category': {
+      const options = getEnum(column, t, categories);
+      const selectedValue = typeof formData[column] !== 'object' ? options.find((item) => item.value === formData[column]) : null;
       return (
         <SelectBox
           required
@@ -127,7 +144,7 @@ export const getField = ({
           {(formData[column] instanceof File || String(formData[column])) && (
             <Avatar
               size={150}
-              src={String(formData[column]) || URL.createObjectURL(formData[column] as File)}
+              src={action === 'create' ? URL.createObjectURL(formData[column] as File) : String(formData[column])}
               alt="Preview"
             />
           )}

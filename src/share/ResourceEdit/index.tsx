@@ -111,6 +111,15 @@ function ResourceEdit({ opened, close, selectedId, resourceName, action, columns
         const filteredValues = Object.fromEntries(
           Object.entries(initialValues).filter(([key]) => filteredColumns.includes(key)),
         );
+
+        if (
+          typeof filteredValues.category === 'object' &&
+          filteredValues.category !== null &&
+          '_id' in filteredValues.category
+        ) {
+          filteredValues.category = (filteredValues.category as { _id: string })._id;
+        }
+
         setValues(filteredValues);
       }
     }, [setValues]);
@@ -131,6 +140,7 @@ function ResourceEdit({ opened, close, selectedId, resourceName, action, columns
                     errors: Object.fromEntries(
                       Object.entries(formik.errors).filter(([_, value]) => typeof value === 'string'),
                     ) as Record<string, string>,
+                    action,
                     t,
                   })}
                 </Grid.Col>
