@@ -44,7 +44,7 @@ export const getField = ({
         checked={formData[column] === 'true' || Boolean(formData[column])}
         labelPosition="left"
         label={t(`${resourceName}.${column}`)}
-        onChange={(event) => setFieldValue(column, event.currentTarget.checked ? 'true' : 'false')}
+        onChange={(event) => setFieldValue(column, event.currentTarget.checked)}
       />
     );
   }

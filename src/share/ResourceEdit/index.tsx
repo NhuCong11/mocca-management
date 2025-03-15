@@ -36,7 +36,7 @@ function ResourceEdit({ opened, close, selectedId, resourceName, action, columns
   const fetchGetData = useMemo(() => resourceGetServices[resourceName], [resourceName]);
   const fetchUpdateData = useMemo(() => resourceUpdateServices[resourceName], [resourceName]);
   const filteredColumns = [
-    ...columns.filter((col) => !excludedFields.includes(col)),
+    ...columns.filter((col) => !excludedFields.includes(col) && !(action === 'update' && col === 'is2FA')),
     ...(resourceName === 'users' && action !== 'update' ? ['password'] : []),
   ];
   const [categories, setCategories] = useState<CategoryInfo[]>([]);
@@ -191,9 +191,11 @@ function ResourceEdit({ opened, close, selectedId, resourceName, action, columns
         validationSchema={validationSchema(t, resourceName, action)}
         onSubmit={(values) => {
           const formattedValues = Object.fromEntries(
-            Object.entries(values).filter(
-              ([_, value]) => value !== '' && value !== undefined && String(value) !== 'false' && value !== false,
-            ),
+            Object.entries(values)
+              .filter(
+                ([_, value]) => value !== '' && value !== undefined && String(value) !== 'false' && value !== false,
+              )
+              .map(([key, value]) => [key, typeof value === 'boolean' ? String(value) : value]),
           );
           const { image, ...productData } = formattedValues;
           if (action === 'create') {
