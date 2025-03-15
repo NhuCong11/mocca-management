@@ -22,7 +22,8 @@
     "btn05": "Xóa",
     "btn06": "Hủy bỏ",
     "btn07": "Chọn file",
-    "btn08": "Thay đổi file"
+    "btn08": "Thay đổi file",
+    "btn09": "Làm mới"
   },
   "form": {
     "tp01": "Email",

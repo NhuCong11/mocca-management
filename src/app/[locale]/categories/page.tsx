@@ -42,7 +42,7 @@ function Categories() {
   const refreshData = () => {
     setCategories([]);
     setNumberLines(null);
-    setNumberLines(linesOnThePage[4] as ComboboxItem);
+    setNumberLines(linesOnThePage[2] as ComboboxItem);
     fetchAllCategories(pageParam, Number(numberLines?.value));
   };
 

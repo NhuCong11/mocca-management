@@ -39,6 +39,13 @@ function Contacts() {
     [dispatch],
   );
 
+  const refreshData = () => {
+    setContacts([]);
+    setNumberLines(null);
+    setNumberLines(linesOnThePage[2] as ComboboxItem);
+    fetchAllContacts(pageParam, Number(numberLines?.value));
+  };
+
   useEffect(() => {
     fetchAllContacts(pageParam, Number(numberLines?.value));
   }, [pageParam, fetchAllContacts, numberLines]);
@@ -61,6 +68,7 @@ function Contacts() {
           numberLines={numberLines}
           changeLines={handleChangeNumberLines}
           filterFields={['fullname', 'email', 'phone']}
+          refresh={refreshData}
         />
       </Box>
       {isLoading && <LoadingStart />}

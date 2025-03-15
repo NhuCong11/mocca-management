@@ -14,7 +14,7 @@ import {
   TextInput,
   ComboboxItem,
 } from '@mantine/core';
-import { IconEdit, IconEye, IconTrash, IconPlus, IconDownload } from '@tabler/icons-react';
+import { IconEdit, IconEye, IconTrash, IconPlus, IconDownload, IconRotateClockwise } from '@tabler/icons-react';
 import CustomCheckbox from '../CustomCheckbox';
 import AppPagination from '@/components/AppPagination';
 import { useTranslations } from 'next-intl';
@@ -96,7 +96,9 @@ function ShowTable<T extends Record<string, any>>({
   };
 
   const handleDeleteSelected = () => {
-    setTableData((prevData) => prevData.filter((_, index) => !selectedRows.has(index)));
+    setTableData((prevData) =>
+      prevData.filter((item, index) => !selectedRows.has(index) && !selectedIds.has(item?._id)),
+    );
     setSelectedRows(new Set());
     setSelectedIds(new Set());
   };
@@ -286,6 +288,15 @@ function ShowTable<T extends Record<string, any>>({
             {t('button.btn04')}
           </Button>
         </Anchor>
+        <Button
+          size="lg"
+          variant="gradient"
+          onClick={handleRefresh}
+          leftSection={<IconRotateClockwise size={15} />}
+          gradient={{ from: 'teal', to: 'lime', deg: 0 }}
+        >
+          {t('button.btn09')}
+        </Button>
       </Group>
       <Group gap="lg">
         <Group>

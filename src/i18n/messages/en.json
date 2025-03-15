@@ -22,7 +22,8 @@
     "btn05": "Delete",
     "btn06": "Cancel",
     "btn07": "Choose file",
-    "btn08": "Change file"
+    "btn08": "Change file",
+    "btn09": "Refresh"
   },
   "form": {
     "tp01": "Email",
