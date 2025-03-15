@@ -8,7 +8,15 @@ export const getAllProduct = createAsyncThunk<any, DefaultParams, RejectValueErr
   'product/getAll',
   async ({ limit, page }, { rejectWithValue }) => {
     try {
-      const res: AxiosResponse = await callApi(HttpMethod.GET, `/v1/products?limit=${limit}&page=${page}`, {}, {});
+      const customHeaders = {
+        'Cache-Control': 'no-cache',
+      };
+      const res: AxiosResponse = await callApi(
+        HttpMethod.GET,
+        `/v1/products?limit=${limit}&page=${page}`,
+        {},
+        customHeaders,
+      );
       return res;
     } catch (error: any) {
       return rejectWithValue({ ...error });

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
-import { useState, useMemo, useEffect, useRef } from 'react';
+import { useState, useMemo, useEffect, useRef, useCallback } from 'react';
 import {
   Table,
   Text,
@@ -145,6 +145,11 @@ function ShowTable<T extends Record<string, any>>({
       return 0;
     });
   }, [filteredData, sortConfig]);
+
+  const handleRefresh = useCallback(() => {
+    setTableData([]);
+    refresh?.();
+  }, [refresh]);
 
   const Header = () => (
     <Group mb="lg" justify="space-between">
@@ -351,7 +356,7 @@ function ShowTable<T extends Record<string, any>>({
           resourceName={translate}
           action={actions}
           columns={columns}
-          refresh={refresh}
+          refresh={handleRefresh}
         />
       )}
       {openedDelete && (

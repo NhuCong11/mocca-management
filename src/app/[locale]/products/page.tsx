@@ -15,7 +15,7 @@ import { getAllProduct } from '@/services/productsServices';
 function Products() {
   const t = useTranslations();
   const dispatch = useAppDispatch();
-  const { getParam, updateParams } = useQueryParams();
+  const { getParam } = useQueryParams();
   const pageParam = Number(getParam('page')) || 1;
   const isLoading = useAppSelector((state) => state.products.loading);
 
@@ -40,8 +40,10 @@ function Products() {
   );
 
   const refreshData = () => {
-    fetchAllProducts(1, Number(numberLines?.value));
-    updateParams({ page: '1' });
+    setProducts([]);
+    setNumberLines(null);
+    setNumberLines(linesOnThePage[4] as ComboboxItem);
+    fetchAllProducts(pageParam, Number(numberLines?.value));
   };
 
   useEffect(() => {

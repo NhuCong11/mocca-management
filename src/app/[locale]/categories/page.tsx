@@ -15,14 +15,13 @@ import { getAllCategory } from '@/services/categoriesServices';
 function Categories() {
   const t = useTranslations();
   const dispatch = useAppDispatch();
-  const { getParam, updateParams } = useQueryParams();
+  const { getParam } = useQueryParams();
   const pageParam = Number(getParam('page')) || 1;
   const isLoading = useAppSelector((state) => state.categories.loading);
 
   const [listCategories, setCategories] = useState<CategoryInfo[]>([]);
   const [totalPages, setTotalPages] = useState(0);
   const [numberLines, setNumberLines] = useState<ComboboxItem | null>(linesOnThePage[2] as ComboboxItem);
-  const [refreshTrigger, setRefreshTrigger] = useState(0);
 
   const handleChangeNumberLines = (value: ComboboxItem) => {
     setNumberLines(value);
@@ -42,14 +41,14 @@ function Categories() {
 
   const refreshData = () => {
     setCategories([]);
-    setRefreshTrigger((prev) => prev + 1);
-    updateParams({ page: '1' });
+    setNumberLines(null);
+    setNumberLines(linesOnThePage[4] as ComboboxItem);
     fetchAllCategories(pageParam, Number(numberLines?.value));
   };
 
   useEffect(() => {
     fetchAllCategories(pageParam, Number(numberLines?.value));
-  }, [pageParam, fetchAllCategories, numberLines, refreshTrigger]);
+  }, [pageParam, fetchAllCategories, numberLines]);
 
   return (
     <Box p="xl">

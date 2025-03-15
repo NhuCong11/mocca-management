@@ -8,7 +8,15 @@ export const getAllCategory = createAsyncThunk<any, DefaultParams, RejectValueEr
   'category/getAll',
   async ({ limit, page }, { rejectWithValue }) => {
     try {
-      const res: AxiosResponse = await callApi(HttpMethod.GET, `/v1/categories?limit=${limit}&page=${page}`, {}, {});
+      const customHeaders = {
+        'Cache-Control': 'no-cache',
+      };
+      const res: AxiosResponse = await callApi(
+        HttpMethod.GET,
+        `/v1/categories?limit=${limit}&page=${page}`,
+        {},
+        customHeaders,
+      );
       return res;
     } catch (error: any) {
       return rejectWithValue({ ...error });
