@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import {  useMemo } from 'react';
 import clsx from 'clsx';
 import { useTranslations } from 'next-intl';
 import { IconChevronDown } from '@tabler/icons-react';
@@ -7,10 +7,14 @@ import { Accordion, Group, ScrollArea, Text } from '@mantine/core';
 import styles from './AppSideBar.module.scss';
 import { getRandomColor, sidebars } from './constant';
 import { Link, usePathname } from '@/i18n/routing';
+import { getLocalStorageItem } from '@/utils/localStorage';
+import { UserInfo } from '@/types';
+import { RULES } from '@/constants';
 
 function AppSidebar() {
   const t = useTranslations();
   const pathname = usePathname();
+  const userInfo: UserInfo | null = getLocalStorageItem('user');
   const defaultOpens = useMemo(() => sidebars.map((item) => item.id), []);
 
   const items = useMemo(
@@ -23,24 +27,29 @@ function AppSidebar() {
           <Accordion.Panel>
             {item.content.map((nav) => {
               const Icon = nav.Icon;
+              const isDisplay = nav.rule.includes(userInfo?.role as RULES);
               return (
-                <Link href={nav.link} key={nav.title}>
-                  <Group
-                    gap={15}
-                    p="md"
-                    className={clsx(styles['sidebar__item'], pathname === nav.link && styles['sidebar__item--active'])}
-                  >
-                    <Icon size={25} color={getRandomColor()} />
-                    <Text size="lg">{t(nav.title)}</Text>
-                  </Group>
-                </Link>
+                isDisplay && (
+                  <Link href={nav.link} key={nav.title}>
+                    <Group
+                      gap={15}
+                      p="md"
+                      className={clsx(
+                        styles['sidebar__item'],
+                        pathname === nav.link && styles['sidebar__item--active'],
+                      )}
+                    >
+                      <Icon size={25} color={getRandomColor()} />
+                      <Text size="lg">{t(nav.title)}</Text>
+                    </Group>
+                  </Link>
+                )
               );
             })}
           </Accordion.Panel>
         </Accordion.Item>
       )),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [pathname],
+    [pathname, userInfo, t],
   );
 
   return (

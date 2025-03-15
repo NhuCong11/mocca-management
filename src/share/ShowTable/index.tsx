@@ -26,6 +26,9 @@ import { useDisclosure } from '@mantine/hooks';
 import ResourceView from '../ResourceView';
 import ResourceDelete from '../ResourceDelete';
 import ResourceEdit from '../ResourceEdit';
+import { getLocalStorageItem } from '@/utils/localStorage';
+import { UserInfo } from '@/types';
+import { checkRoleShop } from '@/utils/checkRoleUtils';
 
 interface ShowTableProps<T> {
   data: T[];
@@ -51,6 +54,7 @@ function ShowTable<T extends Record<string, any>>({
   refresh,
 }: ShowTableProps<T>) {
   const t = useTranslations();
+  const userInfo: UserInfo | null = getLocalStorageItem('user');
 
   const [tableData, setTableData] = useState(data);
   const [sortConfig, setSortConfig] = useState<{ key: keyof T | null; direction: 'asc' | 'desc' | null }>({
@@ -65,6 +69,7 @@ function ShowTable<T extends Record<string, any>>({
   const [selectedId, setSelectedId] = useState('');
   const [actions, setActions] = useState<'create' | 'update'>('create');
   const [countdown, setCountdown] = useState(0);
+  const [isShop, setIsShop] = useState(false);
   const [openedView, { open: openView, close: closeView }] = useDisclosure(false);
   const [openedEdit, { open: openEdit, close: closeEdit }] = useDisclosure(false);
   const [openedDelete, { open: openDelete, close: closeDelete }] = useDisclosure(false);
@@ -117,9 +122,12 @@ function ShowTable<T extends Record<string, any>>({
       if (translate === 'users') {
         return (selectedRole ? item.role.toLowerCase() === selectedRole.value.toLowerCase() : true) && matchesSearch;
       }
+      if (isShop && translate === 'products') {
+        return item.shop._id === userInfo?._id;
+      }
       return matchesSearch;
     });
-  }, [tableData, searchQuery, selectedRole, translate, filterFields]);
+  }, [tableData, searchQuery, selectedRole, translate, filterFields, isShop, userInfo]);
 
   const handleRoleChange = (value: ComboboxItem) => {
     setSelectedRole(value);
@@ -262,7 +270,7 @@ function ShowTable<T extends Record<string, any>>({
         <ActionIcon size={45} variant="light" color="violet" onClick={() => handleView('view')}>
           <IconEye size={18} />
         </ActionIcon>
-        {!excludedCUActions.includes(translate) && (
+        {!excludedCUActions.includes(translate) && isShop && (
           <ActionIcon size={45} variant="light" color="teal" onClick={() => handleView('update')}>
             <IconEdit size={18} />
           </ActionIcon>
@@ -277,7 +285,7 @@ function ShowTable<T extends Record<string, any>>({
   const TableFooter = () => (
     <Group justify="space-between" mt="xl" gap={50}>
       <Group>
-        {!excludedCUActions.includes(translate) && (
+        {!excludedCUActions.includes(translate) && isShop && (
           <Button
             size="lg"
             variant="gradient"
@@ -336,6 +344,14 @@ function ShowTable<T extends Record<string, any>>({
   useEffect(() => {
     setTableData(data);
   }, [data]);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      if (userInfo) {
+        setIsShop(checkRoleShop(userInfo?.role));
+      }
+    }
+  }, [userInfo]);
 
   return (
     <Box>

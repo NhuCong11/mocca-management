@@ -42,7 +42,7 @@ function Products() {
   const refreshData = () => {
     setProducts([]);
     setNumberLines(null);
-    setNumberLines(linesOnThePage[4] as ComboboxItem);
+    setNumberLines(linesOnThePage[2] as ComboboxItem);
     fetchAllProducts(pageParam, Number(numberLines?.value));
   };
 

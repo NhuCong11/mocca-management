@@ -39,7 +39,7 @@ export const sidebars = [
         title: 'sidebar.products',
         link: '/products',
         Icon: IconBadgeTm,
-        rule: [RULES.SHOP],
+        rule: [RULES.SHOP, RULES.ADMIN],
       },
     ],
   },
