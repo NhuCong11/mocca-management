@@ -36,7 +36,7 @@ export const resourceGetServices: Record<string, (id: string) => any> = {
 export const resourceUpdateServices: Record<string, (id: string, data: any) => any> = {
   users: (id, userCredentials) => updateUserById({ userId: id, userCredentials }),
   categories: (id, data) => updateCategoryById({ categoryId: id, ...data }),
-  products: (id, data) => updateProductById({ productId: id, ...data }),
+  products: (id, { image, ...data }) => updateProductById({ productId: id, image, productData: data }),
 };
 
 export const getIcon = (col: string) => {
