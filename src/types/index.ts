@@ -39,7 +39,7 @@ export interface UserInfo {
   verifyExpireAt?: string;
   forgotStatus?: string;
   role?: string;
-  avatar?: string;
+  avatar?: string | File;
   background?: string;
   is2FA?: boolean;
   isLocked?: boolean;

@@ -23,7 +23,7 @@
     "btn06": "Cancel",
     "btn07": "Choose file",
     "btn08": "Change file",
-    "btn09": "Refresh"
+    "btn09": "{count} Refresh"
   },
   "form": {
     "tp01": "Email",

@@ -64,6 +64,7 @@ function ShowTable<T extends Record<string, any>>({
   const searchInputRef = useRef<HTMLInputElement | null>(null);
   const [selectedId, setSelectedId] = useState('');
   const [actions, setActions] = useState<'create' | 'update'>('create');
+  const [countdown, setCountdown] = useState(0);
   const [openedView, { open: openView, close: closeView }] = useDisclosure(false);
   const [openedEdit, { open: openEdit, close: closeEdit }] = useDisclosure(false);
   const [openedDelete, { open: openDelete, close: closeDelete }] = useDisclosure(false);
@@ -148,10 +149,27 @@ function ShowTable<T extends Record<string, any>>({
     });
   }, [filteredData, sortConfig]);
 
-  const handleRefresh = useCallback(() => {
-    setTableData([]);
-    refresh?.();
-  }, [refresh]);
+  const handleRefresh = useCallback(
+    (refreshBtn?: boolean) => {
+      if (refreshBtn) {
+        if (countdown > 0) return;
+        setCountdown(10);
+
+        const interval = setInterval(() => {
+          setCountdown((prev) => {
+            if (prev <= 1) {
+              clearInterval(interval);
+              return 0;
+            }
+            return prev - 1;
+          });
+        }, 1000);
+      }
+      setTableData([]);
+      refresh?.();
+    },
+    [refresh, countdown],
+  );
 
   const Header = () => (
     <Group mb="lg" justify="space-between">
@@ -291,11 +309,12 @@ function ShowTable<T extends Record<string, any>>({
         <Button
           size="lg"
           variant="gradient"
-          onClick={handleRefresh}
+          onClick={() => handleRefresh(true)}
+          disabled={countdown > 0}
           leftSection={<IconRotateClockwise size={15} />}
           gradient={{ from: 'teal', to: 'lime', deg: 0 }}
         >
-          {t('button.btn09')}
+          {t('button.btn09', { count: countdown > 0 ? countdown : null })}
         </Button>
       </Group>
       <Group gap="lg">

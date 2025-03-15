@@ -18,7 +18,7 @@ import { getEnumData } from '@/utils/constants';
 import { GENDER } from '@/constants';
 import { rolesSelect } from '../ShowTable/constant';
 
-export const excludedFields = ['createdAt', 'updatedAt', 'username', 'shop'];
+export const excludedFields = ['createdAt', 'updatedAt', 'username', 'shop', 'avatar'];
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const resourceCreateServices: Record<string, (data: any) => any> = {

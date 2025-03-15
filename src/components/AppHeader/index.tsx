@@ -31,7 +31,7 @@ function AppHeader() {
   const token = JSON.parse(String(getLocalStorageItem('accessToken')));
 
   const [isLogin, setIsLogin] = useState(false);
-  const [avatar, setAvatar] = useState<string | StaticImageData>(userInfo?.avatar || '');
+  const [avatar, setAvatar] = useState<string | StaticImageData>(String(userInfo?.avatar) || '');
 
   const {
     elementRef: languagesRef,
@@ -82,7 +82,7 @@ function AppHeader() {
     if (typeof window !== 'undefined') {
       if (isAuth || token) {
         setIsLogin(true);
-        setAvatar(userInfo?.avatar ? userInfo.avatar : '/images/logo.png');
+        setAvatar(userInfo?.avatar ? String(userInfo.avatar) : '/images/logo.png');
       } else {
         setIsLogin(false);
       }
