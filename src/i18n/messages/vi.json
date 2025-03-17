@@ -23,7 +23,12 @@
     "btn06": "Hủy bỏ",
     "btn07": "Chọn file",
     "btn08": "Thay đổi file",
-    "btn09": "Làm mới"
+    "btn09": "Làm mới",
+    "btn10": "Từ chối",
+    "btn11": "Xác nhận",
+    "btn12": "Hủy đơn",
+    "btn13": "Giao hàng",
+    "btn14": "Hoàn thành"
   },
   "form": {
     "tp01": "Email",
@@ -161,5 +166,25 @@
     "shop": "Cửa hàng",
     "category": "Danh mục",
     "slug": "Slug"
+  },
+  "historyOrder": {
+    "statusPending": "Chờ xác nhận",
+    "statusConfirmed": "Đã xác nhận",
+    "statusShipping": "Đang giao",
+    "statusSuccess": "Hoàn thành",
+    "statusRejected": "Bị từ chối",
+    "label01": "Tổng tiền",
+    "label02": "Địa chỉ:",
+    "label03": "Ghi chú:",
+    "label04": "Thời gian tạo:",
+    "label05": "Phí áp dụng",
+    "label06": "Thanh toán",
+    "desc01": "Bạn hiện không có đơn hàng nào",
+    "notify01": "Đã có lỗi xảy ra, vui lòng thử lại.",
+    "paymentStatus01": "Chưa thanh toán",
+    "paymentStatus02": "Đã thanh toán",
+    "paymentType01": "Thanh toán khi nhận hàng",
+    "paymentType02": "Thanh toán chuyển khoản",
+    "paymentType03": "Thanh toán bằng Ví Điện Tử MoccaCafe"
   }
 }

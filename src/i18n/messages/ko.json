@@ -23,7 +23,12 @@
     "btn06": "취소",
     "btn07": "파일 선택",
     "btn08": "파일 변경",
-    "btn09": "새로고침"
+    "btn09": "새로고침",
+    "btn10": "거부",
+    "btn11": "확인",
+    "btn12": "주문 취소",
+    "btn13": "배송",
+    "btn14": "완료"
   },
   "form": {
     "tp01": "이메일",
@@ -160,5 +165,25 @@
     "shop": "상점",
     "category": "카테고리",
     "slug": "슬러그"
+  },
+  "historyOrder": {
+    "statusPending": "확인 대기 중",
+    "statusConfirmed": "확인됨",
+    "statusShipping": "배송 중",
+    "statusSuccess": "완료됨",
+    "statusRejected": "거부됨",
+    "label01": "총 금액",
+    "label02": "주소:",
+    "label03": "비고:",
+    "label04": "생성 시간:",
+    "label05": "적용 수수료",
+    "label06": "결제",
+    "desc01": "현재 주문이 없습니다",
+    "notify01": "오류가 발생했습니다. 다시 시도해주세요.",
+    "paymentStatus01": "미결제",
+    "paymentStatus02": "결제 완료",
+    "paymentType01": "현금 결제 (배송 시)",
+    "paymentType02": "은행 이체",
+    "paymentType03": "MoccaCafe 전자 지갑 결제"
   }
 }

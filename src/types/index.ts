@@ -143,3 +143,27 @@ export interface ChangeOrderStatus {
   orderId: string;
   status: OrderStatus;
 }
+
+export interface CartItemInfo {
+  _id: string;
+  product: ProductInfo;
+  quantity: number;
+  totalPrice: number;
+}
+
+export interface OrderItemInfo {
+  _id: string;
+  createdAt: string;
+  updatedAt: string;
+  totalMoney: number;
+  status: string;
+  shop: RestaurantInfo;
+  paymentMethod: string;
+  paymentCode: string;
+  paymentStatus?: string;
+  cartDetails: CartItemInfo[];
+  address: string;
+  note: string;
+  expriedTimeBank?: string;
+  user?: UserInfo;
+}

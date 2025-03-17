@@ -23,7 +23,12 @@
     "btn06": "Cancel",
     "btn07": "Choose file",
     "btn08": "Change file",
-    "btn09": "Refresh"
+    "btn09": "Refresh",
+    "btn10": "Reject",
+    "btn11": "Confirm",
+    "btn12": "Cancel Order",
+    "btn13": "Deliver",
+    "btn14": "Complete"
   },
   "form": {
     "tp01": "Email",
@@ -160,5 +165,25 @@
     "shop": "Shop",
     "category": "Category",
     "slug": "Slug"
+  },
+  "historyOrder": {
+    "statusPending": "Pending Confirmation",
+    "statusConfirmed": "Confirmed",
+    "statusShipping": "Shipping",
+    "statusSuccess": "Completed",
+    "statusRejected": "Rejected",
+    "label01": "Total Amount",
+    "label02": "Address:",
+    "label03": "Note:",
+    "label04": "Created At:",
+    "label05": "Applicable Fees",
+    "label06": "Payment",
+    "desc01": "You currently have no orders",
+    "notify01": "An error has occurred, please try again.",
+    "paymentStatus01": "Unpaid",
+    "paymentStatus02": "Paid",
+    "paymentType01": "Cash on Delivery",
+    "paymentType02": "Bank Transfer",
+    "paymentType03": "MoccaCafe E-Wallet Payment"
   }
 }

@@ -23,7 +23,12 @@
     "btn06": "取消",
     "btn07": "选择文件",
     "btn08": "更改文件",
-    "btn09": "刷新"
+    "btn09": "刷新",
+    "btn10": "拒绝",
+    "btn11": "确认",
+    "btn12": "取消订单",
+    "btn13": "配送",
+    "btn14": "完成"
   },
   "form": {
     "tp01": "电子邮件",
@@ -160,5 +165,25 @@
     "shop": "商店",
     "category": "类别",
     "slug": "别名"
+  },
+  "historyOrder": {
+    "statusPending": "待确认",
+    "statusConfirmed": "已确认",
+    "statusShipping": "配送中",
+    "statusSuccess": "已完成",
+    "statusRejected": "已拒绝",
+    "label01": "总金额",
+    "label02": "地址：",
+    "label03": "备注：",
+    "label04": "创建时间：",
+    "label05": "适用费用",
+    "label06": "付款",
+    "desc01": "您当前没有订单",
+    "notify01": "发生错误，请重试。",
+    "paymentStatus01": "未支付",
+    "paymentStatus02": "已支付",
+    "paymentType01": "货到付款",
+    "paymentType02": "银行转账",
+    "paymentType03": "MoccaCafe 电子钱包支付"
   }
 }
