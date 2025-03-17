@@ -12,6 +12,8 @@ import { getOrdersByStatus } from '@/services/ordersServices';
 import { showToast, ToastType } from '@/utils/toastUtils';
 import { OrderStatus } from '@/constants';
 import OrderItem from './OrderItem';
+import { OrderItemInfo } from '@/types';
+import { deleteOrder } from '@/lib/features/ordersSlice';
 
 function Orders() {
   const t = useTranslations();
@@ -40,12 +42,17 @@ function Orders() {
   };
 
   useEffect(() => {
+    const newList = ordersData.filter((item: OrderItemInfo) => item._id !== reduxOrders?.idOrderCancel);
+    setOrdersData(newList);
+    dispatch(deleteOrder(null));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [reduxOrders?.idOrderCancel]);
+
+  useEffect(() => {
     setOrdersData([]);
     window.scrollTo(0, 0);
     fetchGetOrders(status as OrderStatus);
   }, [status, fetchGetOrders]);
-
-  console.log(ordersData);
 
   return (
     <Box p="xl">

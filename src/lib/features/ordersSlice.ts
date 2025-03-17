@@ -7,19 +7,25 @@ import { cancelOrder, changeStatus, getOrdersByStatus } from '@/services/ordersS
 interface OrdersState {
   loading: boolean;
   orders: null;
+  idOrderCancel: null;
   error: string | null;
 }
 
 const initialState: OrdersState = {
   loading: false,
   orders: null,
+  idOrderCancel: null,
   error: null,
 };
 
 const ordersSlice = createSlice({
   name: 'orders',
   initialState,
-  reducers: {},
+  reducers: {
+    deleteOrder: (state, action) => {
+      state.idOrderCancel = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       // Get Orders By Status
@@ -73,4 +79,5 @@ const ordersSlice = createSlice({
   },
 });
 
+export const { deleteOrder } = ordersSlice.actions;
 export default ordersSlice.reducer;

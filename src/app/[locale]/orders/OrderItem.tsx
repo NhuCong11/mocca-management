@@ -2,13 +2,14 @@ import { useTranslations } from 'next-intl';
 import { IconChevronDown } from '@tabler/icons-react';
 import { Accordion, Avatar, Box, Button, Divider, Flex, Group, Image, Text, Title } from '@mantine/core';
 
-import { getButtons, getOrderDetails, getPaymentMethod, getPaymentStatus } from './constant';
+import { getButtons, getChangeNextStatus, getOrderDetails, getPaymentMethod, getPaymentStatus } from './constant';
 import { getVNCurrency } from '@/utils/constants';
 import { CartItemInfo, OrderItemInfo } from '@/types';
 import { useAppDispatch } from '@/lib/hooks';
 import { cancelOrder, changeStatus } from '@/services/ordersServices';
 import { OrderStatus } from '@/constants';
 import { showToast, ToastType } from '@/utils/toastUtils';
+import { deleteOrder } from '@/lib/features/ordersSlice';
 
 function OrderItem({ data }: { data: OrderItemInfo }) {
   const t = useTranslations();
@@ -18,6 +19,7 @@ function OrderItem({ data }: { data: OrderItemInfo }) {
   const paymentStatus = getPaymentStatus(data?.paymentStatus, t);
   const orderDetails = getOrderDetails(data, paymentMethod, paymentStatus);
   const buttons = getButtons(data?.status, t);
+  const nextStatus = getChangeNextStatus(data?.status);
 
   const handleChangeStatus = (status?: OrderStatus) => {
     if (!status) return;
@@ -28,6 +30,7 @@ function OrderItem({ data }: { data: OrderItemInfo }) {
         throw new Error(result?.payload?.message || t('system.error'));
       }
     });
+    dispatch(deleteOrder(data?._id));
     showToast('', ToastType.PROMISE, changeStatusPromise);
   };
 
@@ -39,11 +42,12 @@ function OrderItem({ data }: { data: OrderItemInfo }) {
         throw new Error(result?.payload?.message || t('system.error'));
       }
     });
+    dispatch(deleteOrder(data?._id));
     showToast('', ToastType.PROMISE, cancelOrderPromise);
   };
 
   return (
-    <Box p="xl">
+    <Box p="xl" pb={0}>
       <Accordion
         multiple
         defaultValue={['user']}
@@ -109,7 +113,7 @@ function OrderItem({ data }: { data: OrderItemInfo }) {
             color={btn.color}
             onClick={() => {
               if (!btn.isCancel) {
-                handleChangeStatus(data?.status as OrderStatus);
+                handleChangeStatus(nextStatus);
               } else {
                 handleCancelOrder();
               }
@@ -119,7 +123,7 @@ function OrderItem({ data }: { data: OrderItemInfo }) {
           </Button>
         ))}
       </Group>
-      <Divider my="xl" color="gray" variant="dashed" />
+      <Divider mt="xl" color="gray" variant="dashed" />
     </Box>
   );
 }

@@ -78,3 +78,16 @@ export const getButtons = (status: string | undefined, t: ReturnType<typeof useT
       ];
   }
 };
+
+export const getChangeNextStatus = (status: string) => {
+  switch (status) {
+    case OrderStatus.Pending:
+      return OrderStatus.Confirmed;
+    case OrderStatus.Confirmed:
+      return OrderStatus.Shipping;
+    case OrderStatus.Shipping:
+      return OrderStatus.Success;
+    default:
+      return OrderStatus.Confirmed;
+  }
+};
