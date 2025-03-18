@@ -42,7 +42,7 @@ function Orders() {
   };
 
   useEffect(() => {
-    const newList = ordersData.filter((item: OrderItemInfo) => item._id !== reduxOrders?.idOrderCancel);
+    const newList = ordersData?.filter((item: OrderItemInfo) => item._id !== reduxOrders?.idOrderCancel);
     setOrdersData(newList);
     dispatch(deleteOrder(null));
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -70,7 +70,7 @@ function Orders() {
         </Grid.Col>
         <Grid.Col span="auto">
           <div className={clsx(styles['orders__status'])}>
-            {statusList.map((item, index) => {
+            {statusList?.map((item, index) => {
               return (
                 <h4
                   className={clsx(
@@ -99,7 +99,7 @@ function Orders() {
               })}
           </div>
 
-          {ordersData.length === 0 && (
+          {ordersData?.length === 0 && (
             <div className={clsx(styles['empty-order'])}>
               {!reduxOrders?.loading ? (
                 <>
