@@ -4,6 +4,7 @@ import { ThemeProvider } from 'next-themes';
 
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import 'react-photo-view/dist/react-photo-view.css';
 import { Toaster } from 'react-hot-toast';
 import { useDisclosure } from '@mantine/hooks';
 import { AppShell, Burger, Flex, Group, MantineProvider } from '@mantine/core';
@@ -16,6 +17,7 @@ import { getLocalStorageItem } from '@/utils/localStorage';
 import AppSidebar from '@/components/AppSidebar';
 import { theme } from '@/styles/mantine';
 import AppThemeToggle from '@/components/AppThemeToggle';
+import SocketMessageProvider from './SocketMessageProvider';
 
 function LayoutProvider({ children }: { children: Readonly<React.ReactNode> }) {
   const pathname = usePathname();
@@ -43,53 +45,55 @@ function LayoutProvider({ children }: { children: Readonly<React.ReactNode> }) {
   }, []);
 
   return (
-    <ThemeProvider attribute="class" defaultTheme="system" enableSystem={true} disableTransitionOnChange>
-      <MantineProvider theme={theme} defaultColorScheme="auto">
-        {!noDefaultLayoutRoutes.includes(pathname) && (isAuth || (typeof window !== 'undefined' && token)) ? (
-          <AppShell
-            header={{ height: 100 }}
-            navbar={{
-              width: 400,
-              breakpoint: 'lg',
-              collapsed: { mobile: !opened },
+    <SocketMessageProvider>
+      <ThemeProvider attribute="class" defaultTheme="system" enableSystem={true} disableTransitionOnChange>
+        <MantineProvider theme={theme} defaultColorScheme="auto">
+          {!noDefaultLayoutRoutes.includes(pathname) && (isAuth || (typeof window !== 'undefined' && token)) ? (
+            <AppShell
+              header={{ height: 100 }}
+              navbar={{
+                width: 400,
+                breakpoint: 'lg',
+                collapsed: { mobile: !opened },
+              }}
+            >
+              <AppShell.Header>
+                <Flex align="center" gap="lg" h="100%" bg="#181818" p="lg">
+                  <Group p="lg">
+                    <Burger color="white" opened={opened} onClick={toggle} hiddenFrom="lg" size="lg" />
+                  </Group>
+                  <AppHeader />
+                </Flex>
+              </AppShell.Header>
+
+              <AppShell.Navbar pt="sm" bg="var(--btn-bg)">
+                <AppSidebar />
+              </AppShell.Navbar>
+
+              <AppShell.Main bg="var(--content-bg)">{children}</AppShell.Main>
+            </AppShell>
+          ) : (
+            children
+          )}
+          <AppThemeToggle />
+          <Toaster
+            gutter={8}
+            position="top-center"
+            reverseOrder={false}
+            toastOptions={{
+              duration: 3000,
+              removeDelay: 1000,
+              style: {
+                borderRadius: '12px',
+                background: 'var(--white)',
+                color: 'var(--coffee-color-v2)',
+                border: '1px solid var(--primary-bg)',
+              },
             }}
-          >
-            <AppShell.Header>
-              <Flex align="center" gap="lg" h="100%" bg="#181818" p="lg">
-                <Group p="lg">
-                  <Burger color="white" opened={opened} onClick={toggle} hiddenFrom="lg" size="lg" />
-                </Group>
-                <AppHeader />
-              </Flex>
-            </AppShell.Header>
-
-            <AppShell.Navbar pt="sm" bg="var(--btn-bg)">
-              <AppSidebar />
-            </AppShell.Navbar>
-
-            <AppShell.Main bg="var(--content-bg)">{children}</AppShell.Main>
-          </AppShell>
-        ) : (
-          children
-        )}
-        <AppThemeToggle />
-        <Toaster
-          gutter={8}
-          position="top-center"
-          reverseOrder={false}
-          toastOptions={{
-            duration: 3000,
-            removeDelay: 1000,
-            style: {
-              borderRadius: '12px',
-              background: 'var(--white)',
-              color: 'var(--coffee-color-v2)',
-              border: '1px solid var(--primary-bg)',
-            },
-          }}
-        />
-      </MantineProvider>
-    </ThemeProvider>
+          />
+        </MantineProvider>
+      </ThemeProvider>
+    </SocketMessageProvider>
   );
 }
 

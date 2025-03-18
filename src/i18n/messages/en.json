@@ -185,5 +185,15 @@
     "paymentType01": "Cash on Delivery",
     "paymentType02": "Bank Transfer",
     "paymentType03": "MoccaCafe E-Wallet Payment"
+  },
+  "chatMessage": {
+    "title01": "Messenger",
+    "desc01": "Loading ...",
+    "desc02": "Welcome",
+    "desc03": "Select a conversation to start messaging",
+    "desc04": "Send message",
+    "desc05": "Search for chat history",
+    "desc06": "Send a message to start the conversation",
+    "notify01": "Chat does not exist."
   }
 }

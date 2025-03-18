@@ -185,5 +185,15 @@
     "paymentType01": "货到付款",
     "paymentType02": "银行转账",
     "paymentType03": "MoccaCafe 电子钱包支付"
+  },
+  "chatMessage": {
+    "title01": "信使",
+    "desc01": "正在加载 ...",
+    "desc02": "欢迎",
+    "desc03": "选择一个对话开始发送消息",
+    "desc04": "发送消息",
+    "desc05": "搜索聊天记录",
+    "desc06": "发送消息以开始对话",
+    "notify01": "聊天不存在。"
   }
 }

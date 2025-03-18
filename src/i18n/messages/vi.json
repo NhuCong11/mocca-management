@@ -186,5 +186,15 @@
     "paymentType01": "Thanh toán khi nhận hàng",
     "paymentType02": "Thanh toán chuyển khoản",
     "paymentType03": "Thanh toán bằng Ví Điện Tử MoccaCafe"
+  },
+  "chatMessage": {
+    "title01": "Messenger",
+    "desc01": "Đang tải ...",
+    "desc02": "Chào mừng",
+    "desc03": "Chọn một cuộc trò chuyện để bắt đầu nhắn tin",
+    "desc04": "Gửi tin nhắn",
+    "desc05": "Tìm kiếm đoạn chat",
+    "desc06": "Gửi tin nhắn để bắt đầu cuộc trò chuyện",
+    "notify01": "Đoạn chat không tồn tại."
   }
 }

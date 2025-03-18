@@ -1,5 +1,5 @@
 import { OrderStatus, TimePeriod } from '@/constants';
-
+import { Socket } from 'socket.io-client';
 export interface RejectValueError {
   rejectValue: { message: string };
 }
@@ -166,4 +166,38 @@ export interface OrderItemInfo {
   note: string;
   expriedTimeBank?: string;
   user?: UserInfo;
+}
+
+export interface GetMessagesProps {
+  userID: string;
+  conversationID: string;
+}
+export interface SendMessageProps {
+  message: string | undefined;
+  conversationID: string;
+  image: File | null;
+}
+export interface SocketMessageType {
+  socket: Socket | null;
+  onlineUsers: RestaurantInfo[];
+}
+export interface ChatMessageContextType {
+  openMessage: boolean;
+  openMessageModal: () => void;
+  closeMessageModal: () => void;
+  newConversation: RestaurantInfo | undefined;
+  addConversation: (newConversation: RestaurantInfo) => void;
+}
+export interface MessageItemInfo {
+  _id: string;
+  senderId: string;
+  receiverId: string;
+  image?: string;
+  message?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+export interface ChatMessageForm {
+  shop?: string;
+  message?: string;
 }
