@@ -15,7 +15,6 @@ import { getLocalStorageItem } from '@/utils/localStorage';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 import { ChatMessageForm, GetMessagesProps, RestaurantInfo, UserInfo } from '@/types';
 import { useSocketMessage } from '@/contexts/SocketMessageProvider';
-import { useChatMessageContext } from '@/contexts/ChatMessageProvider';
 import { getConversations, getMessages } from '@/services/chatsServices';
 import { handleMobile, saveRestaurant } from '@/lib/features/chatsSlice';
 
@@ -23,7 +22,6 @@ function Sidebar() {
   const t = useTranslations();
   const dispatch = useAppDispatch();
   const { onlineUsers } = useSocketMessage();
-  const { newConversation } = useChatMessageContext();
   const user: UserInfo | null = getLocalStorageItem('user');
   const loading = useAppSelector((state) => state.chats.loading);
   const restaurant = useAppSelector((state) => state.chats.restaurant);
@@ -92,21 +90,6 @@ function Sidebar() {
       }),
     [conversations, onlineUsers, conversationSelected, restaurant, handleClickConversation],
   );
-
-  useEffect(() => {
-    if (newConversation && user?._id) {
-      setConversations((prevConversations) => {
-        const isExist =
-          newConversation._id === user._id ||
-          prevConversations.some((conversation) => conversation._id === newConversation._id);
-
-        if (!isExist) {
-          return [newConversation, ...prevConversations];
-        }
-        return prevConversations;
-      });
-    }
-  }, [newConversation, user]);
 
   useEffect(() => {
     if (user?._id) {
