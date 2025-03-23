@@ -5,6 +5,7 @@ import { createCategory, getCategoryById, updateCategoryById } from '@/services/
 import { createProduct, getProductById, updateProductById } from '@/services/productsServices';
 import {
   IconCalendarTime,
+  IconCategoryPlus,
   IconCoin,
   IconGenderBigender,
   IconKey,
@@ -60,6 +61,8 @@ export const getIcon = (col: string) => {
       return IconMessage;
     case 'password':
       return IconKey;
+    case 'classifies':
+      return IconCategoryPlus;
     default:
       return IconLetterCase;
   }

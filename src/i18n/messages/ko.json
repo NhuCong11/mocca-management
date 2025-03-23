@@ -164,7 +164,8 @@
     "image": "이미지",
     "shop": "상점",
     "category": "카테고리",
-    "slug": "슬러그"
+    "slug": "슬러그",
+    "classifies": "분류하다"
   },
   "historyOrder": {
     "statusPending": "확인 대기 중",

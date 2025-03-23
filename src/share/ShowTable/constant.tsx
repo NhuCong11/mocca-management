@@ -147,6 +147,12 @@ export const renderCellValue = (row: Record<string, any>, key: string, t: (path:
           {value}
         </Text>
       );
+    case 'classifies':
+      return (
+        <Text size="xl" lineClamp={6}>
+          {value.join(',')}
+        </Text>
+      );
     default:
       if (typeof value === 'boolean') {
         return (

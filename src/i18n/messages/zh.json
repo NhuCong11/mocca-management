@@ -164,7 +164,8 @@
     "image": "图片",
     "shop": "商店",
     "category": "类别",
-    "slug": "别名"
+    "slug": "别名",
+    "classifies": "分类"
   },
   "historyOrder": {
     "statusPending": "待确认",

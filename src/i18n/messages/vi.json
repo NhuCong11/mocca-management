@@ -165,7 +165,8 @@
     "image": "Ảnh",
     "shop": "Cửa hàng",
     "category": "Danh mục",
-    "slug": "Slug"
+    "slug": "Slug",
+    "classifies": "Phân loại"
   },
   "historyOrder": {
     "statusPending": "Chờ xác nhận",

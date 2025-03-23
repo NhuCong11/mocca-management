@@ -40,7 +40,7 @@ function ResourceEdit({ opened, close, selectedId, resourceName, action, columns
     ...(resourceName === 'users' && action !== 'update' ? ['password'] : []),
   ];
   const [categories, setCategories] = useState<CategoryInfo[]>([]);
-  const [initialValues, setInitialValues] = useState<Record<string, string | number | boolean | File>>({});
+  const [initialValues, setInitialValues] = useState<Record<string, string | number | boolean | File | string[]>>({});
 
   const handleCreate = (data: any) => {
     if (!fetchCreateData) return;
@@ -207,6 +207,7 @@ function ResourceEdit({ opened, close, selectedId, resourceName, action, columns
               )
               .map(([key, value]) => [key, typeof value === 'boolean' ? String(value) : value]),
           );
+
           const { image, ...productData } = formattedValues;
           if (action === 'create') {
             handleCreate(resourceName === 'products' ? { productData, image } : formattedValues);

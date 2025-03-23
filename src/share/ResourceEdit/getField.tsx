@@ -10,6 +10,7 @@ import {
   NumberInput,
   PasswordInput,
   Switch,
+  TagsInput,
   Text,
   TextInput,
 } from '@mantine/core';
@@ -28,10 +29,10 @@ export const getField = ({
   t,
 }: {
   column: string;
-  formData: Record<string, string | number | File | boolean | object>;
+  formData: Record<string, string | number | File | boolean | object | string[]>;
   resourceName: string;
   categories: CategoryInfo[];
-  setFieldValue: (field: string, value: string | number | File | boolean) => void;
+  setFieldValue: (field: string, value: string | number | File | boolean | string[]) => void;
   errors: Record<string, string>;
   action: string;
   t: (key: string) => string;
@@ -84,7 +85,8 @@ export const getField = ({
 
     case 'category': {
       const options = getEnum(column, t, categories);
-      const selectedValue = typeof formData[column] !== 'object' ? options.find((item) => item.value === formData[column]) : null;
+      const selectedValue =
+        typeof formData[column] !== 'object' ? options.find((item) => item.value === formData[column]) : null;
       return (
         <SelectBox
           required
@@ -113,6 +115,19 @@ export const getField = ({
           placeholder={t(`${resourceName}.${column}`)}
           onChange={(value) => setFieldValue(column, value ?? '')}
           error={errors[column] ? errors[column] : null}
+        />
+      );
+
+    case 'classifies':
+      return (
+        <TagsInput
+          size="xl"
+          required
+          value={Array.isArray(formData[column]) ? formData[column] : []}
+          label={t(`${resourceName}.${column}`)}
+          placeholder={t(`${resourceName}.${column}`)}
+          onChange={(value) => setFieldValue(column, value)}
+          error={errors[column]}
         />
       );
 
