@@ -1,12 +1,12 @@
 import { DateInput } from '@mantine/dates';
 import { IconUpload } from '@tabler/icons-react';
 import {
-  Avatar,
   Box,
   Button,
   ComboboxItem,
   FileButton,
   Group,
+  Image,
   NumberInput,
   PasswordInput,
   Switch,
@@ -25,6 +25,7 @@ export const getField = ({
   categories,
   setFieldValue,
   errors,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   action,
   t,
 }: {
@@ -157,9 +158,14 @@ export const getField = ({
             )}
           </FileButton>
           {(formData[column] instanceof File || String(formData[column])) && (
-            <Avatar
-              size={150}
-              src={action === 'create' ? URL.createObjectURL(formData[column] as File) : String(formData[column])}
+            <Image
+              radius="md"
+              h={200}
+              src={
+                formData[column] instanceof File
+                  ? URL.createObjectURL(formData[column] as File)
+                  : String(formData[column])
+              }
               alt="Preview"
             />
           )}
