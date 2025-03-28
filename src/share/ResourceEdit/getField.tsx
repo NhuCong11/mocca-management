@@ -12,6 +12,7 @@ import {
   Switch,
   TagsInput,
   Text,
+  Textarea,
   TextInput,
 } from '@mantine/core';
 import { getEnum, getIcon } from './constant';
@@ -177,6 +178,21 @@ export const getField = ({
         <PasswordInput
           required
           size="xl"
+          value={(formData[column] as string) || ''}
+          label={t(`${resourceName}.${column}`)}
+          leftSection={<Icon size={20} />}
+          placeholder={t(`${resourceName}.${column}`)}
+          onChange={(event) => setFieldValue(column, event.currentTarget.value)}
+          error={errors[column] ? errors[column] : null}
+        />
+      );
+
+    case 'description':
+      return (
+        <Textarea
+          required
+          size="xl"
+          minRows={3}
           value={(formData[column] as string) || ''}
           label={t(`${resourceName}.${column}`)}
           leftSection={<Icon size={20} />}

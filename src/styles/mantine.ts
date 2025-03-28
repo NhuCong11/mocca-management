@@ -83,6 +83,18 @@ export const theme = createTheme({
         },
       }),
     },
+    Textarea: {
+      styles: (theme: MantineTheme) => ({
+        label: {
+          marginBottom: '8px',
+        },
+        input: {
+          fontWeight: 400,
+          minHeight: '100px',
+          borderColor: theme.colors.gray[7],
+        },
+      }),
+    },
     Switch: {
       styles: {
         root: {

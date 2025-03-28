@@ -7,6 +7,7 @@ import {
   IconCalendarTime,
   IconCategoryPlus,
   IconCoin,
+  IconFileDescription,
   IconGenderBigender,
   IconKey,
   IconLetterCase,
@@ -63,6 +64,8 @@ export const getIcon = (col: string) => {
       return IconKey;
     case 'classifies':
       return IconCategoryPlus;
+    case 'description':
+      return IconFileDescription;
     default:
       return IconLetterCase;
   }
