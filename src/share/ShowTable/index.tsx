@@ -20,7 +20,15 @@ import AppPagination from '@/components/AppPagination';
 import { useTranslations } from 'next-intl';
 import { handleExportFile } from '@/utils/constants';
 import SelectBox from '../SelectBox';
-import { excludedCUActions, excludedDActions, excludedFields, NOT_SORT, renderCellValue, renderSortIcon, rolesSelect } from './constant';
+import {
+  excludedCUActions,
+  excludedDActions,
+  excludedFields,
+  NOT_SORT,
+  renderCellValue,
+  renderSortIcon,
+  rolesSelect,
+} from './constant';
 import { linesOnThePage } from '@/constants';
 import { useDisclosure } from '@mantine/hooks';
 import ResourceView from '../ResourceView';
@@ -256,7 +264,7 @@ function ShowTable<T extends Record<string, any>>({
             <IconEdit size={18} />
           </ActionIcon>
         )}
-        {(!excludedDActions.includes(translate) && isAdmin ||  isShop) && (
+        {((!excludedDActions.includes(translate) && isAdmin) || isShop) && (
           <ActionIcon size={45} variant="light" color="red" onClick={() => handleView('delete')}>
             <IconTrash size={18} />
           </ActionIcon>
@@ -287,16 +295,18 @@ function ShowTable<T extends Record<string, any>>({
             {t('button.btn03')}
           </Button>
         )}
-        <Anchor href={handleExportFile(searchQuery || String(selectedRole?.value ?? ''), translate)} target="_blank">
-          <Button
-            size="lg"
-            variant="gradient"
-            leftSection={<IconDownload size={15} />}
-            gradient={{ from: 'yellow', to: 'orange', deg: 150 }}
-          >
-            {t('button.btn04')}
-          </Button>
-        </Anchor>
+        {isAdmin && (
+          <Anchor href={handleExportFile(searchQuery || String(selectedRole?.value ?? ''), translate)} target="_blank">
+            <Button
+              size="lg"
+              variant="gradient"
+              leftSection={<IconDownload size={15} />}
+              gradient={{ from: 'yellow', to: 'orange', deg: 150 }}
+            >
+              {t('button.btn04')}
+            </Button>
+          </Anchor>
+        )}
         <Button
           size="lg"
           variant="gradient"
