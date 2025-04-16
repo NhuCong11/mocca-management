@@ -74,7 +74,7 @@ function OrderItem({ data }: { data: OrderItemInfo }) {
                       <Title order={4} size="h2">
                         {cartDetail.product.name}
                       </Title>
-                      <Text size="lg" mt="lg" c="gray" truncate="end" lineClamp={3}>
+                      <Text size="lg" mt="lg" c="gray" truncate="end" lineClamp={3} style={{ textWrap: 'wrap' }}>
                         {cartDetail.product.description}
                       </Text>
                       <Text size="lg" mt="lg">
