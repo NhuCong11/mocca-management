@@ -1,21 +1,23 @@
 'use client';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Box, ComboboxItem, Group, Title } from '@mantine/core';
 import { IconAddressBook } from '@tabler/icons-react';
 
-import { ProductInfo } from '@/types';
+import { ProductInfo, UserInfo } from '@/types';
 import ShowTable from '@/share/ShowTable';
 import LoadingStart from '@/share/Loading';
 import { linesOnThePage } from '@/constants';
 import { useQueryParams } from '@/hooks/useQueryParams';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 import { getAllProduct } from '@/services/productsServices';
+import { getLocalStorageItem } from '@/utils/localStorage';
 
 function Products() {
   const t = useTranslations();
   const dispatch = useAppDispatch();
   const { getParam } = useQueryParams();
+  const userInfo: UserInfo | null = useMemo(() => getLocalStorageItem('user'), []);
   const pageParam = Number(getParam('page')) || 1;
   const isLoading = useAppSelector((state) => state.products.loading);
 
@@ -29,14 +31,14 @@ function Products() {
 
   const fetchAllProducts = useCallback(
     (page: number, numberLines: number) => {
-      dispatch(getAllProduct({ limit: numberLines, page })).then((result) => {
+      dispatch(getAllProduct({ limit: numberLines, page, shop: userInfo?._id })).then((result) => {
         if (result?.payload?.code === 200) {
           setProducts(result.payload.data.products);
           setTotalPages(result.payload.data.totalPage);
         }
       });
     },
-    [dispatch],
+    [dispatch, userInfo?._id],
   );
 
   const refreshData = () => {

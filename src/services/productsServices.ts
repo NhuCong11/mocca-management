@@ -6,14 +6,14 @@ import { DefaultParams, RejectValueError, UpdateProductInfo } from '@/types';
 
 export const getAllProduct = createAsyncThunk<any, DefaultParams, RejectValueError>(
   'product/getAll',
-  async ({ limit, page }, { rejectWithValue }) => {
+  async ({ limit, page, shop }, { rejectWithValue }) => {
     try {
       const customHeaders = {
         'Cache-Control': 'no-cache',
       };
       const res: AxiosResponse = await callApi(
         HttpMethod.GET,
-        `/v1/products?limit=${limit}&page=${page}`,
+        `/v1/products?limit=${limit}&page=${page}&shop=${shop}`,
         {},
         customHeaders,
       );

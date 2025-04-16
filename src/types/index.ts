@@ -8,6 +8,7 @@ export interface DefaultParams {
   limit: number;
   page: number;
   keyword?: string;
+  shop?: string;
 }
 
 export interface StatisticalProps {

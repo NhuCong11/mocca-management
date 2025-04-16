@@ -123,12 +123,9 @@ function ShowTable<T extends Record<string, any>>({
       if (translate === 'users') {
         return (selectedRole ? item.role.toLowerCase() === selectedRole.value.toLowerCase() : true) && matchesSearch;
       }
-      if (isShop && translate === 'products') {
-        return item?.shop?._id === userInfo?._id;
-      }
       return matchesSearch;
     });
-  }, [tableData, searchQuery, selectedRole, translate, filterFields, isShop, userInfo]);
+  }, [tableData, searchQuery, selectedRole, translate, filterFields]);
 
   const handleRoleChange = (value: ComboboxItem) => {
     setSelectedRole(value);
