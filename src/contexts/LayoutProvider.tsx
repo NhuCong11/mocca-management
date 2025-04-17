@@ -67,7 +67,7 @@ function LayoutProvider({ children }: { children: Readonly<React.ReactNode> }) {
               </AppShell.Header>
 
               <AppShell.Navbar pt="sm" bg="var(--btn-bg)">
-                <AppSidebar />
+                <AppSidebar onCloseNavbar={toggle} />
               </AppShell.Navbar>
 
               <AppShell.Main bg="var(--content-bg)">{children}</AppShell.Main>

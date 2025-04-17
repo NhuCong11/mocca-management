@@ -1,4 +1,4 @@
-import {  useMemo } from 'react';
+import { useMemo } from 'react';
 import clsx from 'clsx';
 import { useTranslations } from 'next-intl';
 import { IconChevronDown } from '@tabler/icons-react';
@@ -11,7 +11,11 @@ import { getLocalStorageItem } from '@/utils/localStorage';
 import { UserInfo } from '@/types';
 import { RULES } from '@/constants';
 
-function AppSidebar() {
+interface AppSidebarProps {
+  onCloseNavbar: () => void;
+}
+
+function AppSidebar({ onCloseNavbar }: AppSidebarProps) {
   const t = useTranslations();
   const pathname = usePathname();
   const userInfo: UserInfo | null = getLocalStorageItem('user');
@@ -30,7 +34,7 @@ function AppSidebar() {
               const isDisplay = nav.rule.includes(userInfo?.role as RULES);
               return (
                 isDisplay && (
-                  <Link href={nav.link} key={nav.title}>
+                  <Link href={nav.link} key={nav.title} onClick={onCloseNavbar}>
                     <Group
                       gap={15}
                       p="md"
@@ -49,7 +53,7 @@ function AppSidebar() {
           </Accordion.Panel>
         </Accordion.Item>
       )),
-    [pathname, userInfo, t],
+    [pathname, userInfo, t, onCloseNavbar],
   );
 
   return (

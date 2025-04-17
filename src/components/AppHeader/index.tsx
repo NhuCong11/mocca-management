@@ -52,6 +52,7 @@ function AppHeader() {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
     removeCookie('accessToken', { path: '/' });
+    removeCookie('userRole', { path: '/' });
     setShowUserOptions(false);
     showToast(t('login.notify02'), ToastType.SUCCESS);
     dispatch(logout());

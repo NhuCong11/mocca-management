@@ -25,6 +25,25 @@ export default async function middleware(request: NextRequest) {
     response.headers.set('x-middleware-rewrite', url.toString());
   }
 
+  // Check for admin role and restrict access to /products and /orders
+  const userRoleCookie = request.cookies.get('userRole')?.value;
+  const restrictedRoutes = ['/products', '/orders'];
+  const isRestrictedRoute = restrictedRoutes.some((route) => pathname.includes(route));
+
+  if (userRoleCookie === 'admin' && isRestrictedRoute) {
+    const url = new URL(`/${currentLocale}/errors/403`, request.url);
+    response.headers.set('x-middleware-rewrite', url.toString());
+  }
+
+  // Check for shop role and restrict access to /users, /contacts, and /categories
+  const shopRestrictedRoutes = ['/users', '/contacts', '/categories'];
+  const isShopRestrictedRoute = shopRestrictedRoutes.some((route) => pathname.includes(route));
+
+  if (userRoleCookie === 'shop' && isShopRestrictedRoute) {
+    const url = new URL(`/${currentLocale}/errors/403`, request.url);
+    response.headers.set('x-middleware-rewrite', url.toString());
+  }
+
   return response;
 }
 

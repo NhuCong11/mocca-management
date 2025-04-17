@@ -52,6 +52,7 @@ function SignIn() {
         }
         localStorage.setItem('accessToken', JSON.stringify(result?.payload?.data.accessToken));
         setCookie('accessToken', JSON.stringify(result?.payload?.data.accessToken));
+        setCookie('userRole', result?.payload?.data.user.role);
         localStorage.setItem('refreshToken', JSON.stringify(result?.payload?.data.refreshToken));
         localStorage.setItem('user', JSON.stringify(result?.payload?.data.user));
         router.push('/');
