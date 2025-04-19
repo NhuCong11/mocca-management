@@ -149,6 +149,7 @@ export interface CartItemInfo {
   _id: string;
   product: ProductInfo;
   quantity: number;
+  classify: string;
   totalPrice: number;
 }
 

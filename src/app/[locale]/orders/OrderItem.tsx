@@ -83,7 +83,7 @@ function OrderItem({ data }: { data: OrderItemInfo }) {
                     </Box>
                   </Group>
                   <Text size="xl" fw={600} c="var(--primary-bg)">
-                    {getVNCurrency(cartDetail.product.price)}
+                    {cartDetail.classify} | {getVNCurrency(cartDetail.product.price)}
                   </Text>
                 </Group>
               );

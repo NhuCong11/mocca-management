@@ -42,17 +42,21 @@ function Orders() {
   };
 
   useEffect(() => {
-    const newList = ordersData?.filter((item: OrderItemInfo) => item._id !== reduxOrders?.idOrderCancel);
+    const newList = reduxOrders?.error
+      ? ordersData
+      : ordersData?.filter((item: OrderItemInfo) => item._id !== reduxOrders?.idOrderCancel);
     setOrdersData(newList);
     dispatch(deleteOrder(null));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [reduxOrders?.idOrderCancel]);
+  }, [reduxOrders]);
 
   useEffect(() => {
-    setOrdersData([]);
+    if (!reduxOrders?.error) {
+      setOrdersData([]);
+    }
     window.scrollTo(0, 0);
     fetchGetOrders(status as OrderStatus);
-  }, [status, fetchGetOrders]);
+  }, [status, fetchGetOrders, reduxOrders?.error]);
 
   return (
     <Box p="xl">
