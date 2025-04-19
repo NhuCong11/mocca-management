@@ -72,10 +72,7 @@ export const getButtons = (status: string | undefined, t: ReturnType<typeof useT
         { text: t('button.btn14'), color: 'teal' },
       ];
     default:
-      return [
-        { text: t('button.btn10'), color: 'red' },
-        { text: t('button.btn11'), color: 'green' },
-      ];
+      return [];
   }
 };
 
