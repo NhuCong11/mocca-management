@@ -85,6 +85,7 @@
     "title05": "Tổng quan hiệu suất",
     "title06": "Biểu đồ doanh thu",
     "timePeriods": {
+      "day": "Ngày",
       "week": "Tuần",
       "month": "Tháng",
       "quarter": "Quý",

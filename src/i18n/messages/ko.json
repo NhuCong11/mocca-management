@@ -84,6 +84,7 @@
     "title05": "성과 개요",
     "title06": "매출 차트",
     "timePeriods": {
+      "day": "일",
       "week": "주",
       "month": "월",
       "quarter": "분기",

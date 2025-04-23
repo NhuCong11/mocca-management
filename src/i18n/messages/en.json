@@ -84,6 +84,7 @@
     "title05": "Performance Overview",
     "title06": "Revenue Chart",
     "timePeriods": {
+      "day": "Day",
       "week": "Week",
       "month": "Month",
       "quarter": "Quarter",

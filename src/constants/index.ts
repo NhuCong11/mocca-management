@@ -13,6 +13,7 @@ export enum RULES {
   SHOP = 'shop',
 }
 export enum TimePeriod {
+  Day = 'day',
   Week = 'week',
   Month = 'month',
   Quarter = 'quarter',
@@ -33,7 +34,7 @@ export const MINIMUM_AGE = 14;
 export const UNKNOWN_ERROR = 'Unknown error';
 export const MOCCA = 'Mocca Cafe';
 export const EMPTY_CHAR = '---';
-export const TIME_PERIODS = [TimePeriod.Week, TimePeriod.Month, TimePeriod.Quarter, TimePeriod.Year];
+export const TIME_PERIODS = [TimePeriod.Day, TimePeriod.Week, TimePeriod.Month, TimePeriod.Quarter, TimePeriod.Year];
 export const LINES_ON_PAGE = [5, 10, 20, 50, 100];
 export const GENDER = ['male', 'female'];
 

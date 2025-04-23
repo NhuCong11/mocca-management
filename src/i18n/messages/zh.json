@@ -84,6 +84,7 @@
     "title05": "绩效概览",
     "title06": "收入图表",
     "timePeriods": {
+      "day": "日",
       "week": "周",
       "month": "月",
       "quarter": "季度",
