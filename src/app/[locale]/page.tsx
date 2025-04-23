@@ -177,7 +177,7 @@ export default function Home() {
             </Group>
           )}
 
-          <Group mt={80}>
+          <Group mt={80} p="lg">
             <Text size="xl" fw={600} c="teal">
               {t('dashboard.title06')}
             </Text>
