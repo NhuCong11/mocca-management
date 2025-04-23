@@ -194,7 +194,7 @@ export default function Home() {
                 withLabelsLine
                 labelsType="percent"
                 data={statusOrderData}
-                style={{ width: '100%', height: '200px', fontSize: '1.6rem' }}
+                style={{ width: '240px', height: '240px', fontSize: '1.6rem' }}
               />
             </Box>
           </Grid.Col>
