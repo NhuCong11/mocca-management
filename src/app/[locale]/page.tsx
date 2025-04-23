@@ -2,7 +2,7 @@
 import { useEffect, useMemo, useState, useCallback } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { BarChart, DonutChart, LineChart } from '@mantine/charts';
-import { Blockquote, Box, ComboboxItem, Grid, Group, Text, Title } from '@mantine/core';
+import { Blockquote, Box, ComboboxItem, Grid, Group, Text, Title, Card, Image } from '@mantine/core';
 import { IconCalendarTime, IconMessage, IconShoppingCart, IconTruckDelivery, IconUser } from '@tabler/icons-react';
 
 import { UserInfo } from '@/types';
@@ -13,7 +13,12 @@ import DateTimeDisplay from '@/utils/dateTimeFormat';
 import { TIME_PERIODS, TimePeriod } from '@/constants';
 import { getLocalStorageItem } from '@/utils/localStorage';
 import { checkRoleAdmin, checkRoleShop } from '@/utils/checkRoleUtils';
-import { getStatisticalData, getStatisticalPerformance, getStatisticalRevenue } from '@/services/dashboardServices';
+import {
+  getStatisticalData,
+  getStatisticalPerformance,
+  getStatisticalRevenue,
+  getTopSellingProducts,
+} from '@/services/dashboardServices';
 import LoadingStart from '@/share/Loading';
 
 interface StatisticalDataInfo {
@@ -26,6 +31,14 @@ interface StatisticalDataInfo {
 
 interface StatisticalRevenueItem {
   _id: string;
+  totalRevenue: number;
+}
+
+interface TopSellingProduct {
+  _id: string;
+  name: string;
+  image: string;
+  totalQuantity: number;
   totalRevenue: number;
 }
 
@@ -45,19 +58,22 @@ export default function Home() {
   const [statisticalData, setStatisticalData] = useState<StatisticalDataInfo | null>(null);
   const [statisticalRevenue, setStatisticalRevenue] = useState<StatisticalRevenueItem[]>([]);
   const [statisticalPerformance, setStatisticalPerformance] = useState([]);
+  const [topSellingProducts, setTopSellingProducts] = useState<TopSellingProduct[]>([]);
 
   const fetchData = useCallback(async () => {
     if (!timePeriod) return;
 
-    const [dataRes, revenueRes, performanceRes] = await Promise.all([
+    const [dataRes, revenueRes, performanceRes, topSellingRes] = await Promise.all([
       dispatch(getStatisticalData({ statisticalBy: timePeriod.value as TimePeriod })),
       dispatch(getStatisticalRevenue({ statisticalBy: timePeriod.value as TimePeriod })),
       dispatch(getStatisticalPerformance({ statisticalBy: timePeriod.value as TimePeriod })),
+      dispatch(getTopSellingProducts()),
     ]);
 
     if (dataRes?.payload?.code === 200) setStatisticalData(dataRes.payload.data);
     if (revenueRes?.payload?.code === 200) setStatisticalRevenue(revenueRes.payload.data);
     if (performanceRes?.payload?.code === 200) setStatisticalPerformance(performanceRes.payload.data);
+    if (topSellingRes?.payload?.code === 200) setTopSellingProducts(topSellingRes.payload.data);
   }, [dispatch, timePeriod]);
 
   useEffect(() => {
@@ -196,6 +212,41 @@ export default function Home() {
                 data={statusOrderData}
                 style={{ width: '240px', height: '240px', fontSize: '1.6rem' }}
               />
+            </Box>
+
+            <Box mt="xl">
+              <Text size="xl" fw={600} c="orange" mb="md">
+                {t('dashboard.topSellingProducts')}
+              </Text>
+              {topSellingProducts.length === 0 ? (
+                <Text size="xl" fs="italic">
+                  {t('nothingFoundMessage')}
+                </Text>
+              ) : (
+                topSellingProducts.map((product) => (
+                  <Card key={product._id} shadow="sm" padding="lg" radius="md" withBorder mb="md">
+                    <Card.Section>
+                      <Image
+                        src={product.image}
+                        height={160}
+                        alt={product.name}
+                        fallbackSrc="https://placehold.co/600x400?text=No+Image"
+                      />
+                    </Card.Section>
+
+                    <Text fw={500} size="lg" mt="md">
+                      {product.name}
+                    </Text>
+
+                    <Text size="sm" c="dimmed">
+                      {t('dashboard.quantitySold')}: {product.totalQuantity}
+                    </Text>
+                    <Text size="sm" c="dimmed">
+                      {t('dashboard.revenue')}: {getVNCurrency(product.totalRevenue)}
+                    </Text>
+                  </Card>
+                ))
+              )}
             </Box>
           </Grid.Col>
         )}
