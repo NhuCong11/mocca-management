@@ -224,7 +224,7 @@ export default function Home() {
           <Text size="xl" fw={600} c="orange" mb="md">
             {t('dashboard.topSellingProducts')}
           </Text>
-          <Grid mt="xl" gutter="xl">
+          <Grid mt="xl" gutter="xl" pb="lg">
             {topSellingProducts.length === 0 ? (
               <Text size="xl" fs="italic">
                 {t('nothingFoundMessage')}
