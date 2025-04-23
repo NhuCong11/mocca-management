@@ -1,0 +1,21 @@
+{
+  "dashboard": {
+    "title01": "Hello",
+    "title02": "Revenue",
+    "title03": "New Users",
+    "title04": "Order Status",
+    "title05": "Performance",
+    "title06": "Revenue Over Time",
+    "topSellingProducts": "Top Selling Products",
+    "quantitySold": "Quantity Sold",
+    "revenue": "Revenue",
+    "statisticsTime": "Statistics Time",
+    "timePeriods": {
+      "day": "Day",
+      "week": "Week",
+      "month": "Month",
+      "quarter": "Quarter",
+      "year": "Year"
+    }
+  }
+}
