@@ -79,10 +79,13 @@
   "dashboard": {
     "title01": "Welcome back 👋 🎉",
     "title02": "Revenue",
-    "title03": "New Users",
-    "title04": "Order Status",
-    "title05": "Performance Overview",
-    "title06": "Revenue Chart",
+    "title03": "New users",
+    "title04": "Order status",
+    "title05": "Performance overview",
+    "title06": "Revenue chart",
+    "topSellingProducts": "Top selling products",
+    "quantitySold": "Quantity sold",
+    "revenue": "Revenue",
     "timePeriods": {
       "day": "Day",
       "week": "Week",
