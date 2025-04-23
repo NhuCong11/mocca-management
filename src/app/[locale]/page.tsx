@@ -215,43 +215,45 @@ export default function Home() {
                 />
               </>
             )}
-
-            <Box mt="xl">
-              <Text size="xl" fw={600} c="orange" mb="md">
-                {t('dashboard.topSellingProducts')}
-              </Text>
-              {topSellingProducts.length === 0 ? (
-                <Text size="xl" fs="italic">
-                  {t('nothingFoundMessage')}
-                </Text>
-              ) : (
-                topSellingProducts.map((product) => (
-                  <Card key={product._id} shadow="sm" padding="lg" radius="md" withBorder mb="md">
-                    <Card.Section>
-                      <Image
-                        src={product.image}
-                        height={160}
-                        alt={product.name}
-                        fallbackSrc="https://placehold.co/600x400?text=No+Image"
-                      />
-                    </Card.Section>
-
-                    <Text fw={500} size="lg" mt="md">
-                      {product.name}
-                    </Text>
-
-                    <Text size="sm" c="dimmed">
-                      {t('dashboard.quantitySold')}: {product.totalQuantity}
-                    </Text>
-                    <Text size="sm" c="dimmed">
-                      {t('dashboard.revenue')}: {getVNCurrency(product.totalRevenue)}
-                    </Text>
-                  </Card>
-                ))
-              )}
-            </Box>
           </Box>
         </Grid.Col>
+      </Grid>
+
+      <Text size="xl" fw={600} c="orange" mb="md">
+        {t('dashboard.topSellingProducts')}
+      </Text>
+      <Grid mt="xl" gutter="xl">
+        {topSellingProducts.length === 0 ? (
+          <Text size="xl" fs="italic">
+            {t('nothingFoundMessage')}
+          </Text>
+        ) : (
+          topSellingProducts.map((product) => (
+            <Grid.Col key={product._id} span={{ base: 12, sm: 6, md: 4, lg: 3 }}>
+              <Card shadow="sm" padding="lg" radius="md" withBorder mb="md">
+                <Card.Section>
+                  <Image
+                    src={product.image}
+                    height={160}
+                    alt={product.name}
+                    fallbackSrc="https://placehold.co/600x400?text=No+Image"
+                  />
+                </Card.Section>
+
+                <Text fw={500} size="xl" mt="md">
+                  {product.name}
+                </Text>
+
+                <Text size="lg" c="dimmed">
+                  {t('dashboard.quantitySold')}: {product.totalQuantity}
+                </Text>
+                <Text size="lg" c="dimmed">
+                  {t('dashboard.revenue')}: {getVNCurrency(product.totalRevenue)}
+                </Text>
+              </Card>
+            </Grid.Col>
+          ))
+        )}
       </Grid>
       {isLoading && <LoadingStart />}
     </Box>
