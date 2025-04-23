@@ -54,7 +54,7 @@ export const getTopSellingProducts = createAsyncThunk<any, void, RejectValueErro
   'dashboard/getTopSellingProducts',
   async (_, { rejectWithValue }) => {
     try {
-      const res: AxiosResponse = await callApi(HttpMethod.GET, `/v1/dashboards/top-selling-products`, {}, null);
+      const res: AxiosResponse = await callApi(HttpMethod.GET, `/v1/dashboard/top-selling-products`, {}, null);
       return res;
     } catch (error: any) {
       return rejectWithValue({ ...error });
