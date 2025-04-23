@@ -191,28 +191,30 @@ export default function Home() {
           </Group>
         </Grid.Col>
 
-        {checkRoleShop(userInfo?.role) && (
-          <Grid.Col span={{ base: 12, md: 12, lg: 3 }}>
-            <Box mt="xl">
-              <Group justify="center">
-                <Text size="xl" fw={600} c="lime">
-                  {t('dashboard.title04')}
-                </Text>
-                {allOrderStatusEmpty && (
-                  <Text size="xl" fs="italic">
-                    {t('nothingFoundMessage')}
+        <Grid.Col span={{ base: 12, md: 12, lg: 3 }}>
+          <Box mt="xl">
+            {checkRoleShop(userInfo?.role) && (
+              <>
+                <Group justify="center">
+                  <Text size="xl" fw={600} c="lime">
+                    {t('dashboard.title04')}
                   </Text>
-                )}
-              </Group>
-              <DonutChart
-                withLabels
-                thickness={15}
-                withLabelsLine
-                labelsType="percent"
-                data={statusOrderData}
-                style={{ width: '240px', height: '240px', fontSize: '1.6rem' }}
-              />
-            </Box>
+                  {allOrderStatusEmpty && (
+                    <Text size="xl" fs="italic">
+                      {t('nothingFoundMessage')}
+                    </Text>
+                  )}
+                </Group>
+                <DonutChart
+                  withLabels
+                  thickness={15}
+                  withLabelsLine
+                  labelsType="percent"
+                  data={statusOrderData}
+                  style={{ width: '240px', height: '240px', fontSize: '1.6rem' }}
+                />
+              </>
+            )}
 
             <Box mt="xl">
               <Text size="xl" fw={600} c="orange" mb="md">
@@ -248,8 +250,8 @@ export default function Home() {
                 ))
               )}
             </Box>
-          </Grid.Col>
-        )}
+          </Box>
+        </Grid.Col>
       </Grid>
       {isLoading && <LoadingStart />}
     </Box>
